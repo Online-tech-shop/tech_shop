@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tech_shop/home_page.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());
@@ -13,7 +12,7 @@ class MyApp extends StatelessWidget {
     return const MaterialApp(
       // Abdujalil
       debugShowCheckedModeBanner: false,
-      home: HomePage(),
+      home: Scaffold(),
     );
   }
 }
