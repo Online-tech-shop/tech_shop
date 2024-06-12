@@ -16,5 +16,5 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-// fazliddin
+// fazliddinnnn
 // Abdujalil qalesiz
