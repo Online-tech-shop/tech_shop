@@ -16,4 +16,4 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-// Abdujalil
+// Abdujalil qalesiz
