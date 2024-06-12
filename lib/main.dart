@@ -17,4 +17,4 @@ class MyApp extends StatelessWidget {
   }
 }
 // fazliddinnnn
-// Abdujalil qalesiz
+// Abdujalil qalswsesiz
