@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
+import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());
@@ -10,14 +12,15 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
-      // Abdujalil
-      debugShowCheckedModeBanner: false,
-      home: HomeScreen(),
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      child: MaterialApp(
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white
+        ),
+        debugShowCheckedModeBanner: false,
+        home: MainScreen(),
+      ),
     );
   }
 }
-// fazliddinnnn
-// Abdujalil ddqalswsesiz
-// Muhammad
-// Abdulloh
