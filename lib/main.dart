@@ -11,13 +11,8 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      // Abdujalil
       debugShowCheckedModeBanner: false,
       home: HomeScreen(),
     );
   }
 }
-// fazliddinnnn
-// Abdujalil ddqalswsesiz
-// Muhammad
-// Abdulloh
