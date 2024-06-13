@@ -12,6 +12,7 @@ class Product {
   String aboutProduct;
   List<int> saleType;
   List<String> brieflyAboutProduct;
+  bool isFavorite;
 
   Product({
     required this.id,
@@ -25,6 +26,7 @@ class Product {
     required this.aboutProduct,
     required this.saleType,
     required this.brieflyAboutProduct,
+    required this.isFavorite,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
@@ -44,6 +46,7 @@ class Product {
       brieflyAboutProduct: List<String>.from(
         json['briefly-about-product'],
       ),
+      isFavorite: false,
     );
   }
 

@@ -32,6 +32,10 @@ class HomeViewModel extends ChangeNotifier {
     return await _httpService.getProducts();
   }
 
+  Future<List<Product>> getFavouriteProducts() async {
+    return await _httpService.getFavoriteProducts();
+  }
+
   void onCategoryItemTap(int index) {
     // Handle category item tap
   }
