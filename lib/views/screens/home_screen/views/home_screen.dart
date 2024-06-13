@@ -10,37 +10,38 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        backgroundColor: Colors.white,
-        surfaceTintColor: Colors.white,
-        title: const TextField(
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: Color(0xFFF3F4F8),
-            label: Text(
-              "Mahsulotlar va turkumlar qidirish",
-              style: TextStyle(
-                color: Color(0xff8B8B95),
+    return DefaultTabController(
+      length: 2,
+      child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          surfaceTintColor: Colors.white,
+          title: const TextField(
+            decoration: InputDecoration(
+              filled: true,
+              fillColor: Color(0xFFF3F4F8),
+              label: Text(
+                "Mahsulotlar va turkumlar qidirish",
+                style: TextStyle(
+                  color: Color(0xff8B8B95),
+                ),
+              ),
+              border: InputBorder.none,
+              contentPadding:
+                  EdgeInsets.symmetric(vertical: 10, horizontal: 20),
+            ),
+          ),
+          actions: [
+            IconButton(
+              onPressed: () {},
+              icon: const Icon(
+                CupertinoIcons.heart,
+                size: 29,
               ),
             ),
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          ),
+          ],
         ),
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              CupertinoIcons.heart,
-              size: 29,
-            ),
-          ),
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: DefaultTabController(
-          length: 2,
+        body: SingleChildScrollView(
           child: Column(
             children: [
               Carousel(viewModel: viewModel),
@@ -60,11 +61,13 @@ class HomeScreen extends StatelessWidget {
                 ],
               ),
               SizedBox(
-                height: MediaQuery.of(context).size.height,
+                height: 900,
                 child: TabBarView(
                   children: [
                     ProductGrid(viewModel: viewModel),
-                    const Center(child: Text("Yozgi savdo content")),
+                    const Center(
+                      child: Text("Yozgi savdo content"),
+                    ),
                   ],
                 ),
               ),

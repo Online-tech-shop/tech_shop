@@ -37,6 +37,7 @@ dependencies:
   gap: ^3.0.1
   image: ^4.2.0
   carousel_slider: ^4.2.1
+  http: ^1.2.1
 
 dev_dependencies:
   flutter_test:
