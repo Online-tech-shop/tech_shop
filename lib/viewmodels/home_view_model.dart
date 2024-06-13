@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tech_shop/models/carouse_item.dart';
 import 'package:tech_shop/models/category_item.dart';
 import 'package:tech_shop/models/product_item.dart';
+import 'package:tech_shop/service/product_http_service.dart';
 
 class HomeViewModel extends ChangeNotifier {
   final List<CarouselItem> carouselItems = [
@@ -14,20 +15,21 @@ class HomeViewModel extends ChangeNotifier {
     20,
     (index) => CategoryItem('assets/images/category1.png', 'SSS'),
   );
+  ProductHttpService _httpService = ProductHttpService();
+  // final List<Product> productItems = List.generate(
+  //   20,
+  //   (index) => Product(
 
-  final List<ProductItem> productItems = List.generate(
-    20,
-    (index) => ProductItem(
-      'assets/images/product.png',
-      'Kir yuvish mashinasi JPE Invertor BLDC, 6-8 kg, kechiktirib yuvish, Child-Lock, ko\'pikni olib tashlash',
-      '58 387 so\'m /oyiga',
-      '519 000 so\'m',
-      '611 000 so\'m',
-    ),
-  );
+  //     // 'assets/images/product.png',
+  //     // 'Kir yuvish mashinasi JPE Invertor BLDC, 6-8 kg, kechiktirib yuvish, Child-Lock, ko\'pikni olib tashlash',
+  //     // '58 387 so\'m /oyiga',
+  //     // '519 000 so\'m',
+  //     // '611 000 so\'m',
+  //   ),
+  // );
 
-  void onCarouselItemTap(int index) {
-    // Handle carousel item tap
+  Future<List<Product>> onCarouselItemTap() async {
+    return await _httpService.getProducts();
   }
 
   void onCategoryItemTap(int index) {
