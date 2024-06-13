@@ -15,18 +15,7 @@ class HomeViewModel extends ChangeNotifier {
     20,
     (index) => CategoryItem('assets/images/category1.png', 'SSS'),
   );
-  ProductHttpService _httpService = ProductHttpService();
-  // final List<Product> productItems = List.generate(
-  //   20,
-  //   (index) => Product(
-
-  //     // 'assets/images/product.png',
-  //     // 'Kir yuvish mashinasi JPE Invertor BLDC, 6-8 kg, kechiktirib yuvish, Child-Lock, ko\'pikni olib tashlash',
-  //     // '58 387 so\'m /oyiga',
-  //     // '519 000 so\'m',
-  //     // '611 000 so\'m',
-  //   ),
-  // );
+  final ProductHttpService _httpService = ProductHttpService();
 
   Future<List<Product>> onCarouselItemTap() async {
     return await _httpService.getProducts();

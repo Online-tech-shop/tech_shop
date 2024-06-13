@@ -1,5 +1,3 @@
-// import 'package:uzum_market_admin_panel/models/review_model.dart';
-
 class Product {
   final String id;
   String name;
@@ -46,8 +44,4 @@ class Product {
       ),
     );
   }
-
-//   List<Review> getReviews(List<Review> reviews) {
-//     return reviews.where((Review review) => review.productId == id).toList();
-//   }
 }
