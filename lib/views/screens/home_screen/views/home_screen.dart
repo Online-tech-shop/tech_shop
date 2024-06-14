@@ -75,6 +75,15 @@ class HomeScreen extends StatelessWidget {
             ),
           ],
         ),
+            pinned: true,
+          ),
+        ];
+      },
+      body: TabBarView(
+        children: [
+          ProductGrid(viewModel: viewModel),
+          ProductGrid(viewModel: viewModel),
+        ],
       ),
     );
   }

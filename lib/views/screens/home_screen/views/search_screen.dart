@@ -18,5 +18,6 @@ class _SearchScreenState extends State<SearchScreen> {
         backgroundColor: Colors.amber,
       ),
     );
+
   }
 }
