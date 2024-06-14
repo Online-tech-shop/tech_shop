@@ -17,7 +17,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       );
     default:
       return CupertinoPageRoute(
-        builder: (BuildContext context) => MainScreen(),
+        builder: (BuildContext context) => const MainScreen(),
       );
   }
 }

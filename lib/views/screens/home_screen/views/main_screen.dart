@@ -14,10 +14,10 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
     HomeScreen(),
-    CatalogScreen(),
-    Placeholder(),
-    Placeholder(),
-    Placeholder(),
+    const CatalogScreen(),
+    const Placeholder(),
+    const Placeholder(),
+    const Placeholder(),
 
   ];
 
