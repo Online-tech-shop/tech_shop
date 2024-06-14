@@ -82,7 +82,9 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
                 onTap: _onButtonPressed,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                      horizontal: 20, vertical: 5),
+                    horizontal: 20,
+                    vertical: 5,
+                  ),
                   margin: const EdgeInsets.only(left: 10),
                   decoration: BoxDecoration(
                     color: _isTapped ? Colors.white : const Color(0xFF7733FF),
