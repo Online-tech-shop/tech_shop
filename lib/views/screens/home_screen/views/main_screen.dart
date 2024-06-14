@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/views/search_screen.dart';
-import 'package:tech_shop/views/screens/home_screen/widgets/public_appbar.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_tab_box_button.dart';
 
 class MainScreen extends StatefulWidget {
@@ -17,42 +15,10 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
     HomeScreen(),
-    SearchScreen(),
-    Placeholder(),
-    Placeholder(),
-    Placeholder(),
-  ];
-  final List _appBar = [
-    PublicAppBar(
-        leading: false,
-        actions: [
-          IconButton(
-            onPressed: () {},
-            icon: const Icon(
-              CupertinoIcons.heart,
-              size: 29,
-            ),
-          ),
-        ],
-        title: const TextField(
-          decoration: InputDecoration(
-            filled: true,
-            fillColor: Color(0xFFF3F4F8),
-            label: Text(
-              "Mahsulotlar va turkumlar qidirish",
-              style: TextStyle(
-                color: Color(0xff8B8B95),
-              ),
-            ),
-            border: InputBorder.none,
-            contentPadding: EdgeInsets.symmetric(vertical: 10, horizontal: 20),
-          ),
-        ),
-        onTap: () {}),
-    PublicAppBar(title: Text("") , onTap: () {}),
-    PublicAppBar(title: Text("Savat"), onTap: () {}),
-    PublicAppBar(title: Text("Saqlangan"), onTap: () {}),
-    PublicAppBar(title: Text("Profil"), onTap: () {})
+    const SearchScreen(),
+    const Placeholder(),
+    const Placeholder(),
+    const Placeholder(),
   ];
 
   void onTabBoxPressed(int index) {
@@ -60,13 +26,12 @@ class _MainScreenState extends State<MainScreen> {
       _currentIndex = index;
     });
   }
-
+//
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: _appBar[_currentIndex],
         body: _pages[_currentIndex],
         bottomNavigationBar: Container(
           height: 50.h,
