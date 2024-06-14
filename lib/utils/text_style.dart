@@ -9,6 +9,7 @@ class CustomTextStyle {
       fontWeight: FontWeight.w600,
     );
   }
+
   static TextStyle get customSelectedTabBoxTextStyle {
     return TextStyle(
       color: Colors.grey,

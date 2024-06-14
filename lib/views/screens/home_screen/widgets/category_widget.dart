@@ -5,7 +5,7 @@ import 'package:tech_shop/viewmodels/home_view_model.dart';
 class CategoryList extends StatelessWidget {
   final HomeViewModel viewModel;
 
-  const CategoryList({required this.viewModel});
+  const CategoryList({super.key, required this.viewModel});
 
   @override
   Widget build(BuildContext context) {
