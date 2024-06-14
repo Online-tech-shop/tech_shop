@@ -22,19 +22,18 @@ class ProductCard extends StatefulWidget {
 
 class _ProductCardState extends State<ProductCard> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(
-        context,
-        RouteName.viewProduct,
-        arguments: {'product': widget.product},
-      ),
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          RouteName.viewProduct,
+          arguments: {
+            'product': widget.product,
+            'review': widget.product.getReviews(widget.reviews)
+          },
+        );
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -100,12 +99,12 @@ class _ProductCardState extends State<ProductCard> {
                       ),
                     ),
                     Container(
-                        padding: EdgeInsets.all(5),
+                        padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.grey)
-                        ),
-                        child: SvgPicture.asset('assets/icons/product_icons/cart.svg'))
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.grey)),
+                        child: SvgPicture.asset(
+                            'assets/icons/product_icons/cart.svg'))
                   ],
                 ),
               ],

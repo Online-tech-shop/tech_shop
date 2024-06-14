@@ -2,17 +2,32 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tech_shop/models/product_item.dart';
+import 'package:tech_shop/models/review_model.dart';
 import 'package:tech_shop/utils/app_constants.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_float_action_button.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_info_container.dart';
 
 class ViewProductScreen extends StatelessWidget {
   final Product product;
+  final List<Review> review;
 
   const ViewProductScreen({
     super.key,
     required this.product,
+    required this.review,
   });
+
+  double countAverageOfReview(List<Review> listReview) {
+    if (listReview.isEmpty) {
+      return 0.0;
+    }
+    int sumOfReview = 0;
+    for (var each in listReview) {
+      sumOfReview += each.star;
+    }
+    double average = sumOfReview / listReview.length;
+    return average;
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -93,6 +108,8 @@ class ViewProductScreen extends StatelessWidget {
                 Row(
                   children: [
                     CustomInfoContainer(
+                      reviewCount: review.length,
+                      reviewAverageNumber: countAverageOfReview(review),
                       isSelected: true,
                       product: product,
                     ),
@@ -112,29 +129,58 @@ class ViewProductScreen extends StatelessWidget {
                     ),
                   ),
                 ),
-                Gap(10),
-                Row(
-                  children: [
-                    Container(
-                      padding: const EdgeInsets.all(10),
-                      decoration: BoxDecoration(
-                        color: const Color(0xFFD6F5DE),
-                        borderRadius: BorderRadius.circular(10),
+                const Gap(10),
+                Padding(
+                  padding: const EdgeInsets.only(bottom: 5),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFD6F5DE),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Icon(Icons.check),
                       ),
-                      child: const Icon(Icons.check),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 10.0),
-                      child: Text(
-                        "${product.leftProduct} dona qoldi",
-                        style: TextStyle(
-                          color: Colors.black,
-                          fontWeight: FontWeight.w600,
-                          fontSize: 14,
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Text(
+                          "${product.leftProduct} dona qoldi",
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
+                ),
+                Padding(
+                  padding: const EdgeInsets.only(top: 5),
+                  child: Row(
+                    children: [
+                      Container(
+                        padding: const EdgeInsets.all(10),
+                        decoration: BoxDecoration(
+                          color: const Color(0xFFFFEFD0),
+                          borderRadius: BorderRadius.circular(10),
+                        ),
+                        child: const Icon(Icons.shopping_cart_outlined),
+                      ),
+                      Padding(
+                        padding: const EdgeInsets.only(left: 10.0),
+                        child: Text(
+                          "${product.leftProduct} dona qoldi",
+                          style: const TextStyle(
+                            color: Colors.black,
+                            fontWeight: FontWeight.w600,
+                            fontSize: 14,
+                          ),
                         ),
                       ),
-                    )
-                  ],
+                    ],
+                  ),
                 )
               ],
             ),

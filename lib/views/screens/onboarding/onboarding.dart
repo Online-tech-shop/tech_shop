@@ -34,8 +34,8 @@ class _SplashPageState extends State<SplashPage> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image(
-              image: const AssetImage(
+            const Image(
+              image: AssetImage(
                 'assets/images/uzum_bank_logo.png',
               ),
               width: 90,
@@ -54,7 +54,7 @@ class _SplashPageState extends State<SplashPage> {
               ),
             ),
             Container(
-              margin: EdgeInsets.symmetric(horizontal: 15, vertical: 50),
+              margin: const EdgeInsets.symmetric(horizontal: 15, vertical: 50),
               width: 60,
               height: 60,
               decoration: BoxDecoration(

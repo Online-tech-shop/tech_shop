@@ -12,13 +12,13 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
-  int _currentIndex = 4;
+  int _currentIndex = 0;
   final List<Widget> _pages = [
     HomeScreen(),
     const CatalogScreen(),
     const Placeholder(),
     const Placeholder(),
-    ProfileScreen()
+    const ProfileScreen()
   ];
 
   void onTabBoxPressed(int index) {

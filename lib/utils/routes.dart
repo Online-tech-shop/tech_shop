@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:tech_shop/models/product_item.dart';
+import 'package:tech_shop/models/review_model.dart';
 import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/views/view_product_screen.dart';
 
@@ -10,10 +11,13 @@ class RouteName {
 Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case RouteName.viewProduct:
-      final Map<String, dynamic> data = settings.arguments as Map<String, dynamic>;
+      final Map<String, dynamic> data =
+          settings.arguments as Map<String, dynamic>;
       return CupertinoPageRoute(
-        builder: (BuildContext context) =>
-            ViewProductScreen(product: data['product'] as Product),
+        builder: (BuildContext context) => ViewProductScreen(
+          product: data['product'] as Product,
+          review: data['review'] as List<Review>,
+        ),
       );
     default:
       return CupertinoPageRoute(
