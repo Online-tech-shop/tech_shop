@@ -32,14 +32,14 @@ class ProfileScreen extends StatelessWidget {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  Container(
+                  SizedBox(
                     height: 50,
                     child: Row(
                       children: [
-                        Container(
+                        const SizedBox(
                           width: 50,
                           height: 50,
-                          child: const Center(
+                          child: Center(
                             child: Icon(Icons.shopping_bag_outlined),
                           ),
                         ),
@@ -83,16 +83,16 @@ class ProfileScreen extends StatelessWidget {
               delegate: SliverChildListDelegate(
                 [
                   Container(
-                    decoration: BoxDecoration(),
+                    decoration: const BoxDecoration(),
                     child: const ListTile(
                       leading: Icon(Icons.home),
                       title: Text("asds"),
                     ),
                   ),
-                  ListTile(
+                  const ListTile(
                     title: Text("asds"),
                   ),
-                  ListTile(
+                  const ListTile(
                     title: Text("asds"),
                   ),
                 ],
