@@ -47,9 +47,7 @@ class HomeScreen extends StatelessWidget {
       body: TabBarView(
         children: [
           ProductGrid(viewModel: viewModel),
-          const Center(
-            child: Text("Yozgi savdo content"),
-          ),
+          ProductGrid(viewModel: viewModel),
         ],
       ),
     );

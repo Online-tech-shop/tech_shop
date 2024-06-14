@@ -22,6 +22,6 @@ class HomeViewModel extends ChangeNotifier {
   }
 
   void onCategoryItemTap(int index) {
-    // Handle category item tap
+    print("tapped");
   }
 }

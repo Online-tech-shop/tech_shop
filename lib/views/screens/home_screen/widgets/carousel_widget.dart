@@ -1,6 +1,7 @@
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter/material.dart';
 import 'package:tech_shop/viewmodels/home_view_model.dart';
+import 'package:tech_shop/views/screens/home_screen/views/profile_screen.dart';
 
 class Carousel extends StatelessWidget {
   final HomeViewModel viewModel;
