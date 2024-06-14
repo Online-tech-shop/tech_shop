@@ -67,7 +67,12 @@ class ViewProductScreen extends StatelessWidget {
           ),
           Container(
             width: double.infinity,
-            padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+            padding: const EdgeInsets.only(
+              left: 20,
+              right: 20,
+              top: 20,
+              bottom: 10,
+            ),
             decoration: const BoxDecoration(
               color: Colors.white,
               borderRadius: BorderRadius.only(
@@ -78,8 +83,13 @@ class ViewProductScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(product.name[AppConstants.appLanguageIndex]),
-                const Gap(10),
+                Text(
+                  product.name[AppConstants.appLanguageIndex],
+                  style: const TextStyle(
+                    fontSize: 18,
+                    fontWeight: FontWeight.w600,
+                  ),
+                ),
                 Row(
                   children: [
                     CustomInfoContainer(
@@ -92,21 +102,44 @@ class ViewProductScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-                const FlutterLogo(
-                  size: 100,
+                Padding(
+                  padding: const EdgeInsets.only(top: 20.0),
+                  child: Text(
+                    '${product.price} so\'m',
+                    style: const TextStyle(
+                      fontSize: 26,
+                      fontWeight: FontWeight.w700,
+                    ),
+                  ),
                 ),
-                const FlutterLogo(
-                  size: 100,
-                ),
-                const FlutterLogo(
-                  size: 100,
-                ),
+                Gap(10),
+                Row(
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.all(10),
+                      decoration: BoxDecoration(
+                        color: const Color(0xFFD6F5DE),
+                        borderRadius: BorderRadius.circular(10),
+                      ),
+                      child: const Icon(Icons.check),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.only(left: 10.0),
+                      child: Text(
+                        "${product.leftProduct} dona qoldi",
+                        style: TextStyle(
+                          color: Colors.black,
+                          fontWeight: FontWeight.w600,
+                          fontSize: 14,
+                        ),
+                      ),
+                    )
+                  ],
+                )
               ],
             ),
           ),
-          const SizedBox(
-            height: kToolbarHeight,
-          )
+          const SizedBox(height: kToolbarHeight)
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
