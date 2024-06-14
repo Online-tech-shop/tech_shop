@@ -55,7 +55,7 @@ class ViewProductScreen extends StatelessWidget {
               mainAxisSize: MainAxisSize.min,
               children: List.generate(
                 product.images.length,
-                    (int index) => Image.network(
+                (int index) => Image.network(
                   product.images[index],
                   height: 500 - kToolbarHeight,
                   width: MediaQuery.of(context).size.width,
