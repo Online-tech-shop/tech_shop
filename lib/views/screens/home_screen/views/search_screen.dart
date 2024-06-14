@@ -10,6 +10,7 @@ class SearchScreen extends StatefulWidget {
 class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
+    return Placeholder();
     // return const Padding(
     //   padding: EdgeInsets.all(15),
     // );
@@ -18,6 +19,7 @@ class _SearchScreenState extends State<SearchScreen> {
         backgroundColor: Colors.amber,
       ),
     );
+
 
   }
 }

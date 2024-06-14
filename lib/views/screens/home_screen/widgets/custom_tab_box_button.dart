@@ -27,8 +27,8 @@ class CustomTabBoxButton extends StatelessWidget {
         children: [
           Image.asset(
             imagePath,
-            height: 23.h,
-            width: 23.w,
+            height: 27,
+            width: 27,
           ),
           Text(
             buttonText,

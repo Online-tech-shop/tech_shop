@@ -25,6 +25,8 @@ class ViewProductScreen extends StatelessWidget {
         ),
         actions: [
           Padding(
+
+            padding: EdgeInsets.only(right: 15.0),
             padding: const EdgeInsets.only(right: 15.0),
             child: Row(
               children: [
@@ -33,6 +35,9 @@ class ViewProductScreen extends StatelessWidget {
                     CupertinoIcons.heart,
                   ),
                 ),
+
+                Gap(15),
+
                 const Gap(15),
                 GestureDetector(
                   child: const Icon(
