@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
-import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
+import 'package:tech_shop/utils/routes.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());
@@ -14,12 +13,19 @@ class MyApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return ScreenUtilInit(
       designSize: const Size(375, 812),
-      child: MaterialApp(
+      builder: (context, child) => MaterialApp(
         theme: ThemeData(
-          scaffoldBackgroundColor: Colors.white
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme: AppBarTheme(
+            backgroundColor: Colors.white,
+            iconTheme: IconThemeData(
+              color: Colors.black,
+              size: 23.sp,
+            ),
+          ),
         ),
         debugShowCheckedModeBanner: false,
-        home: MainScreen(),
+        onGenerateRoute: generateRoute,
       ),
     );
   }
