@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/views/catalog_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_tab_box_button.dart';
@@ -19,6 +18,7 @@ class _MainScreenState extends State<MainScreen> {
     Placeholder(),
     Placeholder(),
     Placeholder(),
+
   ];
 
   void onTabBoxPressed(int index) {
@@ -27,7 +27,6 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
-//
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
@@ -36,13 +35,13 @@ class _MainScreenState extends State<MainScreen> {
         body: _pages[_currentIndex],
         bottomNavigationBar: Container(
           height: 55,
-          padding: EdgeInsets.symmetric(horizontal: 10.w),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          decoration: const BoxDecoration(
             color: Colors.white,
             boxShadow: [
               BoxShadow(
                 color: Colors.grey,
-                blurRadius: 10.r,
+                blurRadius: 10,
               ),
             ],
           ),
@@ -52,7 +51,7 @@ class _MainScreenState extends State<MainScreen> {
               CustomTabBoxButton(
                 buttonText: 'Bosh sahifa',
                 imagePath:
-                    'assets/icons/bottom_navigation_bar_icons/home${_currentIndex == 0 ? '' : '_un'}.png',
+                'assets/icons/bottom_navigation_bar_icons/home${_currentIndex == 0 ? '' : '_un'}.png',
                 currentIndex: 0,
                 isSelected: _currentIndex == 0,
                 onTabBoxPressed: onTabBoxPressed,
@@ -60,7 +59,7 @@ class _MainScreenState extends State<MainScreen> {
               CustomTabBoxButton(
                 buttonText: 'Katalog',
                 imagePath:
-                    'assets/icons/bottom_navigation_bar_icons/search${_currentIndex == 1 ? '' : '_un'}.png',
+                'assets/icons/bottom_navigation_bar_icons/search${_currentIndex == 1 ? '' : '_un'}.png',
                 currentIndex: 1,
                 isSelected: _currentIndex == 1,
                 onTabBoxPressed: onTabBoxPressed,
@@ -68,7 +67,7 @@ class _MainScreenState extends State<MainScreen> {
               CustomTabBoxButton(
                 buttonText: 'Savat',
                 imagePath:
-                    'assets/icons/bottom_navigation_bar_icons/cart${_currentIndex == 2 ? '' : '_un'}.png',
+                'assets/icons/bottom_navigation_bar_icons/cart${_currentIndex == 2 ? '' : '_un'}.png',
                 currentIndex: 2,
                 isSelected: _currentIndex == 2,
                 onTabBoxPressed: onTabBoxPressed,
@@ -76,7 +75,7 @@ class _MainScreenState extends State<MainScreen> {
               CustomTabBoxButton(
                 buttonText: 'Saralangan',
                 imagePath:
-                    'assets/icons/bottom_navigation_bar_icons/fav${_currentIndex == 3 ? '' : '_un'}.png',
+                'assets/icons/bottom_navigation_bar_icons/fav${_currentIndex == 3 ? '' : '_un'}.png',
                 currentIndex: 3,
                 isSelected: _currentIndex == 3,
                 onTabBoxPressed: onTabBoxPressed,
@@ -84,7 +83,7 @@ class _MainScreenState extends State<MainScreen> {
               CustomTabBoxButton(
                 buttonText: 'Kabinet',
                 imagePath:
-                    'assets/icons/bottom_navigation_bar_icons/profile${_currentIndex == 4 ? '' : '_un'}.png',
+                'assets/icons/bottom_navigation_bar_icons/profile${_currentIndex == 4 ? '' : '_un'}.png',
                 currentIndex: 4,
                 isSelected: _currentIndex == 4,
                 onTabBoxPressed: onTabBoxPressed,
