@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/models/review_model.dart';
 import 'package:tech_shop/utils/app_constants.dart';
@@ -85,15 +86,32 @@ class _ProductCardState extends State<ProductCard> {
                     )
                   ],
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  '${widget.product.price} so\'m',
-                  style: const TextStyle(
-                    decorationThickness: 2,
-                    color: Colors.black,
-                    fontSize: 14,
-                    fontWeight: FontWeight.w700,
-                  ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '${widget.product.price} so\'m',
+                      style: const TextStyle(
+                        decorationThickness: 2,
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Container(
+                      padding: const EdgeInsets.all(7),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.grey),
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/icons/product_icons/cart.svg',
+                        height: 20,
+                        width: 20,
+                      ),
+                    )
+                  ],
                 ),
               ],
             ),
