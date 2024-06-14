@@ -5,14 +5,14 @@ class CustomTextStyle {
   static TextStyle get customUnselectedTabBoxTextStyle {
     return TextStyle(
       color: const Color(0xFF7733ff),
-      fontSize: 10.0.sp,
+      fontSize: 10.0,
       fontWeight: FontWeight.w600,
     );
   }
   static TextStyle get customSelectedTabBoxTextStyle {
     return TextStyle(
       color: Colors.grey,
-      fontSize: 10.0.sp,
+      fontSize: 10.0,
       fontWeight: FontWeight.w600,
     );
   }

@@ -17,10 +17,10 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
     HomeScreen(),
-    SearchScreen(),
-    Placeholder(),
-    Placeholder(),
-    Placeholder(),
+    const SearchScreen(),
+    const Placeholder(),
+    const Placeholder(),
+    const Placeholder(),
   ];
   final List _appBar = [
     PublicAppBar(
@@ -49,10 +49,10 @@ class _MainScreenState extends State<MainScreen> {
           ),
         ),
         onTap: () {}),
-    PublicAppBar(title: Text("") , onTap: () {}),
-    PublicAppBar(title: Text("Savat"), onTap: () {}),
-    PublicAppBar(title: Text("Saqlangan"), onTap: () {}),
-    PublicAppBar(title: Text("Profil"), onTap: () {})
+    PublicAppBar(title: const Text(""), onTap: () {}),
+    PublicAppBar(title: const Text("Savat"), onTap: () {}),
+    PublicAppBar(title: const Text("Saqlangan"), onTap: () {}),
+    PublicAppBar(title: const Text("Profil"), onTap: () {})
   ];
 
   void onTabBoxPressed(int index) {
@@ -69,14 +69,13 @@ class _MainScreenState extends State<MainScreen> {
         appBar: _appBar[_currentIndex],
         body: _pages[_currentIndex],
         bottomNavigationBar: Container(
-          height: 50.h,
-          padding: EdgeInsets.symmetric(horizontal: 10.w),
-          decoration: BoxDecoration(
+          padding: const EdgeInsets.symmetric(horizontal: 15, vertical: 7),
+          decoration: const BoxDecoration(
             color: Colors.white,
             boxShadow: [
               BoxShadow(
                 color: Colors.grey,
-                blurRadius: 15.r,
+                blurRadius: 15,
               ),
             ],
           ),
