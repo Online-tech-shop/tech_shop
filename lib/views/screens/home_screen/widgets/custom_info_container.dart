@@ -24,7 +24,7 @@ class CustomInfoContainer extends StatelessWidget {
       ),
       child: Column(
         children: [
-          Text('5')
+          Text('05')
         ],
       ),
     );
