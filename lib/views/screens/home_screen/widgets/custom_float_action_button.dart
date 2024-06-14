@@ -42,7 +42,11 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+
+               const  Text(
+
                 Text(
+
                   'Narx umumiy',
                   style: TextStyle(
                     color: Colors.grey,
@@ -51,6 +55,9 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
                 ),
                 Text(
                   '${widget.product.price} so\'m',
+
+                  style: const TextStyle(
+
                   style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -102,7 +109,11 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
                           color: Color(0xFF7733FF),
                         ),
                       Text(
+
+                        _isTapped ? "O'tish" : "Savatga",
+
                         _isTapped ? 'O\'tish' : 'Savatga',
+
                         style: TextStyle(
                           color: _isTapped
                               ? const Color(0xFF7733FF)
