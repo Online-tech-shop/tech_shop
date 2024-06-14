@@ -65,13 +65,15 @@ class _MainScreenState extends State<MainScreen> {
         bottomNavigationBar: Container(
           height: 50.h,
           padding: EdgeInsets.symmetric(horizontal: 10.w),
-          decoration:  BoxDecoration(color: Colors.white, boxShadow: [
-            BoxShadow(
-              color: Colors.grey,
-              blurRadius: 15.r,
-              // spreadRadius: 10,
-            ),
-          ]),
+          decoration: BoxDecoration(
+            color: Colors.white,
+            boxShadow: [
+              BoxShadow(
+                color: Colors.grey,
+                blurRadius: 15.r,
+              ),
+            ],
+          ),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
