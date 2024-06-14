@@ -11,5 +11,15 @@ class _SearchScreenState extends State<SearchScreen> {
   @override
   Widget build(BuildContext context) {
     return Placeholder();
+    // return const Padding(
+    //   padding: EdgeInsets.all(15),
+    // );
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.amber,
+      ),
+    );
+
+
   }
 }
