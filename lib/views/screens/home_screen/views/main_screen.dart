@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
-import 'package:tech_shop/views/screens/home_screen/views/catalog_screen.dart';
+import 'package:tech_shop/views/screens/catalog_screen/screens/catalog_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_tab_box_button.dart';
 
 class MainScreen extends StatefulWidget {

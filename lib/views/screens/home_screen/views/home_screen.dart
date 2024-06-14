@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/carousel_widget.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/category_widget.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/product_widget.dart';
+import 'package:tech_shop/views/screens/catalog_screen/widgets/read_textfield_widget.dart';
 
 import '../../../../viewmodels/home_view_model.dart';
 
@@ -15,28 +16,7 @@ class HomeScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(
-          title: GestureDetector(
-            onTap: () {},
-            child: Container(
-              alignment: Alignment.centerLeft,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                color: Color(0xFFF3F4F8),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 35, vertical: 5),
-                child: Text(
-                  textAlign: TextAlign.left,
-                  "Mahsulot va toifalarni qidirish",
-                  style: TextStyle(
-                    color: Color(0xff8B8B95),
-                  ),
-                ),
-              ),
-            ),
-          ),
-        ),
+        appBar: AppBar(title: ReadTextfieldWidget(readOnly: true)),
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[

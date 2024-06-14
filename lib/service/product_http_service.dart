@@ -6,7 +6,7 @@ import 'package:tech_shop/models/product_item.dart';
 
 class ProductHttpService {
   final Uri _url = Uri.parse(
-      'https://to-do-f5021-default-rtdb.firebaseio.com/product.json');
+      'https://uzum-market-81608-default-rtdb.firebaseio.com/product.json');
 
   Future<List<Product>> getProducts() async {
     try {

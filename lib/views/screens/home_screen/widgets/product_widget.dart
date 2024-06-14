@@ -3,12 +3,29 @@ import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/viewmodels/home_view_model.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/product_card.dart';
 
-class ProductGrid extends StatelessWidget {
+class ProductGrid extends StatefulWidget {
   final HomeViewModel viewModel;
 
-  ProductGrid({super.key, required this.viewModel});
+  const ProductGrid({super.key, required this.viewModel});
 
+  @override
+  State<ProductGrid> createState() => _ProductGridState();
+}
+
+class _ProductGridState extends State<ProductGrid> {
   final HomeViewModel _homeViewModel = HomeViewModel();
+
+  List<Product> productList = [];
+  void getProducts() async {
+    productList = await _homeViewModel.onCarouselItemTap();
+    print(productList);
+  }
+
+  @override
+  void initState() {
+    super.initState();
+    getProducts();
+  }
 
   @override
   Widget build(BuildContext context) {
