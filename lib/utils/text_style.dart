@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomTextStyle {
   static TextStyle get customUnselectedTabBoxTextStyle {
@@ -9,8 +8,9 @@ class CustomTextStyle {
       fontWeight: FontWeight.w600,
     );
   }
+
   static TextStyle get customSelectedTabBoxTextStyle {
-    return TextStyle(
+    return const TextStyle(
       color: Colors.grey,
       fontSize: 10.0,
       fontWeight: FontWeight.w600,
