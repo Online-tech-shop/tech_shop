@@ -78,22 +78,23 @@ class ViewProductScreen extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(product.name),
+                const Gap(10),
                 Row(
                   children: [
-                    CustomInfoContainer(
-                      isSelected: false,
-                      product: product,
-                    ),
                     CustomInfoContainer(
                       isSelected: true,
                       product: product,
                     ),
+                    CustomInfoContainer(
+                      isSelected: false,
+                      product: product,
+                    ),
                   ],
                 ),
+
               ],
             ),
           ),
-          Gap(50),
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
