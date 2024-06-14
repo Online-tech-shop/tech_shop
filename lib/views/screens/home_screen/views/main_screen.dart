@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
-import 'package:tech_shop/views/screens/home_screen/views/search_screen.dart';
+import 'package:tech_shop/views/screens/home_screen/views/catalog_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_tab_box_button.dart';
 
 class MainScreen extends StatefulWidget {
@@ -14,10 +14,11 @@ class _MainScreenState extends State<MainScreen> {
   int _currentIndex = 0;
   final List<Widget> _pages = [
     HomeScreen(),
-    const SearchScreen(),
-    const Placeholder(),
-    const Placeholder(),
-    const Placeholder(),
+    CatalogScreen(),
+    Placeholder(),
+    Placeholder(),
+    Placeholder(),
+
   ];
 
   void onTabBoxPressed(int index) {
