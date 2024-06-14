@@ -1,9 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tech_shop/views/screens/catalog_screen/widgets/category_tap_widget.dart';
-import 'package:tech_shop/views/screens/home_screen/widgets/category_widget.dart';
 import 'package:tech_shop/views/screens/catalog_screen/widgets/read_textfield_widget.dart';
-import 'package:tech_shop/views/screens/catalog_screen/screens/search_page_screen.dart';
 
 class CatalogScreen extends StatefulWidget {
   const CatalogScreen({super.key});

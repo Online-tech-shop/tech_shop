@@ -3,11 +3,15 @@ import 'package:gap/gap.dart';
 import 'package:tech_shop/models/product_item.dart';
 
 class CustomInfoContainer extends StatelessWidget {
+  final int? reviewCount;
+  final double? reviewAverageNumber;
   final Product product;
   final bool isSelected;
 
   const CustomInfoContainer({
     super.key,
+    this.reviewCount,
+    this.reviewAverageNumber,
     required this.isSelected,
     required this.product,
   });
@@ -31,7 +35,7 @@ class CustomInfoContainer extends StatelessWidget {
           Row(
             children: [
               Text(
-                isSelected ? '5.0' : '${product.orderAmount}+',
+                isSelected ? '$reviewAverageNumber' : '${product.orderAmount}+',
                 style: const TextStyle(
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
@@ -48,9 +52,9 @@ class CustomInfoContainer extends StatelessWidget {
           ),
           const Gap(5),
           Text(
-            isSelected ? '100 sharhh' : 'ta buyurtma',
+            isSelected ? '$reviewCount sharh' : 'ta buyurtma',
             style: const TextStyle(
-            fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.w500,
               color: Colors.grey,
             ),
           ),

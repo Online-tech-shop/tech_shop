@@ -1,6 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:tech_shop/viewmodels/home_view_model.dart';
 import 'package:tech_shop/views/screens/catalog_screen/screens/search_page_screen.dart';
 
 class ReadTextfieldWidget extends StatelessWidget {

@@ -18,26 +18,18 @@ class _ProductGridState extends State<ProductGrid> {
   final HomeViewModel _homeViewModel = HomeViewModel();
   final ReviewViewModel _reviewViewModel = ReviewViewModel();
 
-  List<Product> productList = [];
-  List<Review> _reviewList = [];
 
-  void getProducts() async {
-    productList = await _homeViewModel.onCarouselItemTap();
-  }
-
-  @override
-  void initState() {
-    super.initState();
-    _reviewViewModel.getReviews().then(
-          (List<Review> value) => _reviewList = value,
-        );
-    getProducts();
+  Future<Map<String, dynamic>> getProductsAndReview() async {
+    return {
+      'product': await _homeViewModel.onCarouselItemTap(),
+      'review': await _reviewViewModel.getReviews(),
+    };
   }
 
   @override
   Widget build(BuildContext context) {
     return FutureBuilder(
-      future: _homeViewModel.onCarouselItemTap(),
+      future: getProductsAndReview(),
       builder: (BuildContext context, AsyncSnapshot snapshot) {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const Center(
@@ -48,7 +40,8 @@ class _ProductGridState extends State<ProductGrid> {
             child: Text('error: snapshot!'),
           );
         } else {
-          List<Product> products = snapshot.data;
+          List<Product> products = snapshot.data['product'];
+          List<Review> reviewList = snapshot.data['review'];
           return GridView.builder(
             padding: const EdgeInsets.all(10),
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
@@ -61,7 +54,7 @@ class _ProductGridState extends State<ProductGrid> {
             itemBuilder: (context, index) {
               return ProductCard(
                 product: products[index],
-                reviews: products[index].getReviews(_reviewList),
+                reviews: products[index].getReviews(reviewList),
               );
             },
           );
