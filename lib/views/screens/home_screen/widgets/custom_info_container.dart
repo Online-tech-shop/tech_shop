@@ -40,7 +40,7 @@ class CustomInfoContainer extends StatelessWidget {
             ],
           ),
           const Gap(5),
-          Text(isSelected ? '100 sharh' : 'ta buyurtma'),
+          Text(isSelected ? '100 sharhh' : 'ta buyurtma'),
         ],
       ),
     );
