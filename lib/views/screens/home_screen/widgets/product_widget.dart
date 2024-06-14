@@ -45,7 +45,7 @@ class _ProductGridState extends State<ProductGrid> {
           );
         } else if (!snapshot.hasData || snapshot.hasError) {
           return const Center(
-            child: Text('error: snapshot'),
+            child: Text('error: snapshot!'),
           );
         } else {
           List<Product> products = snapshot.data;
