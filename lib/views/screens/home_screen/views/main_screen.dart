@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
@@ -21,60 +22,19 @@ class _MainScreenState extends State<MainScreen> {
     Placeholder(),
     Placeholder(),
   ];
-  final List _appBar = [
-    PublicAppBar(
-      leading: false,
-      actions: [
-        IconButton(
-          onPressed: () {},
-          icon: const Icon(
-            CupertinoIcons.heart,
-            size: 29,
-          ),
-        ),
-      ],
-      title: TextField(
-        decoration: InputDecoration(
-          filled: true,
-          prefixIconColor: const Color(0xff8B8B95),
-          fillColor: const Color(0xFFF3F4F8),
-          hintStyle: const TextStyle(
-            color: Color(0xff8B8B95),
-          ),
-          prefixIcon: const Icon(Icons.search),
-          hintText: "Mahsulotlar va turkumlar qidirish",
-          border: OutlineInputBorder(
-            borderRadius: BorderRadius.circular(15),
-            borderSide: BorderSide.none,
-          ),
-          contentPadding:
-              const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
-        ),
-      ),
-      onTap: () {},
-    ),
-    PublicAppBar(title: Text(""), onTap: () {}),
-    PublicAppBar(title: Text("Savat"), onTap: () {}),
-    PublicAppBar(title: Text("Saqlangan"), onTap: () {}),
-    PublicAppBar(title: Text("Profil"), onTap: () {})
-    const SearchScreen(),
-    const Placeholder(),
-    const Placeholder(),
-    const Placeholder(),
-  ];
 
   void onTabBoxPressed(int index) {
     setState(() {
       _currentIndex = index;
     });
   }
+
 //
   @override
   Widget build(BuildContext context) {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: _appBar[_currentIndex],
         body: _pages[_currentIndex],
         bottomNavigationBar: Container(
           height: 55.h,
