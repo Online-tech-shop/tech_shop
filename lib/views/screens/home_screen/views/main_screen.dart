@@ -1,9 +1,7 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/views/search_screen.dart';
-import 'package:tech_shop/views/screens/home_screen/widgets/public_appbar.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_tab_box_button.dart';
 
 class MainScreen extends StatefulWidget {
@@ -37,7 +35,7 @@ class _MainScreenState extends State<MainScreen> {
       child: Scaffold(
         body: _pages[_currentIndex],
         bottomNavigationBar: Container(
-          height: 55.h,
+          height: 55,
           padding: EdgeInsets.symmetric(horizontal: 10.w),
           decoration: BoxDecoration(
             color: Colors.white,

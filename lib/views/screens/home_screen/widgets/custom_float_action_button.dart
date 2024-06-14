@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tech_shop/models/product_item.dart';
 
 class CustomFloatActionButton extends StatefulWidget {
@@ -42,11 +41,7 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
               mainAxisSize: MainAxisSize.min,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-
-               const  Text(
-
-                Text(
-
+                const Text(
                   'Narx umumiy',
                   style: TextStyle(
                     color: Colors.grey,
@@ -55,10 +50,7 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
                 ),
                 Text(
                   '${widget.product.price} so\'m',
-
                   style: const TextStyle(
-
-                  style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
                   ),
@@ -89,8 +81,8 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
               GestureDetector(
                 onTap: _onButtonPressed,
                 child: Container(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 20, vertical: 5),
+                  padding: const EdgeInsets.symmetric(
+                      horizontal: 20, vertical: 5),
                   margin: const EdgeInsets.only(left: 10),
                   decoration: BoxDecoration(
                     color: _isTapped ? Colors.white : const Color(0xFF7733FF),
@@ -109,11 +101,7 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
                           color: Color(0xFF7733FF),
                         ),
                       Text(
-
-                        _isTapped ? "O'tish" : "Savatga",
-
                         _isTapped ? 'O\'tish' : 'Savatga',
-
                         style: TextStyle(
                           color: _isTapped
                               ? const Color(0xFF7733FF)

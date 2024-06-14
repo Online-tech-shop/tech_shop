@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tech_shop/utils/text_style.dart';
 
 class CustomTabBoxButton extends StatelessWidget {
