@@ -53,7 +53,7 @@ class HomeScreen extends StatelessWidget {
             children: [
               ProductGrid(viewModel: viewModel),
               const Center(
-                child: Text("Yozgi savdo content"),
+                child: Text("Yozgi savdo"),
               ),
             ],
           ),
