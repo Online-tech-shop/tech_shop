@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:tech_shop/utils/text_style.dart';
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_tab_box_button.dart';
 
