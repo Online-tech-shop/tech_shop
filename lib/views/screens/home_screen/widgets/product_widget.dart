@@ -45,7 +45,7 @@ class _ProductGridState extends State<ProductGrid> {
           );
         } else if (!snapshot.hasData || snapshot.hasError) {
           return const Center(
-            child: Text('error: snapshot'),
+            child: Text('error: snapshot!'),
           );
         } else {
           List<Product> products = snapshot.data;
@@ -54,7 +54,7 @@ class _ProductGridState extends State<ProductGrid> {
             gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
               crossAxisSpacing: 10,
               mainAxisSpacing: 10,
-              mainAxisExtent: 370,
+              mainAxisExtent: 400,
               crossAxisCount: 2,
             ),
             itemCount: products.length,
