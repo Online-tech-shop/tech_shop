@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tech_shop/models/product_item.dart';
+import 'package:tech_shop/utils/app_constants.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_float_action_button.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_info_container.dart';
 
@@ -77,7 +78,7 @@ class ViewProductScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text(product.name),
+                Text(product.name[AppConstants.appLanguageIndex]),
                 const Gap(10),
                 Row(
                   children: [
@@ -91,10 +92,21 @@ class ViewProductScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-
+                const FlutterLogo(
+                  size: 100,
+                ),
+                const FlutterLogo(
+                  size: 100,
+                ),
+                const FlutterLogo(
+                  size: 100,
+                ),
               ],
             ),
           ),
+          const SizedBox(
+            height: kToolbarHeight,
+          )
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

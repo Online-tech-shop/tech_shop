@@ -1,15 +1,30 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tech_shop/models/product_item.dart';
+import 'package:tech_shop/models/review_model.dart';
+import 'package:tech_shop/utils/app_constants.dart';
 import 'package:tech_shop/utils/routes.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   final Product product;
+  final List<Review> reviews;
 
   const ProductCard({
     super.key,
     required this.product,
+    required this.reviews,
   });
+
+  @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +32,7 @@ class ProductCard extends StatelessWidget {
       onTap: () => Navigator.pushNamed(
         context,
         RouteName.viewProduct,
-        arguments: {'product': product},
+        arguments: {'product': widget.product},
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
@@ -30,7 +45,7 @@ class ProductCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
                 image: NetworkImage(
-                  product.images[0],
+                  widget.product.images[0],
                 ),
                 fit: BoxFit.cover,
               ),
@@ -52,32 +67,33 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  product.name,
+                  widget.product.name[AppConstants.appLanguageIndex],
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(fontSize: 18),
                 ),
-                const Row(
+                Row(
                   children: [
-                    Icon(Icons.star, color: Color(0XffF59815), size: 15),
-                    Text("7.9", style: TextStyle(color: Colors.grey)),
-                    Text("(11ta baho)")
+                    const Icon(Icons.star, color: Color(0XffF59815), size: 15),
+                    const Text(
+                      "7.9 ",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      "(${widget.reviews.length}ta sharhlar)",
+                      style: const TextStyle(color: Colors.grey),
+                    )
                   ],
                 ),
                 const SizedBox(height: 10),
                 Text(
-                  product.price.toString(),
+                  '${widget.product.price} so\'m',
                   style: const TextStyle(
-                      decoration: TextDecoration.lineThrough,
-                      decorationThickness: 2,
-                      decorationColor: Colors.grey,
-                      color: Colors.grey,
-                      fontSize: 14),
-                ),
-                Text(
-                  product.category.toString(),
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
+                    decorationThickness: 2,
+                    color: Colors.black,
+                    fontSize: 14,
+                    fontWeight: FontWeight.w700,
+                  ),
                 ),
               ],
             ),
