@@ -3,11 +3,15 @@ import 'package:gap/gap.dart';
 import 'package:tech_shop/models/product_item.dart';
 
 class CustomInfoContainer extends StatelessWidget {
+  final int? reviewCount;
+  final double? reviewAverageNumber;
   final Product product;
   final bool isSelected;
 
   const CustomInfoContainer({
     super.key,
+    this.reviewCount,
+    this.reviewAverageNumber,
     required this.isSelected,
     required this.product,
   });
@@ -21,15 +25,22 @@ class CustomInfoContainer extends StatelessWidget {
         left: isSelected ? 0 : 10,
       ),
       decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(10)),
+        color: Colors.white,
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Text(isSelected ? '5.0' : '${product.orderAmount}+'),
+              Text(
+                isSelected ? '$reviewAverageNumber' : '${product.orderAmount}+',
+                style: const TextStyle(
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
               const Gap(5),
               if (isSelected)
                 for (int i = 0; i < 5; i++)
@@ -40,7 +51,13 @@ class CustomInfoContainer extends StatelessWidget {
             ],
           ),
           const Gap(5),
-          Text(isSelected ? '100 sharhh' : 'ta buyurtma'),
+          Text(
+            isSelected ? '$reviewCount sharh' : 'ta buyurtma',
+            style: const TextStyle(
+              fontWeight: FontWeight.w500,
+              color: Colors.grey,
+            ),
+          ),
         ],
       ),
     );

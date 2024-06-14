@@ -1,6 +1,8 @@
+import 'review_model.dart';
+
 class Product {
   final String id;
-  String name;
+  List<String> name;
   int price;
   int category;
   List<String> images;
@@ -10,6 +12,7 @@ class Product {
   String aboutProduct;
   List<int> saleType;
   List<String> brieflyAboutProduct;
+  int leftProduct;
 
   Product({
     required this.id,
@@ -23,12 +26,13 @@ class Product {
     required this.aboutProduct,
     required this.saleType,
     required this.brieflyAboutProduct,
+    required this.leftProduct,
   });
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
       id: json['id'],
-      name: json['name'],
+      name: List<String>.from(json['name']),
       price: json['price'],
       category: json['category'],
       images: List<String>.from(json['images']),
@@ -42,6 +46,11 @@ class Product {
       brieflyAboutProduct: List<String>.from(
         json['briefly-about-product'],
       ),
+      leftProduct: json['left-product'] ?? 0,
     );
+  }
+
+  List<Review> getReviews(List<Review> reviews) {
+    return reviews.where((Review review) => review.productId == id).toList();
   }
 }

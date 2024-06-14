@@ -1,25 +1,40 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gap/gap.dart';
+
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tech_shop/models/product_item.dart';
+import 'package:tech_shop/models/review_model.dart';
+import 'package:tech_shop/utils/app_constants.dart';
 import 'package:tech_shop/utils/routes.dart';
 
-class ProductCard extends StatelessWidget {
+class ProductCard extends StatefulWidget {
   final Product product;
+  final List<Review> reviews;
 
   const ProductCard({
     super.key,
     required this.product,
+    required this.reviews,
   });
 
   @override
+  State<ProductCard> createState() => _ProductCardState();
+}
+
+class _ProductCardState extends State<ProductCard> {
+  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(
-        context,
-        RouteName.viewProduct,
-        arguments: {'product': product},
-      ),
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          RouteName.viewProduct,
+          arguments: {
+            'product': widget.product,
+            'review': widget.product.getReviews(widget.reviews)
+          },
+        );
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
@@ -31,7 +46,7 @@ class ProductCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
                 image: NetworkImage(
-                  product.images[0],
+                  widget.product.images[0],
                 ),
                 fit: BoxFit.cover,
               ),
@@ -53,33 +68,45 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  product.name,
+                  widget.product.name[AppConstants.appLanguageIndex],
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(fontSize: 18),
                 ),
-                const Row(
+                Row(
                   children: [
-                    Icon(Icons.star, color: Color(0XffF59815), size: 15),
-                    Text("7.9", style: TextStyle(color: Colors.grey)),
-                    Text("(11ta baho)")
+                    const Icon(Icons.star, color: Color(0XffF59815), size: 15),
+                    const Text(
+                      "7.9 ",
+                      style: TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      "(${widget.reviews.length}ta sharhlar)",
+                      style: const TextStyle(color: Colors.grey),
+                    )
                   ],
                 ),
-                const SizedBox(height: 10),
-                Text(
-                  product.price.toString(),
-                  style: const TextStyle(
-                      decoration: TextDecoration.lineThrough,
-                      decorationThickness: 2,
-                      decorationColor: Colors.grey,
-                      color: Colors.grey,
-                      fontSize: 14),
-                ),
-                Gap(10),
-                Text(
-                  product.category.toString(),
-                  style: const TextStyle(
-                      fontSize: 16, fontWeight: FontWeight.bold),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '${widget.product.price} so\'m',
+                      style: const TextStyle(
+                        decorationThickness: 2,
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Container(
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.grey)),
+                        child: SvgPicture.asset(
+                            'assets/icons/product_icons/cart.svg'))
+                  ],
                 ),
               ],
             ),
