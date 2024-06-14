@@ -1,3 +1,4 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
@@ -56,11 +57,8 @@ class _MainScreenState extends State<MainScreen> {
     PublicAppBar(title: Text(""), onTap: () {}),
     PublicAppBar(title: Text("Savat"), onTap: () {}),
     PublicAppBar(title: Text("Saqlangan"), onTap: () {}),
-    PublicAppBar(title: Text("Profil"), onTap: () {})
-    const SearchScreen(),
-    const Placeholder(),
-    const Placeholder(),
-    const Placeholder(),
+    PublicAppBar(title: Text("Profil"), onTap: () {}),
+   
   ];
 
   void onTabBoxPressed(int index) {
@@ -68,6 +66,7 @@ class _MainScreenState extends State<MainScreen> {
       _currentIndex = index;
     });
   }
+
 //
   @override
   Widget build(BuildContext context) {
