@@ -91,7 +91,14 @@ class ViewProductScreen extends StatelessWidget {
                     ),
                   ],
                 ),
-
+                const Text(
+                  "1 799 000 so'm", //firebasedan opkkelinishi kerak
+                  style: TextStyle(
+                    fontSize: 24,
+                    fontWeight: FontWeight.bold,
+                  ),
+                ),
+                
               ],
             ),
           ),

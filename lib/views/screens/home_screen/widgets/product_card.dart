@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gap/gap.dart';
 import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/utils/routes.dart';
 
@@ -74,6 +75,7 @@ class ProductCard extends StatelessWidget {
                       color: Colors.grey,
                       fontSize: 14),
                 ),
+                Gap(10),
                 Text(
                   product.category.toString(),
                   style: const TextStyle(
