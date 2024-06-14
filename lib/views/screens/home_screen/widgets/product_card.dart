@@ -100,12 +100,17 @@ class _ProductCardState extends State<ProductCard> {
                       ),
                     ),
                     Container(
-                        padding: EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.grey)
-                        ),
-                        child: SvgPicture.asset('assets/icons/product_icons/cart.svg'))
+                      padding: const EdgeInsets.all(7),
+                      decoration: BoxDecoration(
+                        shape: BoxShape.circle,
+                        border: Border.all(color: Colors.grey),
+                      ),
+                      child: SvgPicture.asset(
+                        'assets/icons/product_icons/cart.svg',
+                        height: 20,
+                        width: 20,
+                      ),
+                    )
                   ],
                 ),
               ],
