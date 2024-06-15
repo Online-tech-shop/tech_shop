@@ -6,6 +6,7 @@ import 'package:tech_shop/models/review_model.dart';
 import 'package:tech_shop/utils/app_constants.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_float_action_button.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_info_container.dart';
+import 'package:tech_shop/views/screens/home_screen/widgets/custom_user_review_box.dart';
 
 class ViewProductScreen extends StatelessWidget {
   final Product product;
@@ -171,7 +172,7 @@ class ViewProductScreen extends StatelessWidget {
                       Padding(
                         padding: const EdgeInsets.only(left: 10.0),
                         child: Text(
-                          "${product.leftProduct} dona qoldi",
+                          "Bu haftada ${product.boughtAmountThisWeek} kishi sotib oldi",
                           style: const TextStyle(
                             color: Colors.black,
                             fontWeight: FontWeight.w600,
@@ -181,7 +182,21 @@ class ViewProductScreen extends StatelessWidget {
                       ),
                     ],
                   ),
-                )
+                ),
+                // Text(review.length.toString()),
+
+                SizedBox(
+                  height: 200,
+                  child: ListView.builder(
+                    scrollDirection: Axis.horizontal,
+                    itemCount: review.length,
+                    itemBuilder: (BuildContext context, int index) =>
+                        CustomUserReviewBox(
+                      index: index,
+                      review: review[index],
+                    ),
+                  ),
+                ),
               ],
             ),
           ),
