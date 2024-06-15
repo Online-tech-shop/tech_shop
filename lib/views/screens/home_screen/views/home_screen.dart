@@ -16,9 +16,14 @@ class HomeScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
-        appBar: AppBar(title: ReadTextfieldWidget(readOnly: true)),
+        appBar: AppBar(
+          surfaceTintColor: Colors.transparent,
+          shadowColor: Colors.transparent,
+          title: ReadTextfieldWidget(readOnly: true),
+        ),
         body: NestedScrollView(
-          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
+          headerSliverBuilder:
+              (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverToBoxAdapter(
                 child: Column(
@@ -39,6 +44,12 @@ class HomeScreen extends StatelessWidget {
               SliverPersistentHeader(
                 delegate: _SliverAppBarDelegate(
                   const TabBar(
+                    dividerColor: Colors.transparent,
+                    labelColor: Color(0xFF7B28DA),
+                    indicatorColor: Color(0xFF7B28DA),
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorPadding: EdgeInsets.symmetric(horizontal: 30),
+                    indicatorWeight: 2.5,
                     tabs: [
                       Tab(text: "Tavsiyalar"),
                       Tab(text: "Yozgi savdo"),
@@ -51,10 +62,8 @@ class HomeScreen extends StatelessWidget {
           },
           body: TabBarView(
             children: [
-              ProductGrid(viewModel: viewModel),
-              const Center(
-                child: Text("Yozgi savdo"),
-              ),
+              ProductGrid(viewModel: viewModel, isSelected: false),
+              ProductGrid(viewModel: viewModel, isSelected: true)
             ],
           ),
         ),

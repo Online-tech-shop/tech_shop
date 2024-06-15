@@ -55,8 +55,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               centerTitle: false,
               background: Container(
                 alignment: Alignment.center,
-                child: Container(
-                    child: const Stack(
+                child: const Stack(
                   clipBehavior: Clip.none,
                   children: [
                     Positioned(
@@ -71,7 +70,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                       ),
                     )
                   ],
-                )),
+                ),
               ),
             ),
           ),
@@ -155,12 +154,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  Container(
+                  SizedBox(
                     height: 50,
                     child: Row(
                       children: [
                         Container(
-                          padding: EdgeInsets.all(10),
+                          padding: const EdgeInsets.all(10),
                           width: 70,
                           height: 70,
                           child: Container(
@@ -187,7 +186,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
                                 "Ilova tili",
                                 style: TextStyle(fontWeight: FontWeight.w500),
                               ),
-                              const Icon(
+                              Icon(
                                 Icons.arrow_forward_ios_rounded,
                                 color: Colors.black26,
                               )
@@ -262,14 +261,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
               delegate: SliverChildListDelegate(
                 [
                   Container(
-                    padding: EdgeInsets.symmetric(horizontal: 20),
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
                     height: 50,
                     child: InkWell(
                       child: Container(
                         width: 100,
                         height: 50,
                         decoration: BoxDecoration(
-                            color: Color(0xff7000FF),
+                            color: const Color(0xff7000FF),
                             borderRadius: BorderRadius.circular(5)),
                         child: const Center(
                           child: Text(

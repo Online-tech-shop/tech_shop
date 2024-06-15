@@ -15,20 +15,46 @@ class CustomUserReviewBox extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       margin: const EdgeInsets.all(10),
+      padding: const EdgeInsets.all(10),
       decoration: BoxDecoration(
         border: Border.all(color: Colors.grey),
-        // color: Colors.,
+        borderRadius: BorderRadius.circular(10),
       ),
       child: Column(
         children: [
           Row(
-            children: List.generate(
-              5,
-              (index) => Icon(
-                Icons.star,
-                color: review.star > index ? Colors.yellow : Colors.grey,
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(
+                    review.userName,
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 18,
+                    ),
+                  ),
+                  Text(
+                    review.publishedDateTime,
+                    style: const TextStyle(
+                      color: Colors.grey,
+                    ),
+                  ),
+                ],
               ),
-            ),
+              Row(
+                children: List.generate(
+                  5,
+                  (index) => Icon(
+                    Icons.star,
+                    color: review.star > index
+                        ? const Color(0xFFFFB536)
+                        : Colors.grey.withOpacity(0.5),
+                  ),
+                ),
+              ),
+            ],
           ),
           Text(review.text),
         ],

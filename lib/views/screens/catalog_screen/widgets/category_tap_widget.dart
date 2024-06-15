@@ -4,6 +4,7 @@ import 'package:tech_shop/views/screens/home_screen/widgets/product_widget.dart'
 
 class CategoryTapWidget extends StatelessWidget {
   HomeViewModel homeViewModel = HomeViewModel();
+
   CategoryTapWidget({super.key});
 
   @override
@@ -34,7 +35,10 @@ class CategoryTapWidget extends StatelessWidget {
           ),
         ),
       ),
-      body: ProductGrid(viewModel: homeViewModel),
+      body: ProductGrid(
+        viewModel: homeViewModel,
+        isSelected: false,
+      ),
     );
   }
 }

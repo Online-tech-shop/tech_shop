@@ -5,10 +5,10 @@ class ProfileItem extends StatefulWidget {
   final Icon ikon;
   String name;
   ProfileItem({
-    Key? key,
+    super.key,
     required this.ikon,
     required this.name,
-  }) : super(key: key);
+  });
 
   @override
   State<ProfileItem> createState() => _ProfileItemState();
@@ -17,11 +17,11 @@ class ProfileItem extends StatefulWidget {
 class _ProfileItemState extends State<ProfileItem> {
   @override
   Widget build(BuildContext context) {
-    return Container(
+    return SizedBox(
       height: 50,
       child: Row(
         children: [
-          Container(
+          SizedBox(
             width: 70,
             height: 70,
             child: Center(
@@ -39,7 +39,7 @@ class _ProfileItemState extends State<ProfileItem> {
               children: [
                 Text(
                   widget.name,
-                  style: TextStyle(fontWeight: FontWeight.w500),
+                  style: const TextStyle(fontWeight: FontWeight.w500),
                 ),
                 const Icon(
                   Icons.arrow_forward_ios_rounded,
