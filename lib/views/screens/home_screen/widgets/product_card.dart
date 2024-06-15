@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:provider/provider.dart';
 import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/models/review_model.dart';
+import 'package:tech_shop/models/sql_model.dart';
 import 'package:tech_shop/utils/app_constants.dart';
 import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/utils/routes.dart';
+import 'package:tech_shop/viewmodels/sql_view_model.dart';
 
 class ProductCard extends StatefulWidget {
   final Product product;
@@ -103,13 +106,29 @@ class _ProductCardState extends State<ProductCard> {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    Container(
+                    GestureDetector(
+                      onTap: () {
+                        final save = Save(
+                          title: widget.product.name[0],
+                          image: widget.product.images[0],
+                          price: widget.product.price.toString(),
+                          amount: widget.product.leftProduct.toString(),
+                          seller: widget.product.seller,
+                          brieflyAboutProduct:
+                              widget.product.brieflyAboutProduct[0],
+                        );
+                        Provider.of<SaveViewModel>(context, listen: false)
+                            .addSave(save);
+                      },
+                      child: Container(
                         padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             border: Border.all(color: Colors.grey)),
                         child: SvgPicture.asset(
-                            'assets/icons/product_icons/cart.svg'))
+                            'assets/icons/product_icons/cart.svg'),
+                      ),
+                    )
                   ],
                 ),
               ],

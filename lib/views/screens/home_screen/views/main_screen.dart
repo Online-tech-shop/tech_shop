@@ -4,6 +4,7 @@ import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
 import 'package:tech_shop/views/screens/catalog_screen/screens/catalog_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_tab_box_button.dart';
 import 'package:tech_shop/views/screens/profile/profile_screen.dart';
+import 'package:tech_shop/views/screens/save_screen/views/save_screen.dart';
 
 class MainScreen extends StatefulWidget {
   const MainScreen({super.key});
@@ -17,7 +18,7 @@ class _MainScreenState extends State<MainScreen> {
   final List<Widget> _pages = [
     HomeScreen(),
     const CatalogScreen(),
-    const CartScreen(),
+    const SaveScreen(),
     const Placeholder(),
     const ProfileScreen()
   ];

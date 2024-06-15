@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tech_shop/utils/routes.dart';
+import 'package:tech_shop/viewmodels/sql_view_model.dart';
 
 void main(List<String> args) {
   runApp(const MyApp());
@@ -10,7 +12,9 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+    return ChangeNotifierProvider(
+      create: (context) => SaveViewModel(),
+      child: MaterialApp(
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
         appBarTheme: const AppBarTheme(
@@ -23,6 +27,7 @@ class MyApp extends StatelessWidget {
       ),
       debugShowCheckedModeBanner: false,
       onGenerateRoute: generateRoute,
+      )
     );
   }
 }
