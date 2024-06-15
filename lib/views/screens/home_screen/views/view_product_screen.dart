@@ -4,6 +4,7 @@ import 'package:gap/gap.dart';
 import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/models/review_model.dart';
 import 'package:tech_shop/utils/app_constants.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_float_action_button.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_info_container.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_user_review_box.dart';
@@ -18,23 +19,15 @@ class ViewProductScreen extends StatelessWidget {
     required this.review,
   });
 
-  double countAverageOfReview(List<Review> listReview) {
-    if (listReview.isEmpty) {
-      return 0.0;
-    }
-    int sumOfReview = 0;
-    for (var each in listReview) {
-      sumOfReview += each.star;
-    }
-    double average = sumOfReview / listReview.length;
-    return average;
-  }
+
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFEFEFEF),
       appBar: AppBar(
+        shadowColor: Colors.transparent,
+        surfaceTintColor: Colors.transparent,
         backgroundColor: const Color(0xFFEFEFEF),
         leading: GestureDetector(
           onTap: () => Navigator.of(context).pop(),
@@ -110,7 +103,7 @@ class ViewProductScreen extends StatelessWidget {
                   children: [
                     CustomInfoContainer(
                       reviewCount: review.length,
-                      reviewAverageNumber: countAverageOfReview(review),
+                      reviewAverageNumber: CustomFunctions.countAverageOfReview(review),
                       isSelected: true,
                       product: product,
                     ),
@@ -183,12 +176,22 @@ class ViewProductScreen extends StatelessWidget {
                     ],
                   ),
                 ),
-                // Text(review.length.toString()),
-
-                SizedBox(
-                  height: 200,
-                  child: ListView.builder(
-                    scrollDirection: Axis.horizontal,
+                Padding(
+                  padding: const EdgeInsets.only(top: 15.0),
+                  child: Text(
+                    review.isNotEmpty
+                        ? '${review.length} sharh'
+                        : "Ushbu mahsulotga hali sharh yozilmagan",
+                    style: const TextStyle(
+                      fontWeight: FontWeight.w700,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                if (review.isNotEmpty)
+                  ListView.builder(
+                    shrinkWrap: true,
+                    physics: const NeverScrollableScrollPhysics(),
                     itemCount: review.length,
                     itemBuilder: (BuildContext context, int index) =>
                         CustomUserReviewBox(
@@ -196,11 +199,10 @@ class ViewProductScreen extends StatelessWidget {
                       review: review[index],
                     ),
                   ),
-                ),
               ],
             ),
           ),
-          const SizedBox(height: kToolbarHeight)
+          const SizedBox(height: kToolbarHeight + 10)
         ],
       ),
       floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,

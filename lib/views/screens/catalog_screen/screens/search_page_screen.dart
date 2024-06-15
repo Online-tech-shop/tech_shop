@@ -36,6 +36,7 @@ class SearchPageWidget extends StatelessWidget {
       ),
       body: ProductGrid(
         viewModel: homeViewModel,
+        isSelected: false,
       ),
     );
   }

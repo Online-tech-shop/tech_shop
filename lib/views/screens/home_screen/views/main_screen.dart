@@ -36,7 +36,7 @@ class _MainScreenState extends State<MainScreen> {
         body: _pages[_currentIndex],
         bottomNavigationBar: Container(
           height: 55,
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
           decoration: const BoxDecoration(
             color: Colors.white,
             boxShadow: [

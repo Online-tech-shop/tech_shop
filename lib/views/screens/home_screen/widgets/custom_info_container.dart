@@ -52,7 +52,13 @@ class CustomInfoContainer extends StatelessWidget {
           ),
           const Gap(5),
           Text(
-            isSelected ? '$reviewCount sharh' : 'ta buyurtma',
+            isSelected
+                ? reviewCount == 0
+                    ? 'Baholar hali yoʻq'
+                    : '$reviewCount sharh'
+                : product.orderAmount == 0
+                    ? 'Buyurtma yoʻq '
+                    : 'ta buyurtma',
             style: const TextStyle(
               fontWeight: FontWeight.w500,
               color: Colors.grey,

@@ -4,6 +4,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/models/review_model.dart';
 import 'package:tech_shop/utils/app_constants.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/utils/routes.dart';
 
 class ProductCard extends StatefulWidget {
@@ -74,10 +75,14 @@ class _ProductCardState extends State<ProductCard> {
                 ),
                 Row(
                   children: [
-                    const Icon(Icons.star, color: Color(0XffF59815), size: 15),
-                    const Text(
-                      "7.9 ",
-                      style: TextStyle(color: Colors.grey),
+                    const Icon(
+                      Icons.star,
+                      color: Color(0XffFFB740),
+                      size: 15,
+                    ),
+                    Text(
+                      ' ${CustomFunctions.countAverageOfReview(widget.reviews).toString().substring(0, 3)} ',
+                      style: const TextStyle(color: Colors.grey),
                     ),
                     Text(
                       "(${widget.reviews.length}ta sharhlar)",
