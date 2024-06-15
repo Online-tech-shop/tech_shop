@@ -1,11 +1,12 @@
 class Save {
   int? id;
-  String title;
-  String image;
-  String price;
-  String amount;
-  String seller;
-  String brieflyAboutProduct;
+  final String title;
+  final String image;
+  double price;
+  final int amount;
+  final String seller;
+  final String? brieflyAboutProduct;
+  int quantity;
 
   Save({
     this.id,
@@ -14,7 +15,8 @@ class Save {
     required this.price,
     required this.amount,
     required this.seller,
-    required this.brieflyAboutProduct,
+    this.brieflyAboutProduct,
+    required this.quantity,
   });
 
   Map<String, dynamic> toMap() {
@@ -26,6 +28,7 @@ class Save {
       'amount': amount,
       'seller': seller,
       'brieflyAboutProduct': brieflyAboutProduct,
+      'quantity': quantity,
     };
   }
 
@@ -38,6 +41,7 @@ class Save {
       amount: map['amount'],
       seller: map['seller'],
       brieflyAboutProduct: map['brieflyAboutProduct'],
+      quantity: map['quantity'],
     );
   }
 }

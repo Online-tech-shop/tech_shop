@@ -27,4 +27,37 @@ class SaveViewModel extends ChangeNotifier {
     await _dbHelper.deleteSave(id);
     fetchSaves();
   }
+
+  void incrementQuantity(int id) {
+    final index = saves.indexWhere((item) => item.id == id);
+    if (index != -1) {
+      saves[index].quantity += 1;
+      updateSave(saves[index]);
+    }
+  }
+
+  void decrementQuantity(int id) {
+    final index = saves.indexWhere((item) => item.id == id);
+    if (index != -1 && saves[index].quantity > 1) {
+      saves[index].quantity -= 1;
+      updateSave(saves[index]);
+    }
+  }
+
+  void incrementPrice(int id) {
+    final index = saves.indexWhere((item) => item.id == id);
+
+    if (index != -1) {
+      saves[index].price += saves[index].price;
+      updateSave(saves[index]);
+    }
+  }
+
+  void decrementPrice(int id) {
+    final index = saves.indexWhere((item) => item.id == id);
+    if (index != -1) {
+      saves[index].price -= saves[index].price / 2;
+      updateSave(saves[index]);
+    }
+  }
 }

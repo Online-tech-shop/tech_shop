@@ -6,9 +6,7 @@ class DatabaseHelper {
   static final DatabaseHelper _instance = DatabaseHelper._internal();
   static Database? _database;
 
-  factory DatabaseHelper() {
-    return _instance;
-  }
+  factory DatabaseHelper() => _instance;
 
   DatabaseHelper._internal();
 
@@ -19,7 +17,7 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDatabase() async {
-    String path = join(await getDatabasesPath(), 'saves.db');
+    String path = join(await getDatabasesPath(), 'saves_product4.db'); // Changed the database name
     return await openDatabase(
       path,
       version: 1,
@@ -29,36 +27,35 @@ class DatabaseHelper {
 
   Future<void> _onCreate(Database db, int version) async {
     await db.execute('''
-      CREATE TABLE saves (
+      CREATE TABLE saves_product4 (
         id INTEGER PRIMARY KEY AUTOINCREMENT,
-        title TEXT,
-        image TEXT,
-        price TEXT,
-        amount TEXT,
-        seller TEXT,
-        brieflyAboutProduct TEXT
+        title TEXT NOT NULL,
+        image TEXT NOT NULL,
+        price REAL NOT NULL,
+        amount INTEGER NOT NULL,
+        seller TEXT NOT NULL,
+        brieflyAboutProduct TEXT,
+        quantity INTEGER NOT NULL
       )
     ''');
   }
 
   Future<int> insertSave(Save save) async {
-    Database db = await database;
-    return await db.insert('saves', save.toMap());
+    final db = await database;
+    return await db.insert('saves_product4', save.toMap());
   }
 
   Future<List<Save>> getSaves() async {
-    Database db = await database;
-    List<Map<String, dynamic>> maps = await db.query('saves');
+    final db = await database;
+    final List<Map<String, dynamic>> maps = await db.query('saves_product4');
 
-    return List.generate(maps.length, (i) {
-      return Save.fromMap(maps[i]);
-    });
+    return List.generate(maps.length, (i) => Save.fromMap(maps[i]));
   }
 
   Future<int> updateSave(Save save) async {
-    Database db = await database;
+    final db = await database;
     return await db.update(
-      'saves',
+      'saves_product4',
       save.toMap(),
       where: 'id = ?',
       whereArgs: [save.id],
@@ -66,9 +63,9 @@ class DatabaseHelper {
   }
 
   Future<int> deleteSave(int id) async {
-    Database db = await database;
+    final db = await database;
     return await db.delete(
-      'saves',
+      'saves_product4',
       where: 'id = ?',
       whereArgs: [id],
     );
