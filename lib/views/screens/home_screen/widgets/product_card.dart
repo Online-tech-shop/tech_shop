@@ -22,25 +22,24 @@ class ProductCard extends StatefulWidget {
 
 class _ProductCardState extends State<ProductCard> {
   @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
-
-  @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () => Navigator.pushNamed(
-        context,
-        RouteName.viewProduct,
-        arguments: {'product': widget.product},
-      ),
+      onTap: () {
+        Navigator.pushNamed(
+          context,
+          RouteName.viewProduct,
+          arguments: {
+            'product': widget.product,
+            'review': widget.product.getReviews(widget.reviews)
+          },
+        );
+      },
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Container(
             clipBehavior: Clip.hardEdge,
-            height: 250,
+            height: 220,
             width: double.infinity,
             decoration: BoxDecoration(
               borderRadius: BorderRadius.circular(10),
@@ -99,29 +98,13 @@ class _ProductCardState extends State<ProductCard> {
                         fontWeight: FontWeight.w700,
                       ),
                     ),
-                    GestureDetector(
-                      onTap: () {
-                        ScaffoldMessenger.of(context).showSnackBar(
-                          const SnackBar(
-                            content: Text(
-                              'Magsulot savatga qo\'shildi',
-                            ),
-                          ),
-                        );
-                      },
-                      child: Container(
-                        padding: const EdgeInsets.all(7),
+                    Container(
+                        padding: const EdgeInsets.all(5),
                         decoration: BoxDecoration(
-                          shape: BoxShape.circle,
-                          border: Border.all(color: Colors.grey),
-                        ),
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.grey)),
                         child: SvgPicture.asset(
-                          'assets/icons/product_icons/cart.svg',
-                          height: 20,
-                          width: 20,
-                        ),
-                      ),
-                    )
+                            'assets/icons/product_icons/cart.svg'))
                   ],
                 ),
               ],

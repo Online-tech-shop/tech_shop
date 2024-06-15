@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:tech_shop/viewmodels/home_view_model.dart';
-import 'package:tech_shop/views/screens/home_screen/widgets/category_widget.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/product_widget.dart';
 
 class SearchPageWidget extends StatelessWidget {
