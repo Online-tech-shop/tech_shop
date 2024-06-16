@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tech_shop/models/category_name.dart';
 import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/models/review_model.dart';
 import 'package:tech_shop/viewmodels/home_view_model.dart';
@@ -9,11 +10,13 @@ class ShowProductsWidget extends StatefulWidget {
   final HomeViewModel viewModel;
   final String searchText;
   final int? categoryIndex;
+  final String? categoryTitle;
 
   ShowProductsWidget({
     super.key,
     required this.viewModel,
     required this.searchText,
+    this.categoryTitle,
     this.categoryIndex,
   });
 
@@ -45,6 +48,7 @@ class _ShowProductsWidgetState extends State<ShowProductsWidget> {
         isLoading = false;
       });
     } catch (e) {
+      // Handle error
       setState(() {
         isLoading = false;
       });
@@ -72,21 +76,48 @@ class _ShowProductsWidgetState extends State<ShowProductsWidget> {
         ? const Center(
             child: Text("Mahsulot topilmadi"),
           )
-        : GridView.builder(
-            padding: const EdgeInsets.all(10),
-            gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-              crossAxisSpacing: 10,
-              mainAxisSpacing: 10,
-              mainAxisExtent: 370,
-              crossAxisCount: 2,
+        : SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    left: 15,
+                    right: 15,
+                  ),
+                  child: Text(
+                    "${widget.searchText} ${filteredProducts.length} ta tovar topildi",
+                    style: TextStyle(
+                      color: Colors.grey.shade600,
+                      fontSize: 18,
+                    ),
+                  ),
+                ),
+                SizedBox(
+                  height: (filteredProducts.length / 2).ceil() * 380.0,
+                  child: GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.all(10),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      mainAxisExtent: 370,
+                      crossAxisCount: 2,
+                    ),
+                    itemCount: filteredProducts.length,
+                    itemBuilder: (context, index) {
+                      return ProductCard(
+                        product: filteredProducts[index],
+                        reviews: filteredProducts[index].getReviews(reviewList),
+                      );
+                    },
+                  ),
+                ),
+              ],
             ),
-            itemCount: filteredProducts.length,
-            itemBuilder: (context, index) {
-              return ProductCard(
-                product: filteredProducts[index],
-                reviews: filteredProducts[index].getReviews(reviewList),
-              );
-            },
           );
   }
 }
