@@ -23,6 +23,8 @@ class _CategoryTapWidgetState extends State<CategoryTapWidget> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        surfaceTintColor: Colors.white,
+        backgroundColor: Colors.white,
         leadingWidth: 30,
         title: ClipRRect(
           borderRadius: BorderRadius.circular(10),

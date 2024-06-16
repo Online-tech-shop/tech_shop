@@ -48,9 +48,10 @@ class _ShowProductsWidgetState extends State<ShowProductsWidget> {
         isLoading = false;
       });
     } catch (e) {
-      // setState(() {
-      //   isLoading = false;
-      // });
+      // Handle error
+      setState(() {
+        isLoading = false;
+      });
     }
   }
 
@@ -75,43 +76,48 @@ class _ShowProductsWidgetState extends State<ShowProductsWidget> {
         ? const Center(
             child: Text("Mahsulot topilmadi"),
           )
-        : Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            mainAxisSize: MainAxisSize.min,
-            children: [
-              Padding(
-                padding: const EdgeInsets.only(
-                  top: 10,
-                  left: 15,
-                  right: 15,
-                ),
-                child: Text(
-                  "${widget.searchText} ${filteredProducts.length} ta tovar topildi",
-                  style: TextStyle(
-                    color: Colors.grey.shade600,
-                    fontSize: 18,
+        : SingleChildScrollView(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.min,
+              children: [
+                Padding(
+                  padding: const EdgeInsets.only(
+                    top: 10,
+                    left: 15,
+                    right: 15,
+                  ),
+                  child: Text(
+                    "${widget.searchText} ${filteredProducts.length} ta tovar topildi",
+                    style: TextStyle(
+                      color: Colors.grey.shade600,
+                      fontSize: 18,
+                    ),
                   ),
                 ),
-              ),
-              Expanded(
-                child: GridView.builder(
-                  padding: const EdgeInsets.all(10),
-                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    mainAxisExtent: 370,
-                    crossAxisCount: 2,
+                SizedBox(
+                  height: (filteredProducts.length / 2).ceil() * 380.0,
+                  child: GridView.builder(
+                    physics: const NeverScrollableScrollPhysics(),
+                    padding: const EdgeInsets.all(10),
+                    gridDelegate:
+                        const SliverGridDelegateWithFixedCrossAxisCount(
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      mainAxisExtent: 370,
+                      crossAxisCount: 2,
+                    ),
+                    itemCount: filteredProducts.length,
+                    itemBuilder: (context, index) {
+                      return ProductCard(
+                        product: filteredProducts[index],
+                        reviews: filteredProducts[index].getReviews(reviewList),
+                      );
+                    },
                   ),
-                  itemCount: filteredProducts.length,
-                  itemBuilder: (context, index) {
-                    return ProductCard(
-                      product: filteredProducts[index],
-                      reviews: filteredProducts[index].getReviews(reviewList),
-                    );
-                  },
                 ),
-              ),
-            ],
+              ],
+            ),
           );
   }
 }
