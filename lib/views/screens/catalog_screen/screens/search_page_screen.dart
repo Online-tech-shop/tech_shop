@@ -65,6 +65,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
       body: ShowProductsWidget(
         viewModel: widget.homeViewModel,
         searchText: searchText,
+
       ),
     );
   }

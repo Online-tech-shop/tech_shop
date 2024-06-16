@@ -14,6 +14,7 @@ class CategoryTapWidget extends StatefulWidget {
   State<CategoryTapWidget> createState() => _CategoryTapWidgetState();
 }
 
+
 class _CategoryTapWidgetState extends State<CategoryTapWidget> {
   HomeViewModel homeViewModel = HomeViewModel();
   String searchText = '';
@@ -67,5 +68,6 @@ class _CategoryTapWidgetState extends State<CategoryTapWidget> {
           searchText: searchText,
           categoryIndex: widget.categoryIndex,
         ));
+  
   }
 }

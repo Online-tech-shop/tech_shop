@@ -1,12 +1,12 @@
 import 'review_model.dart';
 
 class Product {
-  final String id;
+  String? id;
   List<String> name;
   int price;
   int category;
   List<String> images;
-  final String seller;
+  String seller;
   int orderAmount;
   int boughtAmountThisWeek;
   String aboutProduct;
@@ -15,7 +15,7 @@ class Product {
   int leftProduct;
 
   Product({
-    required this.id,
+    this.id,
     required this.name,
     required this.price,
     required this.category,
@@ -28,6 +28,21 @@ class Product {
     required this.brieflyAboutProduct,
     required this.leftProduct,
   });
+
+  Map<String, dynamic> toMap() {
+    return {
+      'name': name,
+      'price': price,
+      'category': category,
+      'images': images,
+      'seller': seller,
+      'orderAmount': orderAmount,
+      'boughtAmountThisWeek': boughtAmountThisWeek,
+      'aboutProduct': aboutProduct,
+      'saleType': saleType,
+      'brieflyAboutProduct': brieflyAboutProduct,
+    };
+  }
 
   factory Product.fromJson(Map<String, dynamic> json) {
     return Product(
