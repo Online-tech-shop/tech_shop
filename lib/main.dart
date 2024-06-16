@@ -15,19 +15,19 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider(
       create: (context) => SaveViewModel(),
       child: MaterialApp(
-      theme: ThemeData(
-        scaffoldBackgroundColor: Colors.white,
-        appBarTheme: const AppBarTheme(
-          backgroundColor: Colors.white,
-          iconTheme: IconThemeData(
-            color: Colors.black,
-            size: 23,
+        theme: ThemeData(
+          scaffoldBackgroundColor: Colors.white,
+          appBarTheme: const AppBarTheme(
+            backgroundColor: Colors.white,
+            iconTheme: IconThemeData(
+              color: Colors.black,
+              size: 23,
+            ),
           ),
         ),
+        debugShowCheckedModeBanner: false,
+        onGenerateRoute: generateRoute,
       ),
-      debugShowCheckedModeBanner: false,
-      onGenerateRoute: generateRoute,
-      )
     );
   }
 }
