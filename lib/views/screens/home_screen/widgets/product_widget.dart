@@ -12,10 +12,10 @@ class ProductGrid extends StatefulWidget {
   final bool isSelected;
 
   const ProductGrid({
-    Key? key,
+    super.key,
     required this.viewModel,
     required this.isSelected,
-  }) : super(key: key);
+  });
 
   @override
   State<ProductGrid> createState() => _ProductGridState();
@@ -42,7 +42,7 @@ class _ProductGridState extends State<ProductGrid> {
           return const ShimmerProductGrid();
         } else if (!snapshot.hasData || snapshot.hasError) {
           return const Center(
-            child: Text('Error: Unable to load data'),
+            child: Text('Internet bilan muammo bor.'),
           );
         } else {
           List<Product> products = widget.isSelected
@@ -77,7 +77,7 @@ class _ProductGridState extends State<ProductGrid> {
 }
 
 class ShimmerProductGrid extends StatelessWidget {
-  const ShimmerProductGrid({Key? key}) : super(key: key);
+  const ShimmerProductGrid({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -106,8 +106,9 @@ class ShimmerProductGrid extends StatelessWidget {
     );
   }
 
-  Widget _buildShimmerContainer(
-      {required double height, }) {
+  Widget _buildShimmerContainer({
+    required double height,
+  }) {
     return Container(
       clipBehavior: Clip.hardEdge,
       decoration: BoxDecoration(
