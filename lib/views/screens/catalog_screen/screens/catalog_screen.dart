@@ -27,8 +27,13 @@ class _CatalogScreenState extends State<CatalogScreen> {
         itemBuilder: (context, index) {
           return ListTile(
             onTap: () {
-              Navigator.of(context).push(CupertinoPageRoute(
-                  builder: (context) => CategoryTapWidget()));
+              Navigator.of(context).push(
+                CupertinoPageRoute(
+                  builder: (context) => CategoryTapWidget(
+                    categoryIndex: index,
+                  ),
+                ),
+              );
             },
             leading: const CircleAvatar(
               backgroundColor: Color(0xffF3F4F8),
