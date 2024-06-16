@@ -1,8 +1,9 @@
-
 import 'package:flutter/material.dart';
+import 'package:tech_shop/views/screens/save_screen/widgets/flush_bar.dart';
 
 class QuantityChanger extends StatelessWidget {
   final int quantity;
+  final VoidCallback onDismissed;
   final VoidCallback onDecrement;
   final VoidCallback onIncrement;
 
@@ -10,6 +11,7 @@ class QuantityChanger extends StatelessWidget {
     required this.quantity,
     required this.onDecrement,
     required this.onIncrement,
+    required this.onDismissed,
     super.key,
   });
 
@@ -19,14 +21,25 @@ class QuantityChanger extends StatelessWidget {
       width: 110,
       height: 35,
       decoration: BoxDecoration(
-        color: Colors.grey.withOpacity(.3),
+        color: Colors.grey.withOpacity(0.3),
         borderRadius: BorderRadius.circular(12),
       ),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
           GestureDetector(
-            onTap: onDecrement,
+            onTap: () {
+              if (quantity > 1) {
+                onDecrement();
+              } else {
+                onDecrement();
+                onDismissed();
+                FlushBars.undo(
+                  message: "Mahsulot o'chirildi",
+                  duration: const Duration(seconds: 2),
+                ).show(context);
+              }
+            },
             child: Padding(
               padding: const EdgeInsets.only(left: 3),
               child: Container(
@@ -42,7 +55,10 @@ class QuantityChanger extends StatelessWidget {
               ),
             ),
           ),
-          Text("$quantity"),
+          Text(
+            "$quantity",
+            style: const TextStyle(fontSize: 16),
+          ),
           GestureDetector(
             onTap: onIncrement,
             child: Padding(

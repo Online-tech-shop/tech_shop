@@ -18,6 +18,27 @@ class Save {
     this.brieflyAboutProduct,
     required this.quantity,
   });
+   Save copyWith({
+    int? id,
+    String? title,
+    String? image,
+    double? price,
+    int? amount,
+    String? seller,
+    String? brieflyAboutProduct,
+    int? quantity,
+  }) {
+    return Save(
+      id: id ?? this.id,
+      title: title ?? this.title,
+      image: image ?? this.image,
+      price: price ?? this.price,
+      amount: amount ?? this.amount,
+      seller: seller ?? this.seller,
+      brieflyAboutProduct: brieflyAboutProduct ?? this.brieflyAboutProduct,
+      quantity: quantity ?? this.quantity,
+    );
+  }
 
   Map<String, dynamic> toMap() {
     return {
