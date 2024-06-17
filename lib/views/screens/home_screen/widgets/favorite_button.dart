@@ -31,7 +31,6 @@ class _FavoriteButtonState extends State<FavoriteButton> {
             ),
           );
         }
-
         setState(() {});
       },
       child: Container(

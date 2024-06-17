@@ -9,6 +9,7 @@ import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_float_action_button.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_info_container.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_user_review_box.dart';
+import 'package:tech_shop/views/screens/home_screen/widgets/favorite_button.dart';
 
 class ViewProductScreen extends StatefulWidget {
   final Product product;
@@ -61,11 +62,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                 padding: const EdgeInsets.only(right: 15.0),
                 child: Row(
                   children: [
-                    GestureDetector(
-                      child: const Icon(
-                        CupertinoIcons.heart,
-                      ),
-                    ),
+                    FavoriteButton(product: widget.product, isSelected: false),
                     const Gap(15),
                     GestureDetector(
                       child: const Icon(
