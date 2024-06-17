@@ -29,8 +29,8 @@ class _MainScreenState extends State<MainScreen> {
     const CatalogScreen(),
     const SaveScreen(),
     const FavouriteScreen(),
-    const ProfileScreen(),
-    // const NoLoginProfile()
+    // const ProfileScreen(),
+    const NoLoginProfile()
   ];
 
   @override
@@ -58,8 +58,9 @@ class _MainScreenState extends State<MainScreen> {
           color: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
           boxShadow: [
             BoxShadow(
-              color:
-                  CustomFunctions.isLight(context) ? Colors.grey : Colors.white.withOpacity(0.3),
+              color: CustomFunctions.isLight(context)
+                  ? Colors.grey
+                  : Colors.white.withOpacity(0.3),
               blurRadius: 10,
             ),
           ],
