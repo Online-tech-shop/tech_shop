@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
 import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
 import 'package:tech_shop/views/screens/save_screen/widgets/save_item.dart';
@@ -43,7 +44,7 @@ class _SaveScreenState extends State<SaveScreen> {
       viewModel.decrementQuantity(id);
       viewModel.decrementPrice(id);
     }
-    _refreshTasks(); // Refresh tasks to update total price when quantity changes
+    _refreshTasks();
   }
 
   @override
@@ -51,6 +52,8 @@ class _SaveScreenState extends State<SaveScreen> {
     final saveViewModel = Provider.of<SaveViewModel>(context, listen: false);
 
     return Scaffold(
+      backgroundColor:
+          CustomFunctions.isLight(context) ? Colors.white : Colors.black,
       appBar: AppBar(
         forceMaterialTransparency: true,
         centerTitle: true,
@@ -60,6 +63,11 @@ class _SaveScreenState extends State<SaveScreen> {
               viewModel.saves.isEmpty
                   ? "Savat"
                   : "${viewModel.saves.length} ta mahsulot savatda",
+              style: TextStyle(
+                color: CustomFunctions.isLight(context)
+                    ? Colors.black
+                    : Colors.white,
+              ),
             );
           },
         ),
@@ -71,10 +79,9 @@ class _SaveScreenState extends State<SaveScreen> {
                 width: 1,
                 height: 1,
               )
-            : Container(
+            : SizedBox(
                 width: double.infinity,
                 height: 60,
-                // color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Consumer<SaveViewModel>(
@@ -90,11 +97,22 @@ class _SaveScreenState extends State<SaveScreen> {
                             children: [
                               Text(
                                 "$totalPrice so'm",
-                                style: const TextStyle(
-                                    fontWeight: FontWeight.bold, fontSize: 20),
+                                style: TextStyle(
+                                  fontWeight: FontWeight.bold,
+                                  fontSize: 20,
+                                  color: CustomFunctions.isLight(context)
+                                      ? Colors.black
+                                      : Colors.white,
+                                ),
                               ),
                               Text(
-                                  "${saveViewModel.saves.length} ta mahsulot."),
+                                "${saveViewModel.saves.length} ta mahsulot.",
+                                style: TextStyle(
+                                  color: CustomFunctions.isLight(context)
+                                      ? Colors.black
+                                      : Colors.white,
+                                ),
+                              ),
                             ],
                           ),
                           Container(

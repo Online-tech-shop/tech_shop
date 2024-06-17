@@ -129,7 +129,7 @@ class ProductCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildProductName(context),
-          _buildProductRating(),
+          _buildProductRating(context),
           const SizedBox(height: 20),
           _buildProductPriceAndCartButton(context),
         ],
@@ -149,7 +149,7 @@ class ProductCard extends StatelessWidget {
     );
   }
 
-  Widget _buildProductRating() {
+  Widget _buildProductRating(BuildContext context) {
     return Row(
       children: [
         const Icon(
@@ -162,7 +162,9 @@ class ProductCard extends StatelessWidget {
           style: const TextStyle(color: Colors.grey),
         ),
         Text(
-          " (${reviews.length}-${'ta_sharhlar'.tr()})",
+
+          context.tr('sharh', namedArgs: {'review':reviews.length.toString()}),
+
           style: const TextStyle(color: Colors.grey),
         )
       ],
@@ -174,7 +176,7 @@ class ProductCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          '${product.price} ${'som'.tr()}',
+          context.tr('som', namedArgs: {'narx':product.price.toString()}),
           style: TextStyle(
             color:
                 CustomFunctions.isLight(context) ? Colors.black : Colors.white,

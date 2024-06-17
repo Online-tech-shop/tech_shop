@@ -10,7 +10,7 @@ import 'package:tech_shop/views/screens/catalog_screen/widgets/read_textfield_wi
 import '../../../../viewmodels/home_view_model.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({Key? key}) : super(key: key);
+  HomeScreen({super.key});
 
   final HomeViewModel viewModel = HomeViewModel();
 
@@ -19,25 +19,13 @@ class HomeScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor:
+            CustomFunctions.isLight(context) ? Colors.white : Colors.black,
         appBar: AppBar(
-          actions: [
-            ElevatedButton(
-              onPressed: () {
-                if (context.locale.languageCode == 'uz') {
-                  context.setLocale(const Locale('ru'));
-                } else {
-                  context.setLocale(const Locale('uz'));
-                }
-                AppConstants.appLanguageIndex =
-                    context.locale.languageCode == 'uz' ? 0 : 1;
-              },
-              child: Text(
-                context.locale.languageCode == 'uz'
-                    ? 'Switch to Russian'
-                    : 'Switch to Uzbek',
-              ),
-            ),
-          ],
+
+          backgroundColor:
+              CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+
           surfaceTintColor: CustomFunctions.isLight(context)
               ? Colors.transparent
               : Colors.black,
@@ -82,6 +70,9 @@ class HomeScreen extends StatelessWidget {
                       Tab(text: 'yozgi_savdo'.tr()),
                     ],
                   ),
+                  CustomFunctions.isLight(context)
+                      ? Colors.white
+                      : Colors.black,
                 ),
                 pinned: true,
               ),
@@ -100,9 +91,10 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate(this._tabBar);
+  _SliverAppBarDelegate(this._tabBar, this.color);
 
   final TabBar _tabBar;
+  final Color color;
 
   @override
   double get minExtent => _tabBar.preferredSize.height;

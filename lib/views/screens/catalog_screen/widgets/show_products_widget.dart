@@ -199,6 +199,8 @@ class _ShowProductsWidgetState extends State<ShowProductsWidget> {
     return filteredProducts.isEmpty
         ? Center(
             child: Text("mahsulot_topilmadi").tr(),
+
+
           )
         : SingleChildScrollView(
             child: Column(
@@ -212,7 +214,10 @@ class _ShowProductsWidgetState extends State<ShowProductsWidget> {
                     right: 15,
                   ),
                   child: Text(
-                    "${widget.searchText} ${filteredProducts.length} ${"ta_tovar_topildi".tr()}",
+                    context.tr(
+                      'ta_tovar_topildi',
+                      namedArgs: {'count': filteredProducts.length.toString()},
+                    ),
                     style: TextStyle(
                       color: Colors.grey.shade600,
                       fontSize: 18,

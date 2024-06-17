@@ -14,13 +14,14 @@ import 'package:tech_shop/views/screens/save_screen/views/save_screen.dart';
 class MainScreen extends StatefulWidget {
   final int n;
 
-  const MainScreen({Key? key, this.n = 0}) : super(key: key);
+  const MainScreen({super.key, this.n = 0});
 
   @override
   State<MainScreen> createState() => _MainScreenState();
 }
 
 class _MainScreenState extends State<MainScreen> {
+  void onChanged() => setState(() {});
   late int _currentIndex;
   final List<Widget> _pages = [
     HomeScreen(),
@@ -53,9 +54,10 @@ class _MainScreenState extends State<MainScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
           color: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
-              color: Colors.grey,
+              color:
+                  CustomFunctions.isLight(context) ? Colors.grey : Colors.white.withOpacity(0.3),
               blurRadius: 10,
             ),
           ],
@@ -69,9 +71,9 @@ class _MainScreenState extends State<MainScreen> {
                 children: [
                   CustomTabBoxButton(
                     buttonText: 'bosh_sahifa'.tr(),
-                    imagePath:
-                        'assets/icons/bottom_navigation_bar_icons/home${_currentIndex == 0 ? '' : '_un'}.png',
-                    
+                    imagePath: CustomFunctions.isLight(context)
+                        ? 'assets/icons/bottom_navigation_bar_icons/home${_currentIndex == 0 ? '' : '_un'}.png'
+                        : null,
                     icon: CupertinoIcons.home,
                     currentIndex: 0,
                     isSelected: _currentIndex == 0,

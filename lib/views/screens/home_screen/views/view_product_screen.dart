@@ -58,7 +58,9 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFEFEFEF),
+      backgroundColor: CustomFunctions.isLight(context)
+          ? const Color(0xFFEFEFEF)
+          : Colors.black,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -208,7 +210,8 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
-                      '${widget.product.price} ${'som'.tr()}',
+                      context.tr('som',
+                          namedArgs: {'narx': widget.product.price.toString()}),
                       style: TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.w700,
@@ -237,9 +240,15 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text(
-                            '${widget.product.leftProduct} ' +
-                                'dona_qoldi'.tr(),
-                            style: const TextStyle(
+
+                            context.tr('dona_qoldi', namedArgs: {
+                              'qoldi': widget.product.leftProduct.toString()
+                            }),
+                            style: TextStyle(
+                              color: CustomFunctions.isLight(context)
+                                  ? Colors.black
+                                  : Colors.white,
+
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
                             ),
@@ -266,9 +275,17 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text(
-                            'bu_haftada_kishi_sotib_oldi'.tr() +
-                                ' - ${widget.product.boughtAmountThisWeek}',
-                            style: const TextStyle(
+
+                            context
+                                .tr('bu_haftada_kishi_sotib_oldi', namedArgs: {
+                              'boughtAmountThisWeek':
+                                  widget.product.boughtAmountThisWeek.toString()
+                            }),
+                            style: TextStyle(
+                              color: CustomFunctions.isLight(context)
+                                  ? Colors.black
+                                  : Colors.white,
+
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
                             ),

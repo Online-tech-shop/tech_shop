@@ -1,4 +1,4 @@
-import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 
 class FiltrModel {
   String title;
@@ -11,6 +11,8 @@ class FiltrModel {
 }
 
 List<FiltrModel> filtrList = [
-  FiltrModel(isSelected: false, title: "Arzonroq"),
-  FiltrModel(isSelected: false, title: "Qimmatroq"),
+
+  FiltrModel(isSelected: false, title: "arzonroq".tr()),
+  FiltrModel(isSelected: false, title: "qimmatroq".tr()),
+  FiltrModel(isSelected: false, title: "yuqori_reyting".tr()),
 ];

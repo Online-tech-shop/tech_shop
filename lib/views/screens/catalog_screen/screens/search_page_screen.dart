@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/viewmodels/home_view_model.dart';
 import 'package:tech_shop/views/screens/catalog_screen/screens/filter_screen.dart';
 import 'package:tech_shop/views/screens/catalog_screen/widgets/show_products_widget.dart';
@@ -19,10 +20,25 @@ class SearchPageWidget extends StatefulWidget {
 class _SearchPageWidgetState extends State<SearchPageWidget> {
   String searchText = '';
   final _textController = TextEditingController();
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+          CustomFunctions.isLight(context) ? Colors.white : Colors.black,
       appBar: AppBar(
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Icon(
+            Icons.arrow_back_ios_new,
+            color:
+                CustomFunctions.isLight(context) ? Colors.black : Colors.white,
+          ),
+        ),
+        backgroundColor:
+            CustomFunctions.isLight(context) ? Colors.white : Colors.black,
         leadingWidth: 30,
         title: ClipRRect(
           borderRadius: BorderRadius.circular(10),
@@ -74,10 +90,15 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
                 ),
               );
             },
-            icon: Image.asset(
-              "assets/icons/product_icons/filter.png",
-              height: 30,
-            ),
+            icon: CustomFunctions.isLight(context)
+                ? Image.asset(
+                    "assets/icons/product_icons/filter.png",
+                    height: 30,
+                  )
+                : const Icon(
+                    Icons.filter_b_and_w,
+                    color: Colors.white,
+                  ),
           ),
         ],
       ),

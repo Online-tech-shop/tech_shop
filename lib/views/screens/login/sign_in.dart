@@ -55,7 +55,7 @@ class _SignInState extends State<SignIn> {
                     TextButton(
                         onPressed: () {
                           Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (ctx) => SigUp()));
+                              MaterialPageRoute(builder: (ctx) => const SigUp()));
                         },
                         child: const Text("Ro'yhatdan o'tish"))
                   ],

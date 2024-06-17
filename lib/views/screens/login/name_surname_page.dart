@@ -1,19 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:tech_shop/service/login_http_services.dart';
+import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
 import 'package:tech_shop/views/screens/login/widgets/gender.dart';
-import 'package:tech_shop/views/screens/profile/profile_screen.dart';
 
 class NameSurnamePage extends StatefulWidget {
   final String localId;
   final String email;
-  NameSurnamePage({super.key, required this.localId, required this.email});
+
+  const NameSurnamePage({super.key, required this.localId, required this.email});
 
   @override
   State<NameSurnamePage> createState() => _NameSurnamePageState();
 }
 
 class _NameSurnamePageState extends State<NameSurnamePage> {
-  final _authHttpservices = LoginHttpServices();
   final _globalKey = GlobalKey<FormState>();
   final _name = TextEditingController();
   final _surname = TextEditingController();
@@ -21,13 +20,13 @@ class _NameSurnamePageState extends State<NameSurnamePage> {
   final _gender = TextEditingController();
 
   Future<void> _selectDate() async {
-    DateTime? _date = await showDatePicker(
+    DateTime? date = await showDatePicker(
         context: context,
         initialDate: DateTime.now(),
         firstDate: DateTime(1900),
         lastDate: DateTime(2025));
-    if (_date != null) {
-      _age.text = _date.toString().split(" ")[0];
+    if (date != null) {
+      _age.text = date.toString().split(" ")[0];
     }
   }
 
@@ -134,9 +133,7 @@ class _NameSurnamePageState extends State<NameSurnamePage> {
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
-                                builder: (ctx) => ProfileScreen()));
-                        print(
-                            "${_name.text}\n${_surname.text}]\n${_age.text}\n${_gender.text}\n${widget.email}\n${widget.localId}");
+                                builder: (ctx) =>  HomeScreen()));
                       }
                     },
                     child: Container(

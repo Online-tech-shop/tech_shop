@@ -141,10 +141,12 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
                   ),
                 ).tr(),
                 Text(
-                  '${widget.product.price * _orderCount} ${"som".tr()}',
-                  style: const TextStyle(
+                  context.tr('som',
+                      namedArgs: {'narx': widget.product.price.toString()}),
+                  style:  TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
+                    color: CustomFunctions.isLight(context) ? Colors.black : Colors.white
                   ),
                 ),
               ],
@@ -198,7 +200,13 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
                         onTap:
                             _isTapped ? () => _navigateToCart(context) : null,
                         child: Text(
-                          _isTapped ? 'O\'tish' : 'Savatga',
+                          _isTapped
+                              ? CustomFunctions.isUzbek(context)
+                                  ? 'O\'tish'
+                                  : 'Переход'
+                              : CustomFunctions.isUzbek(context)
+                                  ? 'Savatga'
+                                  : 'В корзину',
                           style: TextStyle(
                             color: _isTapped
                                 ? const Color(0xFF7733FF)

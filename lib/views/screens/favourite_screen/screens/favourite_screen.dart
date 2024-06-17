@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/models/review_model.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/viewmodels/favourite_view_model.dart';
 import 'package:tech_shop/viewmodels/home_view_model.dart';
 import 'package:tech_shop/viewmodels/review_view_model.dart';
@@ -25,7 +26,6 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   bool isDataCame = false;
   final List<Product> _favProductList = [];
   List<Review> _reviewList = [];
-  int a = 0;
 
   @override
   void initState() {
@@ -62,104 +62,108 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: kToolbarHeight, left: 20, right: 20),
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.center,
-        children: [
-          Padding(
-            padding: EdgeInsets.symmetric(horizontal: 16),
-            child: const Text(
-              'istaklarim',
-              style: TextStyle(
-                fontSize: 18,
-                fontWeight: FontWeight.w700,
-              ),
-            ).tr(),
-          ),
-          Expanded(
-            child: isDataCame
-                ? (_favProductList.isEmpty
-                    ? Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        children: [
-                          Row(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            children: [
-                              Image.asset(
-                                'assets/images/fav.png',
-                                height: 250,
-                                width: 250,
-                              ),
-                            ],
-                          ),
-                          const Text(
-                            'sizga_yoqqanini_qoʻshing',
-                            style: TextStyle(
-                              fontSize: 25,
-                              fontWeight: FontWeight.w700,
-                            ),
-                          ).tr(),
-                          const Text(
-                            'bosh_sahifaga_oʻting_va_mahsulotdagi_♡_belgisini_bosing',
-                            textAlign: TextAlign.center,
-                            style: TextStyle(
-                              fontSize: 13,
-                            ),
-                          ).tr(),
-                          const Gap(10),
-                          GestureDetector(
-                            onTap: () {
-                              Navigator.pushAndRemoveUntil(
-                                context,
-                                MaterialPageRoute(
-                                  builder: (context) => const MainScreen(),
+    return Container(
+      color: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+      child: Padding(
+        padding: const EdgeInsets.only(top: kToolbarHeight, left: 20, right: 20),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 16),
+              child:  Text(
+                'istaklarim',
+                style: TextStyle(
+                  fontSize: 18,
+                  fontWeight: FontWeight.w700,
+                  color: CustomFunctions.isLight(context) ? Colors.black : Colors.white,
+                ),
+              ).tr(),
+            ),
+            Expanded(
+              child: isDataCame
+                  ? (_favProductList.isEmpty
+                      ? Column(
+                          mainAxisAlignment: MainAxisAlignment.center,
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Image.asset(
+                                  'assets/images/fav.png',
+                                  height: 250,
+                                  width: 250,
                                 ),
-                                (route) => false,
-                              );
-                            },
-                            child: Container(
-                              width: 130,
-                              height: 45,
-                              decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(10),
-                                color: Colors.deepPurple[500],
-                              ),
-                              child: Center(
-                                child: Text(
-                                  "bosh_sahifaga",
-                                  style: TextStyle(
-                                    color: Colors.white,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ).tr(),
-                              ),
+                              ],
                             ),
-                          )
-                        ],
-                      )
-                    : GridView.builder(
-                        itemCount: _favProductList.length,
-                        gridDelegate:
-                            const SliverGridDelegateWithFixedCrossAxisCount(
-                          crossAxisSpacing: 10,
-                          mainAxisSpacing: 10,
-                          mainAxisExtent: 400,
-                          crossAxisCount: 2,
-                        ),
-                        itemBuilder: (BuildContext context, int index) =>
-                            ProductCard(
-                          key: UniqueKey(),
-                          product: _favProductList[index],
-                          reviews:
-                              _favProductList[index].getReviews(_reviewList),
-                          isDeleteFromFavScreen: true,
-                          deleteFromFavScreen: deleteProductFromFav,
-                        ),
-                      ))
-                : const ShimmerProductGrid(),
-          ),
-        ],
+                            const Text(
+                              'sizga_yoqqanini_qoʻshing',
+                              style: TextStyle(
+                                fontSize: 25,
+                                fontWeight: FontWeight.w700,
+                              ),
+                            ).tr(),
+                            const Text(
+                              'bosh_sahifaga_oʻting_va_mahsulotdagi_♡_belgisini_bosing',
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 13,
+                              ),
+                            ).tr(),
+                            const Gap(10),
+                            GestureDetector(
+                              onTap: () {
+                                Navigator.pushAndRemoveUntil(
+                                  context,
+                                  MaterialPageRoute(
+                                    builder: (context) => const MainScreen(),
+                                  ),
+                                  (route) => false,
+                                );
+                              },
+                              child: Container(
+                                width: 130,
+                                height: 45,
+                                decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(10),
+                                  color: Colors.deepPurple[500],
+                                ),
+                                child: Center(
+                                  child: const Text(
+                                    "bosh_sahifaga",
+                                    style: TextStyle(
+                                      color: Colors.white,
+                                      fontWeight: FontWeight.bold,
+                                    ),
+                                  ).tr(),
+                                ),
+                              ),
+                            )
+                          ],
+                        )
+                      : GridView.builder(
+                          itemCount: _favProductList.length,
+                          gridDelegate:
+                              const SliverGridDelegateWithFixedCrossAxisCount(
+                            crossAxisSpacing: 10,
+                            mainAxisSpacing: 10,
+                            mainAxisExtent: 400,
+                            crossAxisCount: 2,
+                          ),
+                          itemBuilder: (BuildContext context, int index) =>
+                              ProductCard(
+                            key: UniqueKey(),
+                            product: _favProductList[index],
+                            reviews:
+                                _favProductList[index].getReviews(_reviewList),
+                            isDeleteFromFavScreen: true,
+                            deleteFromFavScreen: deleteProductFromFav,
+                          ),
+                        ))
+                  : const ShimmerProductGrid(),
+            ),
+          ],
+        ),
       ),
     );
   }

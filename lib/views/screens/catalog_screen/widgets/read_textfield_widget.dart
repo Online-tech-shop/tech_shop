@@ -13,6 +13,7 @@ class ReadTextfieldWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
     return ClipRRect(
       borderRadius: BorderRadius.circular(10),
       child: TextField(
@@ -40,7 +41,7 @@ class ReadTextfieldWidget extends StatelessWidget {
           hintStyle: const TextStyle(
             color: Color(0xff8B8B95),
           ),
-          hintText: tr('mahsulot_va_toifalarni_qidirish'),
+          hintText: tr('mahsulotVaToifalarniQidirish'),
           border: InputBorder.none,
           contentPadding: const EdgeInsets.only(top: 12),
         ),

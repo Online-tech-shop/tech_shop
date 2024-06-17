@@ -59,10 +59,10 @@ class CustomInfoContainer extends StatelessWidget {
           Text(
             isSelected
                 ? reviewCount == 0
-                    ? 'baholar_hali-yoʻq'.tr()
+                    ? context.tr('baholar_hali-yoʻq')
                     : '$reviewCount sharh'
                 : product.orderAmount == 0
-                    ? "buyurtma_yo'q".tr()
+                    ? context.tr('buyurtma_yoq')
                     : 'ta_buyurtma'.tr(),
             style: TextStyle(
               fontWeight: FontWeight.w500,

@@ -4,6 +4,7 @@ import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/models/review_model.dart';
 import 'package:tech_shop/viewmodels/home_view_model.dart';
 import 'package:tech_shop/viewmodels/review_view_model.dart';
+import 'package:tech_shop/utils/functions.dart';
 
 class FilterScreen extends StatefulWidget {
   HomeViewModel homeViewModel;
@@ -62,8 +63,28 @@ class _FilterScreenState extends State<FilterScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+          CustomFunctions.isLight(context) ? Colors.white : Colors.black,
       appBar: AppBar(
-        title: const Text("Filtr"),
+        leading: GestureDetector(
+          onTap: () {
+            Navigator.of(context).pop();
+          },
+          child: Icon(
+            Icons.arrow_back_ios_new,
+            color:
+                CustomFunctions.isLight(context) ? Colors.black : Colors.white,
+          ),
+        ),
+        backgroundColor:
+            CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+        title: Text(
+          CustomFunctions.isUzbek(context) ? 'Filtr' : 'Фильтр',
+          style: TextStyle(
+            color:
+                CustomFunctions.isLight(context) ? Colors.black : Colors.white,
+          ),
+        ),
       ),
       body: Column(
         children: [
@@ -75,7 +96,14 @@ class _FilterScreenState extends State<FilterScreen> {
               itemBuilder: (context, index) {
                 final data = filtrList[index];
                 return ListTile(
-                  title: Text(data.title),
+                  title: Text(
+                    data.title,
+                    style: TextStyle(
+                      color: CustomFunctions.isLight(context)
+                          ? Colors.black
+                          : Colors.white,
+                    ),
+                  ),
                   onTap: () {
                     setState(() {
                       for (var item in filtrList) {
@@ -100,6 +128,7 @@ class _FilterScreenState extends State<FilterScreen> {
               },
             ),
           ),
+
         ],
       ),
     );

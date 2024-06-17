@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 
 class Gender extends StatelessWidget {
   const Gender({super.key});
@@ -7,7 +6,7 @@ class Gender extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AlertDialog(
-      title: Text("Jinsingizni tanlang"),
+      title: const Text("Jinsingizni tanlang"),
       actions: [
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
