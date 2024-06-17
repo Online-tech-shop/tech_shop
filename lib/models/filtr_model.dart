@@ -13,6 +13,4 @@ class FiltrModel {
 List<FiltrModel> filtrList = [
   FiltrModel(isSelected: false, title: "Arzonroq"),
   FiltrModel(isSelected: false, title: "Qimmatroq"),
-  FiltrModel(isSelected: false, title: "Yuqori reyting"),
-
 ];

@@ -16,7 +16,7 @@ class _CatalogScreenState extends State<CatalogScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: ReadTextfieldWidget(
+        title: const ReadTextfieldWidget(
           readOnly: true,
         ),
       ),

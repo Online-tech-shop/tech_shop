@@ -17,11 +17,10 @@ class HomeViewModel extends ChangeNotifier {
   );
   final ProductHttpService _httpService = ProductHttpService();
 
-  Future<List<Product>> onCarouselItemTap() async {
-    return await _httpService.getProducts();
-  }
+  List<Product> products = [];
 
-  void onCategoryItemTap(int index) {
-    
+  Future<List<Product>> onCarouselItemTap() async {
+    products = await _httpService.getProducts();
+    return products;
   }
 }

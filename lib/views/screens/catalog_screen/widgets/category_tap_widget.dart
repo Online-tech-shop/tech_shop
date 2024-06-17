@@ -29,7 +29,6 @@ class _CategoryTapWidgetState extends State<CategoryTapWidget> {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        // backgroundColor:CustomFunctions.isLight(context) ? Colors.white : Colors.black,
         leadingWidth: 30,
         title: ClipRRect(
           borderRadius: BorderRadius.circular(10),
@@ -59,7 +58,7 @@ class _CategoryTapWidgetState extends State<CategoryTapWidget> {
                 color: Color(0xff8B8B95),
               ),
               filled: true,
-              fillColor: CustomFunctions.isLight(context) ? Color(0xffF3F4F8) : Colors.black,
+              fillColor: CustomFunctions.isLight(context) ? const Color(0xffF3F4F8) : Colors.black,
               hintStyle: const TextStyle(
                 color: Color(0xff8B8B95),
               ),
