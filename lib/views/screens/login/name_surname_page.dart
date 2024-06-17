@@ -1,12 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
+import 'package:tech_shop/service/login_http_services.dart';
+import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
 import 'package:tech_shop/views/screens/login/widgets/gender.dart';
 
 class NameSurnamePage extends StatefulWidget {
   final String localId;
   final String email;
 
-  const NameSurnamePage({super.key, required this.localId, required this.email});
+  const NameSurnamePage(
+      {super.key, required this.localId, required this.email});
 
   @override
   State<NameSurnamePage> createState() => _NameSurnamePageState();
@@ -130,10 +132,20 @@ class _NameSurnamePageState extends State<NameSurnamePage> {
                   InkWell(
                     onTap: () {
                       if (_globalKey.currentState!.validate()) {
+                        LoginHttpServices().addUser(
+                          _name.text,
+                          _surname.text,
+                          widget.email,
+                          _gender.text,
+                          widget.localId,
+                          _age.text
+                        );
                         Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (ctx) =>  HomeScreen()));
+                          context,
+                          MaterialPageRoute(
+                            builder: (ctx) => const MainScreen(),
+                          ),
+                        );
                       }
                     },
                     child: Container(

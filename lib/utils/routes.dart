@@ -4,9 +4,11 @@ import 'package:tech_shop/models/review_model.dart';
 import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/views/view_product_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
+import 'package:tech_shop/views/screens/login/sign_in.dart';
 
 class RouteName {
   static const String viewProduct = '/viewProduct';
+  static const String initial = '/';
 }
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -21,9 +23,12 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           review: data['review'] as List<Review>,
         ),
       );
+    case RouteName.initial:
+      return CupertinoPageRoute(
+        builder: (context) => const SignIn(),
+      );
     default:
       return CupertinoPageRoute(
-        // ignore: deprecated_member_use
         builder: (BuildContext context) => WillPopScope(
           onWillPop: () async {
             final difference = DateTime.now().difference(timeBackPressed);
