@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
 import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
 import 'package:tech_shop/views/screens/save_screen/widgets/save_item.dart';
@@ -135,7 +136,10 @@ class _SaveScreenState extends State<SaveScreen> {
                 final save = saves[index];
                 return SaveItem(
                   save: save,
-                  onDismissed: () {
+                  onDismissed: () async {
+                    SharedPreferences sharedPreferences =
+                        await SharedPreferences.getInstance();
+                    sharedPreferences.remove('order-count');
                     viewModel.deleteSave(save.id as int);
                   },
                   onChangeQuantity: _changeQuantity,
