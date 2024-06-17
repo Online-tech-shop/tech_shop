@@ -8,6 +8,7 @@ import 'package:tech_shop/utils/routes.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
 
 void main(List<String> args) async {
+  print('object');
   WidgetsFlutterBinding.ensureInitialized();
   final AdaptiveThemeMode? savedThemeMode = await AdaptiveTheme.getThemeMode();
   await EasyLocalization.ensureInitialized();
