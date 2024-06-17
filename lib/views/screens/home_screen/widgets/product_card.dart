@@ -162,7 +162,9 @@ class ProductCard extends StatelessWidget {
           style: const TextStyle(color: Colors.grey),
         ),
         Text(
+
           context.tr('sharh', namedArgs: {'review':reviews.length.toString()}),
+
           style: const TextStyle(color: Colors.grey),
         )
       ],
