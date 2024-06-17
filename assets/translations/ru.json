@@ -3,7 +3,7 @@
     "termada_qidirishku": "искать по термину",
     "mahsulot_va_toifalarni_qidirish": "поиск товаров и категорий",
     "mahsulot_topilmadi": "товар не найден",
-    "ta_tovar_topildi": "товаров найдено: {count}",
+    "ta_tovar_topildi": "товаров найдено",
     "istaklarim": "мои желания",
     "sizga_yoqqanini_qoʻshing": "добавьте то, что вам нравится",
     "bosh_sahifaga_oʻting_va_mahsulotdagi_♡_belgisini_bosing": "перейдите на главную страницу и нажмите значок ♡ на товаре",
@@ -15,7 +15,7 @@
     "savat": "корзина",
     "saralangan": "избранное",
     "kabinet": "кабинет",
-    "som": "{narx} сом",
+    "som": "сом",
     "dona_qoldi": "осталось {qoldi} шт.",
     "bu_haftada_kishi_sotib_oldi": "на этой неделе {boughtAmountThisWeek} человек купило",
     "sharh": "{review} отзыв",
@@ -37,5 +37,4 @@
     "xaritadagi_topshirish_punktlari": "Пункты доставки на карте",
     "malumot": "Информация",
     "umumiy_narx": "Итоговая цена"
-
 }
