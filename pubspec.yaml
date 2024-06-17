@@ -39,7 +39,12 @@ dependencies:
   carousel_slider: ^4.2.1
   http: ^1.2.1
   flutter_svg: ^2.0.10+1
-  shared_preferences: ^2.2.3
+  sqflite: ^2.3.3+1
+  provider: ^6.1.2
+  another_flushbar: ^1.12.30
+  shimmer: ^3.0.0
+  fluttertoast: ^8.2.6
+  smooth_page_indicator: ^1.1.0
 
 dev_dependencies:
   flutter_test:

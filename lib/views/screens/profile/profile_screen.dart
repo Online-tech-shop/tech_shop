@@ -1,5 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/rendering.dart';
+import 'package:flutter/widgets.dart';
+import 'package:gap/gap.dart';
 import 'package:tech_shop/views/screens/profile/widgets/profile_item.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -12,300 +15,262 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
-    double screenH = MediaQuery.of(context).size.height;
-    double screenW = MediaQuery.of(context).size.width;
     return Scaffold(
       backgroundColor: Colors.grey.shade200,
-      body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            floating: true,
-            pinned: true,
-            expandedHeight: screenH * 0.16,
-            backgroundColor: Colors.purple,
-            flexibleSpace: FlexibleSpaceBar(
-              title: Container(
-                padding: EdgeInsets.only(top: 0.13 * screenW),
-                child: const Row(
-                  children: [
-                    CircleAvatar(
-                      radius: 25,
-                      backgroundColor: Colors.white,
-                    ),
-                    SizedBox(
-                      width: 20,
-                    ),
-                    Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Text(
-                          "abdujalil a.",
-                          style: TextStyle(fontSize: 12),
+      body: Stack(
+        children: [
+          SizedBox(
+            child: Image.asset(
+              "assets/images/profile.jpg",
+              fit: BoxFit.cover,
+              width: double.infinity,
+            ),
+          ),
+          CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                toolbarHeight: 80,
+                backgroundColor: Color.fromARGB(189, 0, 0, 0),
+                clipBehavior: Clip.hardEdge,
+                automaticallyImplyLeading: true,
+                expandedHeight: 130.0,
+                pinned: true,
+                flexibleSpace: FlexibleSpaceBar(
+                  centerTitle: true,
+                  collapseMode: CollapseMode.parallax,
+                  title: const Row(
+                    children: [
+                      Gap(15),
+                      CircleAvatar(
+                        child: Center(
+                          child: Icon(Icons.person),
                         ),
-                        Text(
-                          "+998 90 134-19-13",
-                          style: TextStyle(fontSize: 12),
-                        ),
-                      ],
-                    )
-                  ],
-                ),
-              ),
-              centerTitle: false,
-              background: Container(
-                alignment: Alignment.center,
-                child: const Stack(
-                  clipBehavior: Clip.none,
-                  children: [
-                    Positioned(
-                      bottom: 130,
-                      left: 140,
-                      child: Text(
-                        "Shaxsiy kabinet",
-                        style: TextStyle(
-                            color: Colors.white,
-                            fontSize: 17,
-                            fontWeight: FontWeight.bold),
                       ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 13),
-          ),
-          DecoratedSliver(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  const ProfileItem(
-                    ikon: Icon(
-                      Icons.shopping_bag_outlined,
-                    ),
-                    name: "Buyurtmalarim",
-                  ),
-                  const ProfileItem(
-                    ikon: Icon(
-                      CupertinoIcons.smiley,
-                    ),
-                    name: "Sharhlarim",
-                  ),
-                  const ProfileItem(
-                    ikon: Icon(
-                      Icons.calendar_month_rounded,
-                    ),
-                    name: "Buyurtmalarim",
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 13),
-          ),
-          DecoratedSliver(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  const ProfileItem(
-                    ikon: Icon(
-                      CupertinoIcons.chat_bubble_2,
-                    ),
-                    name: "Chatlarim",
-                  ),
-                  const ProfileItem(
-                    ikon: Icon(
-                      Icons.notifications_none,
-                    ),
-                    name: "Xabarnomalar",
-                  ),
-                  const ProfileItem(
-                    ikon: Icon(
-                      Icons.percent,
-                    ),
-                    name: "Promokodlarim",
-                  ),
-                  const ProfileItem(
-                    ikon: Icon(
-                      Icons.settings_rounded,
-                    ),
-                    name: "Sozlamalar",
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 13),
-          ),
-          DecoratedSliver(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  SizedBox(
-                    height: 50,
-                    child: Row(
-                      children: [
-                        Container(
-                          padding: const EdgeInsets.all(10),
-                          width: 70,
-                          height: 70,
-                          child: Container(
-                            padding: const EdgeInsets.all(30),
-                            decoration: const BoxDecoration(
-                                shape: BoxShape.circle,
-                                image: DecorationImage(
-                                    image: AssetImage(
-                                        'assets/images/uzbekistan.png'),
-                                    fit: BoxFit.cover)),
-                            width: 40,
-                            height: 40,
-                          ),
-                        ),
-                        Expanded(
-                            child: Container(
-                          padding: const EdgeInsets.symmetric(horizontal: 10),
-                          height: double.infinity,
-                          decoration: const BoxDecoration(),
-                          child: const Row(
-                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                            children: [
-                              Text(
-                                "Ilova tili",
-                                style: TextStyle(fontWeight: FontWeight.w500),
-                              ),
-                              Icon(
-                                Icons.arrow_forward_ios_rounded,
-                                color: Colors.black26,
-                              )
-                            ],
-                          ),
-                        ))
-                      ],
-                    ),
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 13),
-          ),
-          DecoratedSliver(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  const ProfileItem(
-                    ikon: Icon(
-                      Icons.location_on_outlined,
-                    ),
-                    name: "Shahar",
-                  ),
-                  const ProfileItem(
-                    ikon: Icon(
-                      Icons.map_outlined,
-                    ),
-                    name: "Xaritadagi topshirish punktlari",
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 13),
-          ),
-          DecoratedSliver(
-            decoration: const BoxDecoration(
-              color: Colors.white,
-            ),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  const ProfileItem(
-                    ikon: Icon(
-                      Icons.help_outline_rounded,
-                    ),
-                    name: "Ma'lumot",
-                  ),
-                  const ProfileItem(
-                    ikon: Icon(
-                      CupertinoIcons.mail,
-                    ),
-                    name: "Xaritadagi topshirish punktlari",
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 20),
-          ),
-          DecoratedSliver(
-            decoration: const BoxDecoration(),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  Container(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    height: 50,
-                    child: InkWell(
-                      child: Container(
-                        width: 100,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            color: const Color(0xff7000FF),
-                            borderRadius: BorderRadius.circular(5)),
-                        child: const Center(
-                          child: Text(
-                            "Chiqish",
+                      Gap(15),
+                      Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          Text(
+                            "Mardon H.",
                             style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.bold,
-                                fontSize: 16),
+                              fontSize: 18,
+                              color: Colors.white,
+                            ),
                           ),
-                        ),
+                          Text(
+                            "+998 97 421 0412",
+                            style: TextStyle(
+                              letterSpacing: 1,
+                              fontSize: 11,
+                              color: Colors.white,
+                            ),
+                          ),
+                        ],
                       ),
-                    ),
+                    ],
+                  ),
+                  background: Image.asset(
+                    "assets/images/profile.jpg",
+                    fit: BoxFit.cover,
+                    width: double.infinity,
+                  ),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Container(
+                  height: 13,
+                  color: Colors.grey[200],
+                ),
+              ),
+              _buildProfileSection([
+                ProfileItem(
+                  ikon: const Icon(Icons.shopping_bag_outlined),
+                  name: "Buyurtmalarim",
+                ),
+                ProfileItem(
+                  ikon: const Icon(CupertinoIcons.smiley),
+                  name: "Sharhlarim",
+                ),
+                ProfileItem(
+                  ikon: const Icon(Icons.calendar_month_rounded),
+                  name: "Buyurtmalarim",
+                ),
+              ]),
+              SliverToBoxAdapter(
+                child: Container(
+                  height: 13,
+                  color: Colors.grey[200],
+                ),
+              ),
+              _buildProfileSection([
+                ProfileItem(
+                  ikon: const Icon(CupertinoIcons.chat_bubble_2),
+                  name: "Chatlarim",
+                ),
+                ProfileItem(
+                  ikon: const Icon(Icons.notifications_none),
+                  name: "Xabarnomalar",
+                ),
+                ProfileItem(
+                  ikon: const Icon(Icons.percent),
+                  name: "Promokodlarim",
+                ),
+                ProfileItem(
+                  ikon: const Icon(Icons.settings_rounded),
+                  name: "Sozlamalar",
+                ),
+              ]),
+              SliverToBoxAdapter(
+                child: Container(
+                  height: 13,
+                  color: Colors.grey[200],
+                ),
+              ),
+              _buildProfileSection([
+                _buildLanguageSetting(),
+              ]),
+              SliverToBoxAdapter(
+                child: Container(
+                  height: 13,
+                  color: Colors.grey[200],
+                ),
+              ),
+              _buildProfileSection([
+                ProfileItem(
+                  ikon: const Icon(Icons.location_on_outlined),
+                  name: "Shahar",
+                ),
+                ProfileItem(
+                  ikon: const Icon(Icons.map_outlined),
+                  name: "Xaritadagi topshirish punktlari",
+                ),
+              ]),
+              SliverToBoxAdapter(
+                child: Container(
+                  height: 13,
+                  color: Colors.grey[200],
+                ),
+              ),
+              _buildProfileSection([
+                ProfileItem(
+                  ikon: const Icon(Icons.help_outline_rounded),
+                  name: "Ma'lumot",
+                ),
+                ProfileItem(
+                  ikon: const Icon(CupertinoIcons.mail),
+                  name: "Xaritadagi topshirish punktlari",
+                ),
+              ]),
+              SliverToBoxAdapter(
+                child: Container(
+                  height: 13,
+                  color: Colors.grey[200],
+                ),
+              ),
+              _buildLogoutButton(),
+              SliverToBoxAdapter(
+                child: Container(
+                  height: 13,
+                  color: Colors.grey[200],
+                ),
+              ),
+              const SliverToBoxAdapter(
+                child: Center(
+                  child: Text(
+                    "Ilova versiyasi: 1.36.3 (12884)",
+                    textAlign: TextAlign.center,
+                  ),
+                ),
+              ),
+              const SliverToBoxAdapter(
+                child: SizedBox(height: 50),
+              ),
+            ],
+          ),
+        ],
+      ),
+    );
+  }
+
+  Widget _buildProfileSection(List<Widget> children) {
+    return SliverPadding(
+      padding: const EdgeInsets.symmetric(vertical: 0),
+      sliver: SliverList(
+        delegate: SliverChildListDelegate(
+          children
+              .map((child) => Container(
+                    color: Colors.white,
+                    child: child,
+                  ))
+              .toList(),
+        ),
+      ),
+    );
+  }
+
+  Widget _buildLanguageSetting() {
+    return Container(
+      height: 50,
+      color: Colors.white,
+      child: const Row(
+        children: [
+          Padding(
+            padding: const EdgeInsets.all(10),
+            child: CircleAvatar(
+              backgroundImage: AssetImage('assets/images/uzbekistan.png'),
+              radius: 20,
+            ),
+          ),
+          const Expanded(
+            child: Padding(
+              padding: EdgeInsets.symmetric(horizontal: 10),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(
+                    "Ilova tili",
+                    style: TextStyle(fontWeight: FontWeight.w500),
+                  ),
+                  Icon(
+                    Icons.arrow_forward_ios_rounded,
+                    color: Colors.black26,
                   )
                 ],
               ),
             ),
-          ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 22),
-          ),
-          DecoratedSliver(
-            decoration: const BoxDecoration(),
-            sliver: SliverList(
-              delegate: SliverChildListDelegate(
-                [
-                  const Text(
-                    "Ilova versiyasi: 1.36.3 (12884)",
-                    textAlign: TextAlign.center,
-                  ),
-                ],
+          )
+        ],
+      ),
+    );
+  }
+
+  Widget _buildLogoutButton() {
+    return SliverToBoxAdapter(
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: InkWell(
+          onTap: () {
+            // Handle logout
+          },
+          child: Container(
+            height: 50,
+            decoration: BoxDecoration(
+              color: const Color(0xff7000FF),
+              borderRadius: BorderRadius.circular(5),
+            ),
+            child: const Center(
+              child: Text(
+                "Chiqish",
+                style: TextStyle(
+                  color: Colors.white,
+                  fontWeight: FontWeight.bold,
+                  fontSize: 16,
+                ),
               ),
             ),
           ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: 50),
-          ),
-        ],
+        ),
       ),
     );
   }

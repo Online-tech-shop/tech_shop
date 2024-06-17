@@ -1,5 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tech_shop/models/product_item.dart';
+import 'package:tech_shop/models/sql_model.dart';
+import 'package:tech_shop/service/sql_service.dart';
+import 'package:tech_shop/viewmodels/sql_view_model.dart';
+import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
 
 class CustomFloatActionButton extends StatefulWidget {
   final Product product;
@@ -12,12 +17,59 @@ class CustomFloatActionButton extends StatefulWidget {
 }
 
 class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
+  int _orderCount = 1;
   bool _isTapped = false;
-  int _orderCount = 0;
 
-  void _onButtonPressed() => setState(() => _isTapped = true);
+  Future<void> _addToCart(BuildContext context) async {
+    final saveViewModel = Provider.of<SaveViewModel>(context, listen: false);
+    final dbHelper = DatabaseHelper();
 
-  void _incrementOrderCount() => setState(() => _orderCount++);
+    final existingProducts = await dbHelper.database.then((db) => db.query(
+          'saves_product4',
+          where: 'title = ?',
+          whereArgs: [widget.product.name[0]],
+        ));
+
+    if (existingProducts.isNotEmpty) {
+      final existingProduct = Save.fromMap(existingProducts.first);
+      final updatedSave = existingProduct.copyWith(
+        price: existingProduct.price + (widget.product.price * _orderCount),
+        quantity: existingProduct.quantity + _orderCount,
+      );
+      await dbHelper.updateSave(updatedSave);
+    } else {
+      final save = Save(
+        title: widget.product.name[0],
+        image: widget.product.images[0],
+        price: widget.product.price.toDouble() + (widget.product.price * _orderCount),
+        amount: widget.product.leftProduct,
+        seller: widget.product.seller,
+        brieflyAboutProduct: widget.product.brieflyAboutProduct[0],
+        quantity: _orderCount,
+      );
+      saveViewModel.addSave(save);
+    }
+  }
+
+  void _incrementOrderCount() {
+    setState(() => _orderCount++);
+  }
+
+  void _onButtonPressed() {
+    setState(() {
+      _isTapped = true;
+      _orderCount = 1;
+    });
+  }
+
+  void _navigateToCart(BuildContext context) {
+    _addToCart(context);
+    Navigator.pushAndRemoveUntil(
+      context,
+      MaterialPageRoute(builder: (context) => const MainScreen(n: 2)),
+      (route) => false,
+    );
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -49,7 +101,7 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
                   ),
                 ),
                 Text(
-                  '${widget.product.price} so\'m',
+                  '${widget.product.price * _orderCount} so\'m',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
@@ -64,7 +116,7 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
                 GestureDetector(
                   onTap: _incrementOrderCount,
                   child: Container(
-                    height: 35,
+                    height: 40,
                     width: 50,
                     decoration: BoxDecoration(
                       color: const Color(0xFF7733FF),
@@ -82,8 +134,8 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
                 onTap: _onButtonPressed,
                 child: Container(
                   padding: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 5,
+                    horizontal: 25,
+                    vertical: 7,
                   ),
                   margin: const EdgeInsets.only(left: 10),
                   decoration: BoxDecoration(
@@ -102,12 +154,16 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
                           Icons.shopping_cart,
                           color: Color(0xFF7733FF),
                         ),
-                      Text(
-                        _isTapped ? 'O\'tish' : 'Savatga',
-                        style: TextStyle(
-                          color: _isTapped
-                              ? const Color(0xFF7733FF)
-                              : Colors.white,
+                      GestureDetector(
+                        onTap:
+                            _isTapped ? () => _navigateToCart(context) : null,
+                        child: Text(
+                          _isTapped ? 'O\'tish' : 'Savatga',
+                          style: TextStyle(
+                            color: _isTapped
+                                ? const Color(0xFF7733FF)
+                                : Colors.white,
+                          ),
                         ),
                       ),
                     ],
