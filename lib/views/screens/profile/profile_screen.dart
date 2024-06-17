@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -82,9 +83,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               _buildProfileSection([
-                const ProfileItem(
+                ProfileItem(
                   ikon: Icon(Icons.shopping_bag_outlined),
-                  name: "Buyurtmalarim",
+                  name: "buyurtmalarim".tr(),
                 ),
                 const ProfileItem(
                   ikon: Icon(CupertinoIcons.smiley),

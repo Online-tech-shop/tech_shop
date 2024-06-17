@@ -46,6 +46,7 @@ dependencies:
   fluttertoast: ^8.2.6
   smooth_page_indicator: ^1.1.0
   shared_preferences: ^2.2.3
+  easy_localization: ^3.0.7
 
 dev_dependencies:
   flutter_test:
@@ -73,6 +74,7 @@ flutter:
     - assets/images/
     - assets/icons/bottom_navigation_bar_icons/
     - assets/icons/product_icons/
+    - assets/translations/
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

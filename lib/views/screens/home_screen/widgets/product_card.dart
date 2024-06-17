@@ -114,7 +114,8 @@ class ProductCard extends StatelessWidget {
           product: product,
           isSelected: false,
           isDeleteFromFavScreen: isDeleteFromFavScreen,
-          deleteFromFavScreen: isDeleteFromFavScreen ? deleteFromFavScreen : null,
+          deleteFromFavScreen:
+              isDeleteFromFavScreen ? deleteFromFavScreen : null,
         ),
       ),
     );
@@ -187,7 +188,7 @@ class ProductCard extends StatelessWidget {
               border: Border.all(color: Colors.grey),
             ),
             child: SvgPicture.asset(
-              'assets/icons/product_icons/cart.svg',
+              'assets/icons/product_ico ns/cart.svg',
             ),
           ),
         ),

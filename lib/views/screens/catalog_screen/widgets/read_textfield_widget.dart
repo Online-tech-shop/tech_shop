@@ -1,15 +1,14 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tech_shop/views/screens/catalog_screen/screens/search_page_screen.dart';
 
 class ReadTextfieldWidget extends StatelessWidget {
-  bool readOnly;
-  String hintText;
-  ReadTextfieldWidget({
+  final bool readOnly;
+  const ReadTextfieldWidget({
+    Key? key,
     required this.readOnly,
-    this.hintText = 'Mahsulot va toifalarni qidirish',
-    super.key,
-  });
+  }) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,28 +16,30 @@ class ReadTextfieldWidget extends StatelessWidget {
       borderRadius: BorderRadius.circular(10),
       child: TextField(
         readOnly: readOnly,
-        onTap: () => readOnly
-            ? Navigator.of(context).push(
-                CupertinoPageRoute(
-                  builder: (context) => SearchPageWidget(),
-                ),
-              )
+        onTap: readOnly
+            ? () {
+                Navigator.of(context).push(
+                  CupertinoPageRoute(
+                    builder: (context) => SearchPageWidget(),
+                  ),
+                );
+              }
             : null,
         scrollPadding: const EdgeInsets.all(10),
-        decoration: const InputDecoration(
-          prefixIcon: Icon(
+        decoration: InputDecoration(
+          prefixIcon: const Icon(
             Icons.search,
             size: 20,
             color: Color(0xff8B8B95),
           ),
           filled: true,
-          fillColor: Color(0xffF3F4F8),
-          hintStyle: TextStyle(
+          fillColor: const Color(0xffF3F4F8),
+          hintStyle: const TextStyle(
             color: Color(0xff8B8B95),
           ),
-          hintText: "Mahsulot va toifalarni qidirish",
+          hintText: tr('mahsulot_va_toifalarni_qidirish'),
           border: InputBorder.none,
-          contentPadding: EdgeInsets.only(top: 12),
+          contentPadding: const EdgeInsets.only(top: 12),
         ),
       ),
     );

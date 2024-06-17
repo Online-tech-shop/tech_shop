@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:tech_shop/viewmodels/home_view_model.dart';
 import 'package:tech_shop/views/screens/catalog_screen/widgets/show_products_widget.dart';
@@ -18,7 +19,6 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
   final _textController = TextEditingController();
   @override
   Widget build(BuildContext context) {
-    
     return Scaffold(
       appBar: AppBar(
         leadingWidth: 30,
@@ -55,7 +55,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
               hintStyle: const TextStyle(
                 color: Color(0xff8B8B95),
               ),
-              hintText: "Termada qidirish",
+              hintText: "termada_qidirish".tr(),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.only(top: 12),
             ),
@@ -65,7 +65,6 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
       body: ShowProductsWidget(
         viewModel: widget.homeViewModel,
         searchText: searchText,
-
       ),
     );
   }
