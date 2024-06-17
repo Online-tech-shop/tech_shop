@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tech_shop/views/screens/login/sign_in.dart';
 
 class NoLoginProfile extends StatefulWidget {
   const NoLoginProfile({super.key});
@@ -82,6 +83,37 @@ class _NoLoginProfileState extends State<NoLoginProfile> {
           ),
           const SizedBox(
             height: 20,
+          ),
+          InkWell(
+            onTap: () {
+              Navigator.push(
+                  context, MaterialPageRoute(builder: (ctx) => SignIn()));
+            },
+            child: Container(
+              width: 250,
+              height: 50,
+              decoration: BoxDecoration(
+                  color: Color(0xff7000FF),
+                  borderRadius: BorderRadius.circular(5)),
+              child: const Center(
+                child: Text(
+                  "Kirish",
+                  style: TextStyle(
+                      color: Colors.white,
+                      fontWeight: FontWeight.w500,
+                      fontSize: 17),
+                ),
+              ),
+            ),
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          Center(
+            child: Text(
+              "Ilova versiyasi: 1.36.3 (12884)",
+              textAlign: TextAlign.center,
+            ),
           ),
         ],
       )),

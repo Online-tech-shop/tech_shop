@@ -291,8 +291,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: InkWell(
           onTap: () {
-            Navigator.pushReplacement(
-                context, MaterialPageRoute(builder: (ctx) => const SigUp()));
+            // Navigator.pushReplacement(
+            //     context, MaterialPageRoute(builder: (ctx) => const SigUp()));
           },
           child: Container(
             height: 50,
