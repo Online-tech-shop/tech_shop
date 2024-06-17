@@ -13,6 +13,7 @@ import 'package:tech_shop/views/screens/profile/profile_screen.dart';
 import 'package:tech_shop/views/screens/save_screen/views/save_screen.dart';
 
 class MainScreen extends StatefulWidget {
+
   final int n;
 
   const MainScreen({super.key, this.n = 0});

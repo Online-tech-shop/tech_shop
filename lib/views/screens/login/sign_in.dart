@@ -1,4 +1,10 @@
+import 'dart:convert';
+
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tech_shop/models/user_model.dart';
+
 import 'package:tech_shop/service/login_http_services.dart';
 import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
 import 'package:tech_shop/views/screens/login/sig_up.dart';
@@ -11,18 +17,11 @@ class SignIn extends StatefulWidget {
 }
 
 class _SignInState extends State<SignIn> {
-  final _authHttpservices = LoginHttpServices();
-  final _globalKey = GlobalKey<FormState>();
-  final _email = TextEditingController();
-  final _password = TextEditingController();
-  bool check = false;
+  final LoginHttpServices _loginHttpServices = LoginHttpServices();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
+  String email = '';
+  String password = '';
 
-  @override
-  void dispose() {
-    _email.dispose();
-    _password.dispose();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
@@ -44,113 +43,101 @@ class _SignInState extends State<SignIn> {
           Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20),
             child: Form(
-                key: _globalKey,
-                child: Column(
-                  children: [
-                    TextFormField(
-                      controller: _email,
-                      decoration: const InputDecoration(
-                          hintText: 'Enter email',
-                          border: OutlineInputBorder()),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your email';
-                        }
-                        return null;
-                      },
+              key: _formKey,
+              child: Column(
+                children: [
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      hintText: 'Enter email',
+                      border: OutlineInputBorder(),
                     ),
-                    const SizedBox(
-                      height: 20,
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'Email kiriting';
+                      }
+                      return null;
+                    },
+                    onSaved: (newValue) {
+                      email = newValue ?? '';
+                    },
+                  ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  TextFormField(
+                    decoration: const InputDecoration(
+                      hintText: 'Enter password',
+                      border: OutlineInputBorder(),
+
                     ),
-                    TextFormField(
-                      controller: _password,
-                      decoration: const InputDecoration(
-                          hintText: 'Enter password',
-                          border: OutlineInputBorder()),
-                      validator: (value) {
-                        if (value == null || value.isEmpty) {
-                          return 'Please enter your password';
-                        }
-                        return null;
-                      },
-                      obscureText: true,
-                    ),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    check
-                        ? const Text(
-                            "Invalid credentials entered!",
-                            style: TextStyle(
-                                color: Colors.red,
-                                fontSize: 17,
-                                fontWeight: FontWeight.w500),
-                          )
-                        : const SizedBox(),
-                    const SizedBox(
-                      height: 20,
-                    ),
-                    InkWell(
-                      onTap: () async {
-                        if (_globalKey.currentState!.validate()) {
-                          var data = await _authHttpservices.login(
-                              _email.text, _password.text);
-                          if (data["check"]) {
-                            Navigator.pushReplacement(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (ctx) => MainScreen()));
-                          } else {
-                            setState(() {
-                              check = true;
-                            });
-                          }
-                        }
-                      },
-                      child: Container(
-                        width: 250,
-                        height: 50,
-                        decoration: BoxDecoration(
-                            color: Color(0xff7000FF),
-                            borderRadius: BorderRadius.circular(5)),
-                        child: const Center(
-                          child: Text(
-                            "Kirish",
-                            style: TextStyle(
-                                color: Colors.white,
-                                fontWeight: FontWeight.w500,
-                                fontSize: 17),
-                          ),
-                        ),
+                    validator: (value) {
+                      if (value == null || value.trim().isEmpty) {
+                        return 'Parol kiriting';
+                      }
+                      return null;
+                    },
+                    onSaved: (newValue) {
+                      password = newValue ?? '';
+                    },
+                  ),
+                  const SizedBox(
+                    height: 40,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Text(
+                        "yoki",
+                        style: TextStyle(fontWeight: FontWeight.bold),
                       ),
-                    ),
-                    TextButton(
+                      TextButton(
                         onPressed: () {
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (ctx) => const SigUp()));
+                          Navigator.pushReplacement(
+                            context,
+                            MaterialPageRoute(
+                              builder: (ctx) => const SigUp(),
+                            ),
+                          );
                         },
-                        child: const Text("Ro'yhatdan o'tish"))
-                  ],
-                )),
-          ),
-          const SizedBox(
-            height: 40,
-          ),
-          Row(
-            mainAxisAlignment: MainAxisAlignment.center,
-            children: [
-              const Text(
-                "yoki",
-                style: TextStyle(fontWeight: FontWeight.bold),
+                        child: const Text("Ro'yhatdan o'tish"),
+                      ),
+                    ],
+                  ),
+                ],
               ),
-              TextButton(
-                  onPressed: () {
-                    Navigator.pushReplacement(
-                        context, MaterialPageRoute(builder: (ctx) => const SigUp()));
-                  },
-                  child: const Text("Ro'yhatdan o'tish"))
-            ],
-          )
+            ),
+          ),
+          TextButton(
+            onPressed: () async {
+              if (_formKey.currentState!.validate()) {
+                _formKey.currentState!.save();
+                final Map<String, dynamic> data =
+                    await _loginHttpServices.login(
+                  email: email,
+                  password: password,
+                );
+                User user = await _loginHttpServices.getUser(data['localId']);
+                SharedPreferences sharedPrefs =
+                    await SharedPreferences.getInstance();
+                sharedPrefs.setString(
+                  'user',
+                  jsonEncode(
+                    user.toJson(),
+                  ),
+                );
+              }
+              SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+              sharedPreferences.setBool('isLogged', true);
+              Navigator.pushReplacement(
+                context,
+                CupertinoPageRoute(
+                  builder: (context) => const MainScreen(),
+                ),
+              );
+            },
+            child: const Text('Tizimga kirish'),
+          ),
+
         ],
       ),
     );
