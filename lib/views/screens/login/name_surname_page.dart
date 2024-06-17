@@ -1,5 +1,11 @@
 import 'package:flutter/material.dart';
+
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:tech_shop/service/login_http_services.dart';
+import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
+
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
+
 import 'package:tech_shop/views/screens/login/widgets/gender.dart';
 
 class NameSurnamePage extends StatefulWidget {
@@ -128,12 +134,25 @@ class _NameSurnamePageState extends State<NameSurnamePage> {
                     height: 40,
                   ),
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       if (_globalKey.currentState!.validate()) {
+
+                        SharedPreferences sharedPreferences =
+                            await SharedPreferences.getInstance();
+                        sharedPreferences.setString("name", _name.text);
+                        sharedPreferences.setString("surname", _surname.text);
+                        sharedPreferences.setString("email", widget.email);
+
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (ctx) => MainScreen()));
+                        print(
+                            "${_name.text}\n${_surname.text}]\n${_age.text}\n${_gender.text}\n${widget.email}\n${widget.localId}");
+
                         Navigator.pushReplacement(
                             context,
                             MaterialPageRoute(
                                 builder: (ctx) =>  HomeScreen()));
+
                       }
                     },
                     child: Container(

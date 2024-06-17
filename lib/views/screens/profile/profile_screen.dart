@@ -4,10 +4,13 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
 import 'package:tech_shop/utils/app_constants.dart';
 import 'package:tech_shop/utils/functions.dart';
+
 import 'package:tech_shop/views/screens/login/sig_up.dart';
 import 'package:tech_shop/views/screens/profile/widgets/profile_item.dart';
+import 'package:tech_shop/views/screens/profile/widgets/settings_screen.dart';
 
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
@@ -17,8 +20,21 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  String? name = "";
+  String? surname = ".";
+  String? email = "";
+  Future<void> getName() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    name = await sharedPreferences.getString("name");
+    surname = await sharedPreferences.getString("surname");
+    email = await sharedPreferences.getString("email");
+
+    setState(() {});
+  }
+
   @override
   Widget build(BuildContext context) {
+    getName();
     return Scaffold(
       backgroundColor:
           CustomFunctions.isLight(context) ? Colors.white : Colors.black,
@@ -66,29 +82,31 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 flexibleSpace: FlexibleSpaceBar(
                   centerTitle: true,
                   collapseMode: CollapseMode.parallax,
-                  title: const Row(
+                  title: Row(
                     children: [
-                      Gap(15),
-                      CircleAvatar(
+                      const Gap(15),
+                      const CircleAvatar(
                         child: Center(
                           child: Icon(Icons.person),
                         ),
                       ),
-                      Gap(15),
+                      const Gap(15),
                       Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: [
                           Text(
-                            "Mardon H.",
-                            style: TextStyle(
+                            "${name} ${surname?[0]}.",
+                            // "aaa",
+                            style: const TextStyle(
                               fontSize: 18,
                               color: Colors.white,
                             ),
                           ),
                           Text(
-                            "+998 97 421 0412",
-                            style: TextStyle(
+                            email!,
+                            // "aa",
+                            style: const TextStyle(
                               letterSpacing: 1,
                               fontSize: 11,
                               color: Colors.white,
@@ -250,6 +268,46 @@ class _ProfileScreenState extends State<ProfileScreen> {
   }
 
   Widget _buildLanguageSetting() {
+
+    return InkWell(
+      onTap: () {
+        Navigator.push(
+            context, MaterialPageRoute(builder: (ctx) => SettingsScreen()));
+      },
+      child: Container(
+        height: 50,
+        color: Colors.white,
+        child: const Row(
+          children: [
+            Padding(
+              padding: EdgeInsets.all(10),
+              child: CircleAvatar(
+                backgroundImage: AssetImage('assets/images/uzbekistan.png'),
+                radius: 20,
+              ),
+            ),
+            Expanded(
+              child: Padding(
+                padding: EdgeInsets.symmetric(horizontal: 10),
+                child: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      "Ilova tili",
+                      style: TextStyle(fontWeight: FontWeight.w500),
+                    ),
+                    Icon(
+                      Icons.arrow_forward_ios_rounded,
+                      color: Colors.black26,
+                    )
+                  ],
+                ),
+              ),
+            )
+          ],
+        ),
+      ),
+
     return GestureDetector(
       onTap: () async {
         SharedPreferences sharedPreferences =
@@ -285,6 +343,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
           )),
+
     );
   }
 
