@@ -111,6 +111,7 @@ class _ShowProductsWidgetState extends State<ShowProductsWidget> {
                       return ProductCard(
                         product: filteredProducts[index],
                         reviews: filteredProducts[index].getReviews(reviewList),
+                        isDeleteFromFavScreen: false,
                       );
                     },
                   ),

@@ -24,7 +24,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     const CatalogScreen(),
     const SaveScreen(),
-     FavouriteScreen(),
+    const FavouriteScreen(),
     const ProfileScreen()
   ];
 
@@ -39,7 +39,6 @@ class _MainScreenState extends State<MainScreen> {
       _currentIndex = index;
     });
   }
-
 
   @override
   Widget build(BuildContext context) {

@@ -15,11 +15,15 @@ import 'package:tech_shop/models/sql_model.dart';
 class ProductCard extends StatelessWidget {
   final Product product;
   final List<Review> reviews;
+  final bool isDeleteFromFavScreen;
+  final Function(String)? deleteFromFavScreen;
 
   const ProductCard({
     super.key,
     required this.product,
     required this.reviews,
+    required this.isDeleteFromFavScreen,
+    this.deleteFromFavScreen,
   });
 
   void _navigateToProduct(BuildContext context) {
@@ -108,6 +112,8 @@ class ProductCard extends StatelessWidget {
         child: FavoriteButton(
           product: product,
           isSelected: false,
+          isDeleteFromFavScreen: isDeleteFromFavScreen,
+          deleteFromFavScreen: isDeleteFromFavScreen ? deleteFromFavScreen : null,
         ),
       ),
     );
@@ -146,7 +152,7 @@ class ProductCard extends StatelessWidget {
           size: 15,
         ),
         Text(
-          ' ${CustomFunctions.countAverageOfReview(reviews).toStringAsFixed(2)} ',
+          ' ${CustomFunctions.countAverageOfReview(reviews).toStringAsFixed(1)} ',
           style: const TextStyle(color: Colors.grey),
         ),
         Text(
