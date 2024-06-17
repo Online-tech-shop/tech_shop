@@ -23,216 +23,47 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? name = "";
   String? surname = ".";
   String? email = "";
-  Future<void> getName() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    name = await sharedPreferences.getString("name");
-    surname = await sharedPreferences.getString("surname");
-    email = await sharedPreferences.getString("email");
 
-    setState(() {});
+  @override
+  void initState() {
+    super.initState();
+    _loadProfileData();
+  }
+
+  Future<void> _loadProfileData() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    setState(() {
+      name = sharedPreferences.getString("name") ?? "";
+      surname = sharedPreferences.getString("surname") ?? ".";
+      email = sharedPreferences.getString("email") ?? "";
+    });
+  }
+
+  void _toggleTheme(BuildContext context) {
+    if (CustomFunctions.isLight(context)) {
+      AdaptiveTheme.of(context).setDark();
+    } else {
+      AdaptiveTheme.of(context).setLight();
+    }
   }
 
   @override
   Widget build(BuildContext context) {
-    getName();
     return Scaffold(
       backgroundColor:
           CustomFunctions.isLight(context) ? Colors.white : Colors.black,
       body: Stack(
         children: [
-          SizedBox(
-            child: Image.asset(
-              "assets/images/profile.jpg",
-              fit: BoxFit.cover,
-              width: double.infinity,
-            ),
+          Image.asset(
+            "assets/images/profile.jpg",
+            fit: BoxFit.cover,
+            width: double.infinity,
           ),
           CustomScrollView(
             slivers: [
-              SliverAppBar(
-                toolbarHeight: 80,
-                backgroundColor: CustomFunctions.isLight(context)
-                    ? Colors.white
-                    : Colors.black,
-                clipBehavior: Clip.hardEdge,
-                automaticallyImplyLeading: true,
-                expandedHeight: 130.0,
-                pinned: true,
-                actions: [
-                  Padding(
-                    padding: const EdgeInsets.only(right: 15.0),
-                    child: GestureDetector(
-                      onTap: () {
-                        if (CustomFunctions.isLight(context)) {
-                          AdaptiveTheme.of(context).setDark();
-                        } else {
-                          AdaptiveTheme.of(context).setLight();
-                        }
-                      },
-                      child: Icon(
-                        CustomFunctions.isLight(context)
-                            ? Icons.dark_mode
-                            : Icons.sunny,
-                        color: Colors.white,
-                        size: 30,
-                      ),
-                    ),
-                  )
-                ],
-                flexibleSpace: FlexibleSpaceBar(
-                  centerTitle: true,
-                  collapseMode: CollapseMode.parallax,
-                  title: Row(
-                    children: [
-                      const Gap(15),
-                      const CircleAvatar(
-                        child: Center(
-                          child: Icon(Icons.person),
-                        ),
-                      ),
-                      const Gap(15),
-                      Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: [
-                          Text(
-                            "${name} ${surname?[0]}.",
-                            // "aaa",
-                            style: const TextStyle(
-                              fontSize: 18,
-                              color: Colors.white,
-                            ),
-                          ),
-                          Text(
-                            email!,
-                            // "aa",
-                            style: const TextStyle(
-                              letterSpacing: 1,
-                              fontSize: 11,
-                              color: Colors.white,
-                            ),
-                          ),
-                        ],
-                      ),
-                    ],
-                  ),
-                  background: Image.asset(
-                    "assets/images/profile.jpg",
-                    fit: BoxFit.cover,
-                    width: double.infinity,
-                  ),
-                ),
-              ),
-              SliverToBoxAdapter(
-                child: Container(
-                  height: 13,
-                  color: CustomFunctions.isLight(context)
-                      ? Colors.white
-                      : Colors.black,
-                ),
-              ),
-              _buildProfileSection([
-                ProfileItem(
-                  ikon: const Icon(Icons.shopping_bag_outlined),
-                  name: tr("buyurtmalarim"),
-                ),
-                ProfileItem(
-                  ikon: const Icon(CupertinoIcons.smiley),
-                  name: tr("sharhlarim"),
-                ),
-                ProfileItem(
-                  ikon: const Icon(Icons.calendar_month_rounded),
-                  name: tr("buyurtmalarim"),
-                ),
-              ]),
-              SliverToBoxAdapter(
-                child: Container(
-                  height: 13,
-                  color: CustomFunctions.isLight(context)
-                      ? Colors.grey[200]
-                      : Colors.white,
-                ),
-              ),
-              _buildProfileSection([
-                ProfileItem(
-                  ikon: const Icon(CupertinoIcons.chat_bubble_2),
-                  name: tr('chatlarim'),
-                ),
-                ProfileItem(
-                  ikon: const Icon(Icons.notifications_none),
-                  name: tr("xabarnomalar"),
-                ),
-                ProfileItem(
-                  ikon: const Icon(Icons.percent),
-                  name: tr("promokodlarim"),
-                ),
-                ProfileItem(
-                  ikon: const Icon(Icons.settings_rounded),
-                  name: tr("sozlamalar"),
-                ),
-              ]),
-              SliverToBoxAdapter(
-                child: Container(
-                  height: 13,
-                  color: CustomFunctions.isLight(context)
-                      ? Colors.grey[200]
-                      : Colors.white,
-                ),
-              ),
-              _buildProfileSection([
-                _buildLanguageSetting(),
-              ]),
-              SliverToBoxAdapter(
-                child: Container(
-                  height: 13,
-                  color: CustomFunctions.isLight(context)
-                      ? Colors.grey[200]
-                      : Colors.white,
-                ),
-              ),
-              _buildProfileSection([
-                ProfileItem(
-                  ikon: const Icon(Icons.location_on_outlined),
-                  name: tr("shahar"),
-                ),
-                ProfileItem(
-                  ikon: const Icon(Icons.map_outlined),
-                  name: tr("xaritadagi_topshirish_punktlari"),
-                ),
-              ]),
-              SliverToBoxAdapter(
-                child: Container(
-                  height: 13,
-                  color: CustomFunctions.isLight(context)
-                      ? Colors.grey[200]
-                      : Colors.white,
-                ),
-              ),
-              _buildProfileSection([
-                ProfileItem(
-                  ikon: const Icon(Icons.help_outline_rounded),
-                  name: tr("malumot"),
-                ),
-                ProfileItem(
-                  ikon: const Icon(CupertinoIcons.mail),
-                  name: tr("xaritadagi_topshirish_punktlari"),
-                ),
-              ]),
-              SliverToBoxAdapter(
-                child: Container(
-                  height: 13,
-                  color: Colors.grey[200],
-                ),
-              ),
+              _buildSliverAppBar(context),
+              _buildProfileSections(context),
               _buildLogoutButton(),
-              SliverToBoxAdapter(
-                child: Container(
-                  height: 13,
-                  color: CustomFunctions.isLight(context)
-                      ? Colors.grey[200]
-                      : Colors.white,
-                ),
-              ),
               const SliverToBoxAdapter(
                 child: Center(
                   child: Text(
@@ -251,64 +82,166 @@ class _ProfileScreenState extends State<ProfileScreen> {
     );
   }
 
-  Widget _buildProfileSection(List<Widget> children) {
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(vertical: 0),
-      sliver: SliverList(
-        delegate: SliverChildListDelegate(
-          children
-              .map((child) => Container(
-                    color: Colors.white,
-                    child: child,
-                  ))
-              .toList(),
+  SliverAppBar _buildSliverAppBar(BuildContext context) {
+    return SliverAppBar(
+      toolbarHeight: 80,
+      backgroundColor:
+          CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+      clipBehavior: Clip.hardEdge,
+      automaticallyImplyLeading: true,
+      expandedHeight: 130.0,
+      pinned: true,
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 15.0),
+          child: GestureDetector(
+            onTap: () => _toggleTheme(context),
+            child: Icon(
+              CustomFunctions.isLight(context) ? Icons.dark_mode : Icons.sunny,
+              color: Colors.white,
+              size: 30,
+            ),
+          ),
+        )
+      ],
+      flexibleSpace: FlexibleSpaceBar(
+        centerTitle: true,
+        collapseMode: CollapseMode.parallax,
+        title: _buildProfileTitle(),
+        background: Image.asset(
+          "assets/images/profile.jpg",
+          fit: BoxFit.cover,
+          width: double.infinity,
         ),
       ),
     );
   }
 
-  Widget _buildLanguageSetting() {
-
-    return InkWell(
-      onTap: () {
-        Navigator.push(
-            context, MaterialPageRoute(builder: (ctx) => SettingsScreen()));
-      },
-      child: Container(
-        height: 50,
-        color: Colors.white,
-        child: const Row(
+  Row _buildProfileTitle() {
+    return Row(
+      children: [
+        const Gap(15),
+        const CircleAvatar(
+          child: Center(
+            child: Icon(Icons.person),
+          ),
+        ),
+        const Gap(15),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            Padding(
-              padding: EdgeInsets.all(10),
-              child: CircleAvatar(
-                backgroundImage: AssetImage('assets/images/uzbekistan.png'),
-                radius: 20,
+            Text(
+              "$name ${surname?[0]}.",
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.white,
               ),
             ),
-            Expanded(
-              child: Padding(
-                padding: EdgeInsets.symmetric(horizontal: 10),
-                child: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      "Ilova tili",
-                      style: TextStyle(fontWeight: FontWeight.w500),
-                    ),
-                    Icon(
-                      Icons.arrow_forward_ios_rounded,
-                      color: Colors.black26,
-                    )
-                  ],
-                ),
+            Text(
+              email!,
+              style: const TextStyle(
+                letterSpacing: 1,
+                fontSize: 11,
+                color: Colors.white,
               ),
-            )
+            ),
           ],
         ),
-      ),
+      ],
+    );
+  }
 
-    return GestureDetector(
+  Widget _buildProfileSections(BuildContext context) {
+    final isLight = CustomFunctions.isLight(context);
+    final backgroundColor = isLight ? Colors.white : Colors.black;
+
+    return SliverList(
+      delegate: SliverChildListDelegate([
+        _buildProfileSection([
+          ProfileItem(
+            ikon: const Icon(Icons.shopping_bag_outlined),
+            name: tr("buyurtmalarim"),
+          ),
+          ProfileItem(
+            ikon: const Icon(CupertinoIcons.smiley),
+            name: tr("sharhlarim"),
+          ),
+          ProfileItem(
+            ikon: const Icon(Icons.calendar_month_rounded),
+            name: tr("buyurtmalarim"),
+          ),
+        ], backgroundColor),
+        _buildDivider(isLight),
+        _buildProfileSection([
+          ProfileItem(
+            ikon: const Icon(CupertinoIcons.chat_bubble_2),
+            name: tr('chatlarim'),
+          ),
+          ProfileItem(
+            ikon: const Icon(Icons.notifications_none),
+            name: tr("xabarnomalar"),
+          ),
+          ProfileItem(
+            ikon: const Icon(Icons.percent),
+            name: tr("promokodlarim"),
+          ),
+          ProfileItem(
+            ikon: const Icon(Icons.settings_rounded),
+            name: tr("sozlamalar"),
+          ),
+        ], backgroundColor),
+        _buildDivider(isLight),
+        _buildProfileSection([
+          _buildLanguageSetting(),
+        ], backgroundColor),
+        _buildDivider(isLight),
+        _buildProfileSection([
+          ProfileItem(
+            ikon: const Icon(Icons.location_on_outlined),
+            name: tr("shahar"),
+          ),
+          ProfileItem(
+            ikon: const Icon(Icons.map_outlined),
+            name: tr("xaritadagi_topshirish_punktlari"),
+          ),
+        ], backgroundColor),
+        _buildDivider(isLight),
+        _buildProfileSection([
+          ProfileItem(
+            ikon: const Icon(Icons.help_outline_rounded),
+            name: tr("malumot"),
+          ),
+          ProfileItem(
+            ikon: const Icon(CupertinoIcons.mail),
+            name: tr("xaritadagi_topshirish_punktlari"),
+          ),
+        ], backgroundColor),
+        _buildDivider(isLight),
+      ]),
+    );
+  }
+
+  Widget _buildProfileSection(List<Widget> children, Color backgroundColor) {
+    return Column(
+      children: children
+          .map((child) => Container(
+                color: backgroundColor,
+                child: child,
+              ))
+          .toList(),
+    );
+  }
+
+  Widget _buildDivider(bool isLight) {
+    return Container(
+      height: 13,
+      color: isLight ? Colors.grey[200] : Colors.white,
+    );
+  }
+
+  Widget _buildLanguageSetting() {
+    return InkWell(
       onTap: () async {
         SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
@@ -324,26 +257,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
         }
       },
       child: Container(
-          height: 50,
-          color: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  tr("ilova_tili"),
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    color: CustomFunctions.isLight(context)
-                        ? Colors.black
-                        : Colors.white,
-                  ),
+        height: 50,
+        color: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                tr("ilova_tili"),
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: CustomFunctions.isLight(context)
+                      ? Colors.black
+                      : Colors.white,
                 ),
-              ],
-            ),
-          )),
-
+              ),
+              const Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: Colors.black26,
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -364,7 +301,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             child: const Center(
               child: Text(
-                ("Chiqish"),
+                "Chiqish",
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
