@@ -8,6 +8,7 @@ import 'package:tech_shop/service/sql_service.dart';
 import 'package:tech_shop/utils/app_constants.dart';
 import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/utils/routes.dart';
+import 'package:tech_shop/views/screens/home_screen/widgets/favorite_button.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
 import 'package:tech_shop/views/screens/save_screen/widgets/flush_bar.dart';
 import 'package:tech_shop/models/sql_model.dart';
@@ -37,11 +38,13 @@ class ProductCard extends StatelessWidget {
     final saveViewModel = Provider.of<SaveViewModel>(context, listen: false);
     final dbHelper = DatabaseHelper();
 
-    final existingProducts = await dbHelper.database.then((db) => db.query(
-          'saves_product4',
-          where: 'title = ?',
-          whereArgs: [product.name[0]],
-        ));
+    final existingProducts = await dbHelper.database.then(
+      (db) => db.query(
+        'saves_product4',
+        where: 'title = ?',
+        whereArgs: [product.name[0]],
+      ),
+    );
 
     if (existingProducts.isNotEmpty) {
       int sum = product.price;
@@ -83,6 +86,83 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
+          Container(
+            clipBehavior: Clip.hardEdge,
+            height: 220,
+            width: double.infinity,
+            decoration: BoxDecoration(
+              borderRadius: BorderRadius.circular(10),
+              image: DecorationImage(
+                image: NetworkImage(
+                  product.images[0],
+                ),
+                fit: BoxFit.cover,
+              ),
+            ),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.end,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                FavoriteButton(
+                  product: product,
+                  isSelected: false,
+                ),
+              ],
+            ),
+          ),
+          Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  product.name[AppConstants.appLanguageIndex],
+                  maxLines: 2,
+                  overflow: TextOverflow.ellipsis,
+                  style: const TextStyle(fontSize: 18),
+                ),
+                Row(
+                  children: [
+                    const Icon(
+                      Icons.star,
+                      color: Color(0XffFFB740),
+                      size: 15,
+                    ),
+                    Text(
+                      ' ${CustomFunctions.countAverageOfReview(reviews).toString().substring(0, 3)} ',
+                      style: const TextStyle(color: Colors.grey),
+                    ),
+                    Text(
+                      "(${reviews.length}ta sharhlar)",
+                      style: const TextStyle(color: Colors.grey),
+                    )
+                  ],
+                ),
+                const SizedBox(height: 20),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  children: [
+                    Text(
+                      '${product.price} so\'m',
+                      style: const TextStyle(
+                        decorationThickness: 2,
+                        color: Colors.black,
+                        fontSize: 14,
+                        fontWeight: FontWeight.w700,
+                      ),
+                    ),
+                    Container(
+                        padding: const EdgeInsets.all(5),
+                        decoration: BoxDecoration(
+                            shape: BoxShape.circle,
+                            border: Border.all(color: Colors.grey)),
+                        child: SvgPicture.asset(
+                            'assets/icons/product_icons/cart.svg'))
+                  ],
+                ),
+              ],
+            ),
+          ),
           _buildProductImage(),
           _buildProductDetails(context),
         ],

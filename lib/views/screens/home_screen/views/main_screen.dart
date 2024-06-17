@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
@@ -22,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     const CatalogScreen(),
     const SaveScreen(),
-    Placeholder(),
+    const Placeholder(),
     const ProfileScreen()
   ];
 
@@ -37,6 +38,7 @@ class _MainScreenState extends State<MainScreen> {
       _currentIndex = index;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {

@@ -273,8 +273,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
           ),
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: CustomFloatActionButton(product: widget.product),
+      bottomNavigationBar: CustomFloatActionButton(product: widget.product),
     );
   }
 }
