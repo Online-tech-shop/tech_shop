@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:tech_shop/viewmodels/home_view_model.dart';
+import 'package:tech_shop/views/screens/catalog_screen/screens/filter_screen.dart';
 import 'package:tech_shop/views/screens/catalog_screen/widgets/show_products_widget.dart';
 
 class SearchPageWidget extends StatefulWidget {
@@ -61,6 +63,23 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
             ),
           ),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {
+              Navigator.of(context).push(
+                CupertinoPageRoute(
+                  builder: (context) {
+                    return FilterScreen();
+                  },
+                ),
+              );
+            },
+            icon: Image.asset(
+              "assets/icons/product_icons/filter.png",
+              height: 30,
+            ),
+          ),
+        ],
       ),
       body: ShowProductsWidget(
         viewModel: widget.homeViewModel,
