@@ -17,8 +17,11 @@ class CategoryTapWidget extends StatefulWidget {
 
 class _CategoryTapWidgetState extends State<CategoryTapWidget> {
   HomeViewModel homeViewModel = HomeViewModel();
-  String searchText = '';
   final _textController = TextEditingController();
+  String searchText = '';
+
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
