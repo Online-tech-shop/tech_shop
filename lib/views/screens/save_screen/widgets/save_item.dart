@@ -20,9 +20,7 @@ class SaveItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        print("a");
-      },
+     
       child: Dismissible(
         key: Key(save.id.toString()),
         background: Container(

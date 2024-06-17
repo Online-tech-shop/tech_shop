@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
+
 import 'package:provider/provider.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
+import 'package:tech_shop/views/screens/favourite_screen/screens/favourite_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
 import 'package:tech_shop/views/screens/catalog_screen/screens/catalog_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_tab_box_button.dart';
@@ -22,7 +24,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     const CatalogScreen(),
     const SaveScreen(),
-    Placeholder(),
+     FavouriteScreen(),
     const ProfileScreen()
   ];
 
@@ -37,6 +39,7 @@ class _MainScreenState extends State<MainScreen> {
       _currentIndex = index;
     });
   }
+
 
   @override
   Widget build(BuildContext context) {

@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -8,6 +7,7 @@ import 'package:tech_shop/service/sql_service.dart';
 import 'package:tech_shop/utils/app_constants.dart';
 import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/utils/routes.dart';
+import 'package:tech_shop/views/screens/home_screen/widgets/favorite_button.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
 import 'package:tech_shop/views/screens/save_screen/widgets/flush_bar.dart';
 import 'package:tech_shop/models/sql_model.dart';
@@ -37,20 +37,21 @@ class ProductCard extends StatelessWidget {
     final saveViewModel = Provider.of<SaveViewModel>(context, listen: false);
     final dbHelper = DatabaseHelper();
 
-    final existingProducts = await dbHelper.database.then((db) => db.query(
-          'saves_product4',
-          where: 'title = ?',
-          whereArgs: [product.name[0]],
-        ));
+    final existingProducts = await dbHelper.database.then(
+      (db) => db.query(
+        'saves_product4',
+        where: 'title = ?',
+        whereArgs: [product.name[0]],
+      ),
+    );
 
     if (existingProducts.isNotEmpty) {
-      int sum = product.price;
       final existingProduct = Save.fromMap(existingProducts.first);
       final updatedSave = Save(
         id: existingProduct.id,
         title: existingProduct.title,
         image: existingProduct.image,
-        price: existingProduct.price + sum,
+        price: existingProduct.price + product.price,
         amount: existingProduct.amount,
         seller: existingProduct.seller,
         brieflyAboutProduct: existingProduct.brieflyAboutProduct,
@@ -104,9 +105,9 @@ class ProductCard extends StatelessWidget {
       ),
       child: Align(
         alignment: Alignment.topRight,
-        child: IconButton(
-          onPressed: () {},
-          icon: const Icon(CupertinoIcons.heart),
+        child: FavoriteButton(
+          product: product,
+          isSelected: false,
         ),
       ),
     );
@@ -168,7 +169,9 @@ class ProductCard extends StatelessWidget {
             fontWeight: FontWeight.w700,
           ),
         ),
-        GestureDetector(
+        InkWell(
+          borderRadius: BorderRadius.circular(18),
+          splashColor: Colors.grey,
           onTap: () => _addToCart(context),
           child: Container(
             padding: const EdgeInsets.all(5),

@@ -17,7 +17,10 @@ class DatabaseHelper {
   }
 
   Future<Database> _initDatabase() async {
-    String path = join(await getDatabasesPath(), 'saves_product4.db'); // Changed the database name
+    String path = join(
+      await getDatabasesPath(),
+      'saves_product4.db',
+    ); // Changed the database name
     return await openDatabase(
       path,
       version: 1,

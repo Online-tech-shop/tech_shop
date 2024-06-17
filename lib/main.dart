@@ -3,7 +3,8 @@ import 'package:provider/provider.dart';
 import 'package:tech_shop/utils/routes.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
 
-void main(List<String> args) {
+void main(List<String> args) async {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(const MyApp());
 }
 
