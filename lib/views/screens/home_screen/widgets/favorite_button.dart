@@ -1,4 +1,3 @@
-import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tech_shop/models/product_item.dart';
@@ -25,12 +24,14 @@ class FavoriteButton extends StatefulWidget {
 
 class _FavoriteButtonState extends State<FavoriteButton> {
   final FavouriteViewModel _favouriteViewModel = FavouriteViewModel();
-  late bool isTapped;
+   bool isTapped = false;
 
   @override
   void initState() {
     super.initState();
-    isTapped = widget.isSelected;
+    FavouriteViewModel().checkIsFav(id: widget.product.id!).then(
+          (value) => setState(() => isTapped = value),
+        );
   }
 
   @override

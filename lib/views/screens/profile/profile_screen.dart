@@ -10,12 +10,7 @@ import 'package:tech_shop/views/screens/login/sig_up.dart';
 import 'package:tech_shop/views/screens/profile/widgets/profile_item.dart';
 
 class ProfileScreen extends StatefulWidget {
-  // final Function() onMainChangeHappened;
-
-  const ProfileScreen({
-    super.key,
-    // required this.onMainChangeHappened,
-  });
+  const ProfileScreen({super.key});
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -25,6 +20,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      backgroundColor:
+          CustomFunctions.isLight(context) ? Colors.white : Colors.black,
       body: Stack(
         children: [
           SizedBox(
@@ -38,7 +35,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
             slivers: [
               SliverAppBar(
                 toolbarHeight: 80,
-                backgroundColor: const Color.fromARGB(189, 0, 0, 0),
+                backgroundColor: CustomFunctions.isLight(context)
+                    ? Colors.white
+                    : Colors.black,
                 clipBehavior: Clip.hardEdge,
                 automaticallyImplyLeading: true,
                 expandedHeight: 130.0,
@@ -109,7 +108,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SliverToBoxAdapter(
                 child: Container(
                   height: 13,
-                  color: Colors.grey[200],
+                  color: CustomFunctions.isLight(context)
+                      ? Colors.white
+                      : Colors.black,
                 ),
               ),
               _buildProfileSection([
@@ -129,7 +130,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SliverToBoxAdapter(
                 child: Container(
                   height: 13,
-                  color: Colors.grey[200],
+                  color: CustomFunctions.isLight(context)
+                      ? Colors.grey[200]
+                      : Colors.white,
                 ),
               ),
               _buildProfileSection([
@@ -153,7 +156,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SliverToBoxAdapter(
                 child: Container(
                   height: 13,
-                  color: Colors.grey[200],
+                  color: CustomFunctions.isLight(context)
+                      ? Colors.grey[200]
+                      : Colors.white,
                 ),
               ),
               _buildProfileSection([
@@ -162,7 +167,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SliverToBoxAdapter(
                 child: Container(
                   height: 13,
-                  color: Colors.grey[200],
+                  color: CustomFunctions.isLight(context)
+                      ? Colors.grey[200]
+                      : Colors.white,
                 ),
               ),
               _buildProfileSection([
@@ -178,7 +185,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SliverToBoxAdapter(
                 child: Container(
                   height: 13,
-                  color: Colors.grey[200],
+                  color: CustomFunctions.isLight(context)
+                      ? Colors.grey[200]
+                      : Colors.white,
                 ),
               ),
               _buildProfileSection([
@@ -201,7 +210,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
               SliverToBoxAdapter(
                 child: Container(
                   height: 13,
-                  color: Colors.grey[200],
+                  color: CustomFunctions.isLight(context)
+                      ? Colors.grey[200]
+                      : Colors.white,
                 ),
               ),
               const SliverToBoxAdapter(
@@ -256,19 +267,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
       },
       child: Container(
           height: 50,
-          color: Colors.white,
-          child: Expanded(
-            child: Padding(
-              padding: const EdgeInsets.only(left: 20),
-              child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(
-                    tr("ilova_tili"),
-                    style: const TextStyle(fontWeight: FontWeight.w500),
+          color: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+          child: Padding(
+            padding: const EdgeInsets.only(left: 20),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              children: [
+                Text(
+                  tr("ilova_tili"),
+                  style: TextStyle(
+                    fontWeight: FontWeight.w500,
+                    color: CustomFunctions.isLight(context)
+                        ? Colors.black
+                        : Colors.white,
                   ),
-                ],
-              ),
+                ),
+              ],
             ),
           )),
     );

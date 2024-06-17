@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
 import 'package:tech_shop/views/screens/login/widgets/gender.dart';
-import 'package:tech_shop/views/screens/profile/profile_screen.dart';
 
 class NameSurnamePage extends StatefulWidget {
   final String localId;

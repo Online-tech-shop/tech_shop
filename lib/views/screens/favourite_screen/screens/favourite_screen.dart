@@ -26,7 +26,6 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   bool isDataCame = false;
   final List<Product> _favProductList = [];
   List<Review> _reviewList = [];
-  int a = 0;
 
   @override
   void initState() {
