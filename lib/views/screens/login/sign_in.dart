@@ -16,6 +16,14 @@ class _SignInState extends State<SignIn> {
   final _email = TextEditingController();
   final _password = TextEditingController();
   bool check = false;
+
+  @override
+  void dispose() {
+    _email.dispose();
+    _password.dispose();
+    super.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -44,8 +52,13 @@ class _SignInState extends State<SignIn> {
                       decoration: const InputDecoration(
                           hintText: 'Enter email',
                           border: OutlineInputBorder()),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your email';
+                        }
+                        return null;
+                      },
                     ),
-
                     const SizedBox(
                       height: 20,
                     ),
@@ -54,13 +67,20 @@ class _SignInState extends State<SignIn> {
                       decoration: const InputDecoration(
                           hintText: 'Enter password',
                           border: OutlineInputBorder()),
+                      validator: (value) {
+                        if (value == null || value.isEmpty) {
+                          return 'Please enter your password';
+                        }
+                        return null;
+                      },
+                      obscureText: true,
                     ),
                     const SizedBox(
                       height: 20,
                     ),
                     check
                         ? const Text(
-                            "Xato ma'lumot kiritildi !",
+                            "Invalid credentials entered!",
                             style: TextStyle(
                                 color: Colors.red,
                                 fontSize: 17,
@@ -81,8 +101,9 @@ class _SignInState extends State<SignIn> {
                                 MaterialPageRoute(
                                     builder: (ctx) => MainScreen()));
                           } else {
-                            check = true;
-                            setState(() {});
+                            setState(() {
+                              check = true;
+                            });
                           }
                         }
                       },
@@ -94,7 +115,7 @@ class _SignInState extends State<SignIn> {
                             borderRadius: BorderRadius.circular(5)),
                         child: const Center(
                           child: Text(
-                            "Ro'yhatdan o'tish",
+                            "Kirish",
                             style: TextStyle(
                                 color: Colors.white,
                                 fontWeight: FontWeight.w500,
@@ -102,15 +123,13 @@ class _SignInState extends State<SignIn> {
                           ),
                         ),
                       ),
-                    )
-
+                    ),
                     TextButton(
                         onPressed: () {
                           Navigator.pushReplacement(context,
                               MaterialPageRoute(builder: (ctx) => const SigUp()));
                         },
                         child: const Text("Ro'yhatdan o'tish"))
-
                   ],
                 )),
           ),
@@ -127,7 +146,7 @@ class _SignInState extends State<SignIn> {
               TextButton(
                   onPressed: () {
                     Navigator.pushReplacement(
-                        context, MaterialPageRoute(builder: (ctx) => SigUp()));
+                        context, MaterialPageRoute(builder: (ctx) => const SigUp()));
                   },
                   child: const Text("Ro'yhatdan o'tish"))
             ],
