@@ -1,5 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/views/screens/catalog_screen/screens/search_page_screen.dart';
 
 class ReadTextfieldWidget extends StatelessWidget {
@@ -25,20 +26,20 @@ class ReadTextfieldWidget extends StatelessWidget {
               )
             : null,
         scrollPadding: const EdgeInsets.all(10),
-        decoration: const InputDecoration(
-          prefixIcon: Icon(
+        decoration:  InputDecoration(
+          prefixIcon: const Icon(
             Icons.search,
             size: 20,
             color: Color(0xff8B8B95),
           ),
           filled: true,
-          fillColor: Color(0xffF3F4F8),
-          hintStyle: TextStyle(
+          fillColor: CustomFunctions.isLight(context) ? const Color(0xffF3F4F8) : Colors.black,
+          hintStyle: const TextStyle(
             color: Color(0xff8B8B95),
           ),
           hintText: "Mahsulot va toifalarni qidirish",
           border: InputBorder.none,
-          contentPadding: EdgeInsets.only(top: 12),
+          contentPadding: const EdgeInsets.only(top: 12),
         ),
       ),
     );

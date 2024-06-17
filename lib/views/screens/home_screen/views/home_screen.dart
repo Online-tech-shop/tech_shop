@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/carousel_widget.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/category_widget.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/product_widget.dart';
@@ -17,13 +18,12 @@ class HomeScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          surfaceTintColor: Colors.transparent,
-          shadowColor: Colors.transparent,
+          surfaceTintColor:CustomFunctions.isLight(context) ? Colors.transparent : Colors.black,
+          shadowColor:CustomFunctions.isLight(context) ? Colors.transparent : Colors.black,
           title: ReadTextfieldWidget(readOnly: true),
         ),
         body: NestedScrollView(
-          headerSliverBuilder:
-              (BuildContext context, bool innerBoxIsScrolled) {
+          headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
             return <Widget>[
               SliverToBoxAdapter(
                 child: Column(
@@ -35,7 +35,9 @@ class HomeScreen extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       height: 10,
-                      color: const Color(0xFFF2F4F7),
+                      color: CustomFunctions.isLight(context)
+                          ? const Color(0xFFF2F4F7)
+                          : Colors.grey.withOpacity(0.1),
                     ),
                     const SizedBox(height: 10),
                   ],
@@ -87,7 +89,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-      color: Colors.white,
+      color: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
       child: _tabBar,
     );
   }
