@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tech_shop/service/login_http_services.dart';
 import 'package:tech_shop/views/screens/login/name_surname_page.dart';
+import 'package:tech_shop/views/screens/login/sign_in.dart';
 
 class SigUp extends StatefulWidget {
   const SigUp({super.key});
@@ -79,7 +80,7 @@ class _SigUpState extends State<SigUp> {
                     InkWell(
                       onTap: () async {
                         if (_globalKey.currentState!.validate()) {
-                          var data = await authHttpServices.login(
+                          var data = await authHttpServices.sign(
                               _email.text, _password.text);
                           Navigator.pushReplacement(
                               context,
@@ -122,12 +123,7 @@ class _SigUpState extends State<SigUp> {
               TextButton(
                   onPressed: () {
                     Navigator.pushReplacement(
-                        context,
-                        MaterialPageRoute(
-                            builder: (ctx) => NameSurnamePage(
-                                  localId: '',
-                                  email: '',
-                                )));
+                        context, MaterialPageRoute(builder: (ctx) => SignIn()));
                   },
                   child: const Text(
                     "Kirish",
