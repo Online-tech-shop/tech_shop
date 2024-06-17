@@ -170,7 +170,8 @@ class ProductCard extends StatelessWidget {
           ),
         ),
         InkWell(
-          radius: 10,
+          borderRadius: BorderRadius.circular(18),
+          splashColor: Colors.grey,
           onTap: () => _addToCart(context),
           child: Container(
             padding: const EdgeInsets.all(5),

@@ -33,7 +33,7 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
     if (existingProducts.isNotEmpty) {
       final existingProduct = Save.fromMap(existingProducts.first);
       final updatedSave = existingProduct.copyWith(
-        price: existingProduct.price + (widget.product.price * _orderCount),
+        price: existingProduct.price * _orderCount,
         quantity: existingProduct.quantity + _orderCount,
       );
       await dbHelper.updateSave(updatedSave);
@@ -41,7 +41,7 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
       final save = Save(
         title: widget.product.name[0],
         image: widget.product.images[0],
-        price: widget.product.price.toDouble() + (widget.product.price * _orderCount),
+        price: widget.product.price.toDouble() * _orderCount,
         amount: widget.product.leftProduct,
         seller: widget.product.seller,
         brieflyAboutProduct: widget.product.brieflyAboutProduct[0],
@@ -66,7 +66,9 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
     _addToCart(context);
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => const MainScreen(n: 2)),
+      MaterialPageRoute(
+        builder: (context) => const MainScreen(n: 2),
+      ),
       (route) => false,
     );
   }
