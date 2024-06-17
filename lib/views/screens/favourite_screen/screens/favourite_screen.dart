@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tech_shop/models/product_item.dart';
@@ -66,15 +67,15 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.center,
         children: [
-          const Padding(
+          Padding(
             padding: EdgeInsets.symmetric(horizontal: 16),
-            child: Text(
-              'Istaklarim',
+            child: const Text(
+              'istaklarim',
               style: TextStyle(
                 fontSize: 18,
                 fontWeight: FontWeight.w700,
               ),
-            ),
+            ).tr(),
           ),
           Expanded(
             child: isDataCame
@@ -93,19 +94,19 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                             ],
                           ),
                           const Text(
-                            'Sizga yoqqanini qoʻshing',
+                            'sizga_yoqqanini_qoʻshing',
                             style: TextStyle(
                               fontSize: 25,
                               fontWeight: FontWeight.w700,
                             ),
-                          ),
+                          ).tr(),
                           const Text(
-                            'Bosh sahifaga oʻting va mahsulotdagi ♡ belgisini bosing',
+                            'bosh_sahifaga_oʻting_va_mahsulotdagi_♡_belgisini_bosing',
                             textAlign: TextAlign.center,
                             style: TextStyle(
                               fontSize: 13,
                             ),
-                          ),
+                          ).tr(),
                           const Gap(10),
                           GestureDetector(
                             onTap: () {
@@ -124,14 +125,14 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                                 borderRadius: BorderRadius.circular(10),
                                 color: Colors.deepPurple[500],
                               ),
-                              child: const Center(
+                              child: Center(
                                 child: Text(
-                                  "Bosh sahifaga",
+                                  "bosh_sahifaga",
                                   style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.bold,
                                   ),
-                                ),
+                                ).tr(),
                               ),
                             ),
                           )

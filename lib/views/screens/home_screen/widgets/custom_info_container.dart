@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tech_shop/models/product_item.dart';
@@ -58,11 +59,11 @@ class CustomInfoContainer extends StatelessWidget {
           Text(
             isSelected
                 ? reviewCount == 0
-                    ? 'Baholar hali yoʻq'
+                    ? 'baholar_hali-yoʻq'.tr()
                     : '$reviewCount sharh'
                 : product.orderAmount == 0
-                    ? 'Buyurtma yoʻq '
-                    : 'ta buyurtma',
+                    ? "buyurtma_yo'q".tr()
+                    : 'ta_buyurtma'.tr(),
             style: TextStyle(
               fontWeight: FontWeight.w500,
               color:

@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
@@ -14,7 +14,7 @@ import 'package:tech_shop/views/screens/save_screen/views/save_screen.dart';
 class MainScreen extends StatefulWidget {
   final int n;
 
-  const MainScreen({super.key, this.n = 0});
+  const MainScreen({Key? key, this.n = 0}) : super(key: key);
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -68,17 +68,17 @@ class _MainScreenState extends State<MainScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomTabBoxButton(
-                    buttonText: 'Bosh sahifa',
-                    imagePath: CustomFunctions.isLight(context)
-                        ? 'assets/icons/bottom_navigation_bar_icons/home${_currentIndex == 0 ? '' : '_un'}.png'
-                        : null,
+                    buttonText: 'bosh_sahifa'.tr(),
+                    imagePath:
+                        'assets/icons/bottom_navigation_bar_icons/home${_currentIndex == 0 ? '' : '_un'}.png',
+                    
                     icon: CupertinoIcons.home,
                     currentIndex: 0,
                     isSelected: _currentIndex == 0,
                     onTabBoxPressed: onTabBoxPressed,
                   ),
                   CustomTabBoxButton(
-                    buttonText: 'Katalog',
+                    buttonText: 'katalog'.tr(),
                     imagePath: CustomFunctions.isLight(context)
                         ? 'assets/icons/bottom_navigation_bar_icons/search${_currentIndex == 1 ? '' : '_un'}.png'
                         : null,
@@ -88,7 +88,7 @@ class _MainScreenState extends State<MainScreen> {
                     onTabBoxPressed: onTabBoxPressed,
                   ),
                   CustomTabBoxButton(
-                    buttonText: 'Savat',
+                    buttonText: 'savat'.tr(),
                     imagePath: CustomFunctions.isLight(context)
                         ? 'assets/icons/bottom_navigation_bar_icons/cart${_currentIndex == 2 ? '' : '_un'}.png'
                         : null,
@@ -98,7 +98,7 @@ class _MainScreenState extends State<MainScreen> {
                     onTabBoxPressed: onTabBoxPressed,
                   ),
                   CustomTabBoxButton(
-                    buttonText: 'Saralangan',
+                    buttonText: 'saralangan'.tr(),
                     imagePath: CustomFunctions.isLight(context)
                         ? 'assets/icons/bottom_navigation_bar_icons/fav${_currentIndex == 3 ? '' : '_un'}.png'
                         : null,
@@ -110,7 +110,7 @@ class _MainScreenState extends State<MainScreen> {
                     onTabBoxPressed: onTabBoxPressed,
                   ),
                   CustomTabBoxButton(
-                    buttonText: 'Kabinet',
+                    buttonText: 'kabinet'.tr(),
                     imagePath: CustomFunctions.isLight(context)
                         ? 'assets/icons/bottom_navigation_bar_icons/profile${_currentIndex == 4 ? '' : '_un'}.png'
                         : null,
@@ -123,7 +123,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
             cartNum == 0
-                ? const Text("")
+                ? const Text("").tr()
                 : Positioned(
                     top: 0,
                     left: MediaQuery.of(context).size.width / 2 - 10,

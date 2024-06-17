@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/viewmodels/home_view_model.dart';
@@ -59,7 +60,7 @@ class _CategoryTapWidgetState extends State<CategoryTapWidget> {
               hintStyle: const TextStyle(
                 color: Color(0xff8B8B95),
               ),
-              hintText: "Termada qidirishku",
+              hintText: "termada_qidirishku".tr(),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.only(top: 12),
             ),

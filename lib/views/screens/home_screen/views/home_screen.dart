@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/carousel_widget.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/category_widget.dart';
@@ -8,7 +9,7 @@ import 'package:tech_shop/views/screens/catalog_screen/widgets/read_textfield_wi
 import '../../../../viewmodels/home_view_model.dart';
 
 class HomeScreen extends StatelessWidget {
-  HomeScreen({super.key});
+  HomeScreen({Key? key}) : super(key: key);
 
   final HomeViewModel viewModel = HomeViewModel();
 
@@ -18,8 +19,28 @@ class HomeScreen extends StatelessWidget {
       length: 2,
       child: Scaffold(
         appBar: AppBar(
-          surfaceTintColor:CustomFunctions.isLight(context) ? Colors.transparent : Colors.black,
-          shadowColor:CustomFunctions.isLight(context) ? Colors.transparent : Colors.black,
+          actions: [
+            ElevatedButton(
+              onPressed: () {
+                if (context.locale.languageCode == 'uz') {
+                  context.setLocale(Locale('ru'));
+                } else {
+                  context.setLocale(Locale('uz'));
+                }
+              },
+              child: Text(
+                context.locale.languageCode == 'uz'
+                    ? 'Switch to Russian'
+                    : 'Switch to Uzbek',
+              ),
+            ),
+          ],
+          surfaceTintColor: CustomFunctions.isLight(context)
+              ? Colors.transparent
+              : Colors.black,
+          shadowColor: CustomFunctions.isLight(context)
+              ? Colors.transparent
+              : Colors.black,
           title: ReadTextfieldWidget(readOnly: true),
         ),
         body: NestedScrollView(
@@ -45,7 +66,7 @@ class HomeScreen extends StatelessWidget {
               ),
               SliverPersistentHeader(
                 delegate: _SliverAppBarDelegate(
-                  const TabBar(
+                  TabBar(
                     dividerColor: Colors.transparent,
                     labelColor: Color(0xFF7B28DA),
                     indicatorColor: Color(0xFF7B28DA),
@@ -53,8 +74,8 @@ class HomeScreen extends StatelessWidget {
                     indicatorPadding: EdgeInsets.symmetric(horizontal: 30),
                     indicatorWeight: 2.5,
                     tabs: [
-                      Tab(text: "Tavsiyalar"),
-                      Tab(text: "Yozgi savdo"),
+                      Tab(text: 'tavsiyalar'.tr()),
+                      Tab(text: 'yozgi_savdo'.tr()),
                     ],
                   ),
                 ),

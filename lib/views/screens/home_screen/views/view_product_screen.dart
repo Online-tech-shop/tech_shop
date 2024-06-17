@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -42,9 +43,11 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
   }
 
   void _shareProduct() {
-    final String productName = widget.product.name[AppConstants.appLanguageIndex];
-    final String productUrl = widget.product.images.isNotEmpty ? widget.product.images[0] : '';
-    final String productPrice = '${widget.product.price} so\'m';
+    final String productName =
+        widget.product.name[AppConstants.appLanguageIndex];
+    final String productUrl =
+        widget.product.images.isNotEmpty ? widget.product.images[0] : '';
+    final String productPrice = '${widget.product.price} ${"som".tr()}';
 
     Share.share(
       'Check out this product: $productName\nPrice: $productPrice\n$productUrl',
@@ -84,7 +87,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                     ),
                     const Gap(15),
                     GestureDetector(
-                      onTap: _shareProduct, // Add the onTap handler
+                      onTap: _shareProduct, 
                       child: const Icon(
                         CupertinoIcons.share_up,
                       ),
@@ -205,7 +208,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
-                      '${widget.product.price} so\'m',
+                      '${widget.product.price} ${'som'.tr()}',
                       style: TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.w700,
@@ -234,7 +237,8 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text(
-                            "${widget.product.leftProduct} dona qoldi",
+                            tr('dona_qoldi',
+                                args: [widget.product.leftProduct.toString()]),
                             style: const TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
@@ -262,7 +266,9 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text(
-                            "Bu haftada ${widget.product.boughtAmountThisWeek} kishi sotib oldi",
+                            tr('bu_haftada_kishi_sotib_oldi', args: [
+                              widget.product.boughtAmountThisWeek.toString()
+                            ]),
                             style: const TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
@@ -276,8 +282,8 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                     padding: const EdgeInsets.only(top: 15.0),
                     child: Text(
                       widget.review.isNotEmpty
-                          ? '${widget.review.length} sharh'
-                          : "Ushbu mahsulotga hali sharh yozilmagan",
+                          ? '${widget.review.length} ${tr('sharh').plural(widget.review.length)}'
+                          : tr('ushbu_mahsulotga_hali_sharh_yozilmagan'),
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 18,
