@@ -240,6 +240,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text(
+
                             context.tr('dona_qoldi', namedArgs: {
                               'qoldi': widget.product.leftProduct.toString()
                             }),
@@ -247,6 +248,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                               color: CustomFunctions.isLight(context)
                                   ? Colors.black
                                   : Colors.white,
+
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
                             ),
@@ -273,6 +275,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text(
+
                             context
                                 .tr('bu_haftada_kishi_sotib_oldi', namedArgs: {
                               'boughtAmountThisWeek':
@@ -282,6 +285,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                               color: CustomFunctions.isLight(context)
                                   ? Colors.black
                                   : Colors.white,
+
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
                             ),
@@ -294,7 +298,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                     padding: const EdgeInsets.only(top: 15.0),
                     child: Text(
                       widget.review.isNotEmpty
-                          ? '${widget.review.length} ${tr('sharh').plural(widget.review.length)}'
+                          ? '${widget.review.length} ${tr('sharh')}'
                           : tr('ushbu_mahsulotga_hali_sharh_yozilmagan'),
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
