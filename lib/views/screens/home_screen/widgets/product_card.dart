@@ -6,6 +6,7 @@ import 'package:tech_shop/models/review_model.dart';
 import 'package:tech_shop/utils/app_constants.dart';
 import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/utils/routes.dart';
+import 'package:tech_shop/views/screens/home_screen/widgets/favorite_button.dart';
 
 class ProductCard extends StatefulWidget {
   final Product product;
@@ -55,10 +56,9 @@ class _ProductCardState extends State<ProductCard> {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                IconButton(
-                  onPressed: () {},
-                  icon: const Icon(CupertinoIcons.heart),
-                )
+                FavoriteButton(product: widget.product,
+                  isSelected: false,
+                ),
               ],
             ),
           ),

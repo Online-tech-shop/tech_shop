@@ -84,20 +84,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  ProfileItem(
-                    ikon: const Icon(
+                  const ProfileItem(
+                    ikon: Icon(
                       Icons.shopping_bag_outlined,
                     ),
                     name: "Buyurtmalarim",
                   ),
-                  ProfileItem(
-                    ikon: const Icon(
+                  const ProfileItem(
+                    ikon: Icon(
                       CupertinoIcons.smiley,
                     ),
                     name: "Sharhlarim",
                   ),
-                  ProfileItem(
-                    ikon: const Icon(
+                  const ProfileItem(
+                    ikon: Icon(
                       Icons.calendar_month_rounded,
                     ),
                     name: "Buyurtmalarim",
@@ -116,26 +116,26 @@ class _ProfileScreenState extends State<ProfileScreen> {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  ProfileItem(
-                    ikon: const Icon(
+                  const ProfileItem(
+                    ikon: Icon(
                       CupertinoIcons.chat_bubble_2,
                     ),
                     name: "Chatlarim",
                   ),
-                  ProfileItem(
-                    ikon: const Icon(
+                  const ProfileItem(
+                    ikon: Icon(
                       Icons.notifications_none,
                     ),
                     name: "Xabarnomalar",
                   ),
-                  ProfileItem(
-                    ikon: const Icon(
+                  const ProfileItem(
+                    ikon: Icon(
                       Icons.percent,
                     ),
                     name: "Promokodlarim",
                   ),
-                  ProfileItem(
-                    ikon: const Icon(
+                  const ProfileItem(
+                    ikon: Icon(
                       Icons.settings_rounded,
                     ),
                     name: "Sozlamalar",
@@ -210,14 +210,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  ProfileItem(
-                    ikon: const Icon(
+                  const ProfileItem(
+                    ikon: Icon(
                       Icons.location_on_outlined,
                     ),
                     name: "Shahar",
                   ),
-                  ProfileItem(
-                    ikon: const Icon(
+                  const ProfileItem(
+                    ikon: Icon(
                       Icons.map_outlined,
                     ),
                     name: "Xaritadagi topshirish punktlari",
@@ -236,14 +236,14 @@ class _ProfileScreenState extends State<ProfileScreen> {
             sliver: SliverList(
               delegate: SliverChildListDelegate(
                 [
-                  ProfileItem(
-                    ikon: const Icon(
+                  const ProfileItem(
+                    ikon: Icon(
                       Icons.help_outline_rounded,
                     ),
                     name: "Ma'lumot",
                   ),
-                  ProfileItem(
-                    ikon: const Icon(
+                  const ProfileItem(
+                    ikon: Icon(
                       CupertinoIcons.mail,
                     ),
                     name: "Xaritadagi topshirish punktlari",

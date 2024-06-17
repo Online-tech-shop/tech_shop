@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tech_shop/views/screens/cart_screen/screens/cart_screen.dart';
+import 'package:tech_shop/views/screens/favourite_screen/screens/favourite_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
 import 'package:tech_shop/views/screens/catalog_screen/screens/catalog_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_tab_box_button.dart';
@@ -18,7 +20,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     const CatalogScreen(),
     const CartScreen(),
-    const Placeholder(),
+    const FavouriteScreen(),
     const ProfileScreen()
   ];
 
@@ -26,6 +28,12 @@ class _MainScreenState extends State<MainScreen> {
     setState(() {
       _currentIndex = index;
     });
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
   }
 
   @override

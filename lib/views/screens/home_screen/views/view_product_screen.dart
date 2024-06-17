@@ -8,6 +8,7 @@ import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_float_action_button.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_info_container.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_user_review_box.dart';
+import 'package:tech_shop/views/screens/home_screen/widgets/favorite_button.dart';
 
 class ViewProductScreen extends StatelessWidget {
   final Product product;
@@ -18,8 +19,6 @@ class ViewProductScreen extends StatelessWidget {
     required this.product,
     required this.review,
   });
-
-
 
   @override
   Widget build(BuildContext context) {
@@ -41,10 +40,9 @@ class ViewProductScreen extends StatelessWidget {
             padding: const EdgeInsets.only(right: 15.0),
             child: Row(
               children: [
-                GestureDetector(
-                  child: const Icon(
-                    CupertinoIcons.heart,
-                  ),
+                FavoriteButton(
+                  product: product,
+                  isSelected: true,
                 ),
                 const Gap(15),
                 GestureDetector(
@@ -103,7 +101,8 @@ class ViewProductScreen extends StatelessWidget {
                   children: [
                     CustomInfoContainer(
                       reviewCount: review.length,
-                      reviewAverageNumber: CustomFunctions.countAverageOfReview(review),
+                      reviewAverageNumber:
+                          CustomFunctions.countAverageOfReview(review),
                       isSelected: true,
                       product: product,
                     ),
@@ -205,8 +204,7 @@ class ViewProductScreen extends StatelessWidget {
           const SizedBox(height: kToolbarHeight + 10)
         ],
       ),
-      floatingActionButtonLocation: FloatingActionButtonLocation.centerDocked,
-      floatingActionButton: CustomFloatActionButton(product: product),
+      bottomNavigationBar: CustomFloatActionButton(product: product),
     );
   }
 }
