@@ -1,13 +1,19 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tech_shop/models/product_item.dart';
+import 'package:tech_shop/utils/functions.dart';
 
 class CustomInfoContainer extends StatelessWidget {
+  final int? reviewCount;
+  final double? reviewAverageNumber;
   final Product product;
   final bool isSelected;
 
   const CustomInfoContainer({
     super.key,
+    this.reviewCount,
+    this.reviewAverageNumber,
     required this.isSelected,
     required this.product,
   });
@@ -21,15 +27,25 @@ class CustomInfoContainer extends StatelessWidget {
         left: isSelected ? 0 : 10,
       ),
       decoration: BoxDecoration(
-          color: Colors.white,
-          border: Border.all(color: Colors.grey),
-          borderRadius: BorderRadius.circular(10)),
+        color: Colors.white,
+        border: Border.all(color: Colors.grey),
+        borderRadius: BorderRadius.circular(10),
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Row(
             children: [
-              Text(isSelected ? '5.0' : '${product.orderAmount}+'),
+              Text(
+                isSelected ? '$reviewAverageNumber' : '${product.orderAmount}+',
+                style: TextStyle(
+                  color: CustomFunctions.isLight(context)
+                      ? Colors.grey.withOpacity(0.8)
+                      : Colors.black,
+                  fontSize: 14,
+                  fontWeight: FontWeight.w600,
+                ),
+              ),
               const Gap(5),
               if (isSelected)
                 for (int i = 0; i < 5; i++)
@@ -40,7 +56,20 @@ class CustomInfoContainer extends StatelessWidget {
             ],
           ),
           const Gap(5),
-          Text(isSelected ? '100 sharhh' : 'ta buyurtma'),
+          Text(
+            isSelected
+                ? reviewCount == 0
+                    ? context.tr('baholar_hali-yoʻq')
+                    : '$reviewCount sharh'
+                : product.orderAmount == 0
+                    ? context.tr('buyurtma_yoq')
+                    : 'ta_buyurtma'.tr(),
+            style: TextStyle(
+              fontWeight: FontWeight.w500,
+              color:
+                  CustomFunctions.isLight(context) ? Colors.grey : Colors.black,
+            ),
+          ),
         ],
       ),
     );

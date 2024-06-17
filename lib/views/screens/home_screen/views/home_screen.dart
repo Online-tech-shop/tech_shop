@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
+import 'package:tech_shop/utils/app_constants.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/carousel_widget.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/category_widget.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/product_widget.dart';
+import 'package:tech_shop/views/screens/catalog_screen/widgets/read_textfield_widget.dart';
 
 import '../../../../viewmodels/home_view_model.dart';
 
@@ -15,27 +19,20 @@ class HomeScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor:
+            CustomFunctions.isLight(context) ? Colors.white : Colors.black,
         appBar: AppBar(
-          title: GestureDetector(
-            onTap: () {},
-            child: Container(
-              alignment: Alignment.centerLeft,
-              decoration: const BoxDecoration(
-                borderRadius: BorderRadius.all(Radius.circular(5)),
-                color: Color(0xFFF3F4F8),
-              ),
-              child: const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 35, vertical: 5),
-                child: Text(
-                  textAlign: TextAlign.left,
-                  "Mahsulot va toifalarni qidirish",
-                  style: TextStyle(
-                    color: Color(0xff8B8B95),
-                  ),
-                ),
-              ),
-            ),
-          ),
+
+          backgroundColor:
+              CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+
+          surfaceTintColor: CustomFunctions.isLight(context)
+              ? Colors.transparent
+              : Colors.black,
+          shadowColor: CustomFunctions.isLight(context)
+              ? Colors.transparent
+              : Colors.black,
+          title: const ReadTextfieldWidget(readOnly: true),
         ),
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -50,7 +47,9 @@ class HomeScreen extends StatelessWidget {
                     Container(
                       width: double.infinity,
                       height: 10,
-                      color: const Color(0xFFF2F4F7),
+                      color: CustomFunctions.isLight(context)
+                          ? const Color(0xFFF2F4F7)
+                          : Colors.grey.withOpacity(0.1),
                     ),
                     const SizedBox(height: 10),
                   ],
@@ -58,12 +57,22 @@ class HomeScreen extends StatelessWidget {
               ),
               SliverPersistentHeader(
                 delegate: _SliverAppBarDelegate(
-                  const TabBar(
+                  TabBar(
+                    dividerColor: Colors.transparent,
+                    labelColor: const Color(0xFF7B28DA),
+                    indicatorColor: const Color(0xFF7B28DA),
+                    indicatorSize: TabBarIndicatorSize.tab,
+                    indicatorPadding:
+                        const EdgeInsets.symmetric(horizontal: 30),
+                    indicatorWeight: 2.5,
                     tabs: [
-                      Tab(text: "Tavsiyalar"),
-                      Tab(text: "Yozgi savdo"),
+                      Tab(text: 'tavsiyalar'.tr()),
+                      Tab(text: 'yozgi_savdo'.tr()),
                     ],
                   ),
+                  CustomFunctions.isLight(context)
+                      ? Colors.white
+                      : Colors.black,
                 ),
                 pinned: true,
               ),
@@ -71,10 +80,8 @@ class HomeScreen extends StatelessWidget {
           },
           body: TabBarView(
             children: [
-              ProductGrid(viewModel: viewModel),
-              const Center(
-                child: Text("Yozgi savdo content"),
-              ),
+              ProductGrid(viewModel: viewModel, isSelected: false),
+              ProductGrid(viewModel: viewModel, isSelected: true)
             ],
           ),
         ),
@@ -84,9 +91,10 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate(this._tabBar);
+  _SliverAppBarDelegate(this._tabBar, this.color);
 
   final TabBar _tabBar;
+  final Color color;
 
   @override
   double get minExtent => _tabBar.preferredSize.height;
@@ -98,7 +106,7 @@ class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
   Widget build(
       BuildContext context, double shrinkOffset, bool overlapsContent) {
     return Container(
-      color: Colors.white,
+      color: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
       child: _tabBar,
     );
   }

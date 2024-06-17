@@ -5,8 +5,8 @@ import 'package:http/http.dart' as http;
 import 'package:tech_shop/models/product_item.dart';
 
 class ProductHttpService {
-  final Uri _url = Uri.parse(
-      'https://to-do-f5021-default-rtdb.firebaseio.com/product.json');
+  final Uri _url =
+      Uri.parse('https://to-do-f5021-default-rtdb.firebaseio.com/product.json');
 
   Future<List<Product>> getProducts() async {
     try {
