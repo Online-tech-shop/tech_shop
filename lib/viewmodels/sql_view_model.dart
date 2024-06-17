@@ -56,7 +56,7 @@ class SaveViewModel extends ChangeNotifier {
   void decrementPrice(int id) {
     final index = saves.indexWhere((item) => item.id == id);
     if (index != -1) {
-      saves[index].price -= saves[index].price / 2;
+      saves[index].price = saves[index].price / 2;
       updateSave(saves[index]);
     }
   }
