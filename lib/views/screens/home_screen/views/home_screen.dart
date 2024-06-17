@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/carousel_widget.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/category_widget.dart';
@@ -17,10 +18,18 @@ class HomeScreen extends StatelessWidget {
     return DefaultTabController(
       length: 2,
       child: Scaffold(
+        backgroundColor:
+            CustomFunctions.isLight(context) ? Colors.white : Colors.black,
         appBar: AppBar(
-          surfaceTintColor:CustomFunctions.isLight(context) ? Colors.transparent : Colors.black,
-          shadowColor:CustomFunctions.isLight(context) ? Colors.transparent : Colors.black,
-          title: ReadTextfieldWidget(readOnly: true),
+          backgroundColor:
+              CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+          surfaceTintColor: CustomFunctions.isLight(context)
+              ? Colors.transparent
+              : Colors.black,
+          shadowColor: CustomFunctions.isLight(context)
+              ? Colors.transparent
+              : Colors.black,
+          title: const ReadTextfieldWidget(readOnly: true),
         ),
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -45,18 +54,22 @@ class HomeScreen extends StatelessWidget {
               ),
               SliverPersistentHeader(
                 delegate: _SliverAppBarDelegate(
-                  const TabBar(
+                  TabBar(
                     dividerColor: Colors.transparent,
-                    labelColor: Color(0xFF7B28DA),
-                    indicatorColor: Color(0xFF7B28DA),
+                    labelColor: const Color(0xFF7B28DA),
+                    indicatorColor: const Color(0xFF7B28DA),
                     indicatorSize: TabBarIndicatorSize.tab,
-                    indicatorPadding: EdgeInsets.symmetric(horizontal: 30),
+                    indicatorPadding:
+                        const EdgeInsets.symmetric(horizontal: 30),
                     indicatorWeight: 2.5,
                     tabs: [
-                      Tab(text: "Tavsiyalar"),
-                      Tab(text: "Yozgi savdo"),
+                      Tab(text: 'tavsiyalar'.tr()),
+                      Tab(text: 'yozgi_savdo'.tr()),
                     ],
                   ),
+                  CustomFunctions.isLight(context)
+                      ? Colors.white
+                      : Colors.black,
                 ),
                 pinned: true,
               ),
@@ -75,9 +88,10 @@ class HomeScreen extends StatelessWidget {
 }
 
 class _SliverAppBarDelegate extends SliverPersistentHeaderDelegate {
-  _SliverAppBarDelegate(this._tabBar);
+  _SliverAppBarDelegate(this._tabBar, this.color);
 
   final TabBar _tabBar;
+  final Color color;
 
   @override
   double get minExtent => _tabBar.preferredSize.height;

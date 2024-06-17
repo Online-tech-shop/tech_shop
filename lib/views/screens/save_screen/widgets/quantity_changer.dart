@@ -52,8 +52,12 @@ class QuantityChanger extends StatelessWidget {
                       : Colors.black,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Center(
-                  child: Icon(Icons.remove, size: 15),
+                child:  Center(
+                  child: Icon(
+                    Icons.remove,
+                    size: 15,
+                    color: CustomFunctions.isLight(context) ?Colors.black : Colors.white,
+                  ),
                 ),
               ),
             ),
@@ -75,8 +79,12 @@ class QuantityChanger extends StatelessWidget {
                       : Colors.black,
                   borderRadius: BorderRadius.circular(10),
                 ),
-                child: const Center(
-                  child: Icon(Icons.add, size: 15),
+                child:  Center(
+                  child: Icon(
+                    Icons.add,
+                    size: 15,
+                    color: CustomFunctions.isLight(context) ?Colors.black : Colors.white,
+                  ),
                 ),
               ),
             ),

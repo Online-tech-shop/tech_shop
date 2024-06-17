@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 
 class CategoryName {
   String title;
@@ -10,10 +11,10 @@ class CategoryName {
 }
 
 List<CategoryName> categoryList = [
-  CategoryName(icon: "headphone", title: "Elektronika"),
-  CategoryName(icon: "cloth", title: "Kiyim"),
-  CategoryName(icon: "shoe", title: "Poyabzallar"),
-  CategoryName(icon: "blender", title: "Maishiy texnika"),
-  CategoryName(icon: "car", title: "Avtotovarlar"),
-  CategoryName(icon: "apple", title: "Oziq-ovqat"),
+  CategoryName(icon: "headphone", title: "elektronika".tr()),
+  CategoryName(icon: "cloth", title: "kiyim".tr()),
+  CategoryName(icon: "shoe", title: "poyabzallar".tr()),
+  CategoryName(icon: "blender", title: "maishiy_texnika".tr()),
+  CategoryName(icon: "car", title: "avtotovarlar".tr()),
+  CategoryName(icon: "apple", title: "oziqovqat".tr()),
 ];

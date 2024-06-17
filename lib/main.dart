@@ -1,13 +1,28 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/material.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
+import 'package:tech_shop/utils/app_constants.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/utils/routes.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
 
 void main(List<String> args) async {
   WidgetsFlutterBinding.ensureInitialized();
   final AdaptiveThemeMode? savedThemeMode = await AdaptiveTheme.getThemeMode();
-  runApp(MyApp(savedThemeMode: savedThemeMode));
+  await EasyLocalization.ensureInitialized();
+  runApp(
+    EasyLocalization(
+      supportedLocales: const [
+        Locale('uz'),
+        Locale('ru'),
+      ],
+      path: 'assets/translations',
+      fallbackLocale: const Locale('uz'),
+      startLocale: const Locale('uz'),
+      child: MyApp(savedThemeMode: savedThemeMode),
+    ),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -20,6 +35,7 @@ class MyApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    AppConstants.appLanguageIndex = CustomFunctions.isUzbek(context) ? 0 : 1;
     return ChangeNotifierProvider(
       create: (BuildContext context) => SaveViewModel(),
       child: AdaptiveTheme(
@@ -37,7 +53,6 @@ class MyApp extends StatelessWidget {
         builder: (ThemeData light, ThemeData dark) => MaterialApp(
           darkTheme: dark,
           theme: ThemeData(
-            scaffoldBackgroundColor: Colors.white,
             appBarTheme: const AppBarTheme(
               backgroundColor: Colors.white,
               iconTheme: IconThemeData(
@@ -48,6 +63,9 @@ class MyApp extends StatelessWidget {
           ),
           debugShowCheckedModeBanner: false,
           onGenerateRoute: generateRoute,
+          localizationsDelegates: context.localizationDelegates,
+          supportedLocales: context.supportedLocales,
+          locale: context.locale,
         ),
         debugShowFloatingThemeButton: true,
       ),

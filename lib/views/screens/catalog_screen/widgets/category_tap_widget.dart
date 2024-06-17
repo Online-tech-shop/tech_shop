@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/viewmodels/home_view_model.dart';
@@ -18,8 +19,11 @@ class CategoryTapWidget extends StatefulWidget {
 
 class _CategoryTapWidgetState extends State<CategoryTapWidget> {
   HomeViewModel homeViewModel = HomeViewModel();
-  String searchText = '';
   final _textController = TextEditingController();
+  String searchText = '';
+
+
+  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,11 +59,11 @@ class _CategoryTapWidgetState extends State<CategoryTapWidget> {
                 color: Color(0xff8B8B95),
               ),
               filled: true,
-              fillColor: CustomFunctions.isLight(context) ? Color(0xffF3F4F8) : Colors.black,
+              fillColor: CustomFunctions.isLight(context) ? const Color(0xffF3F4F8) : Colors.black,
               hintStyle: const TextStyle(
                 color: Color(0xff8B8B95),
               ),
-              hintText: "Termada qidirishku",
+              hintText: "termada_qidirishku".tr(),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.only(top: 12),
             ),

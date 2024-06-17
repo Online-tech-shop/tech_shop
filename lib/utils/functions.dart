@@ -1,4 +1,5 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:tech_shop/models/review_model.dart';
 
@@ -21,5 +22,14 @@ class CustomFunctions {
     } else {
       return false;
     }
+  }
+
+  static bool isUzbek(BuildContext context) {
+    final Locale currentLocale = context.locale;
+    String languageCode = currentLocale.languageCode;
+    if (languageCode == 'uz') {
+      return true;
+    }
+    return false;
   }
 }

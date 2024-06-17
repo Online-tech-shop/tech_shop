@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/models/review_model.dart';
@@ -47,7 +48,6 @@ class _ShowProductsWidgetState extends State<ShowProductsWidget> {
         isLoading = false;
       });
     } catch (e) {
-      // Handle error
       setState(() {
         isLoading = false;
       });
@@ -72,8 +72,8 @@ class _ShowProductsWidgetState extends State<ShowProductsWidget> {
     }).toList();
 
     return filteredProducts.isEmpty
-        ? const Center(
-            child: Text("Mahsulot topilmadi"),
+        ? Center(
+            child: const Text("mahsulot_topilmadi").tr(),
           )
         : SingleChildScrollView(
             child: Column(
@@ -87,7 +87,10 @@ class _ShowProductsWidgetState extends State<ShowProductsWidget> {
                     right: 15,
                   ),
                   child: Text(
-                    "${widget.searchText} ${filteredProducts.length} ta tovar topildi",
+                    context.tr(
+                      'ta_tovar_topildi',
+                      namedArgs: {'count': filteredProducts.length.toString()},
+                    ),
                     style: TextStyle(
                       color: Colors.grey.shade600,
                       fontSize: 18,
