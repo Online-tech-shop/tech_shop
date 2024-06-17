@@ -43,7 +43,8 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFEFEFEF),
+      backgroundColor:
+          CustomFunctions.isLight(context) ? Color(0xFFEFEFEF) : Colors.black,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
