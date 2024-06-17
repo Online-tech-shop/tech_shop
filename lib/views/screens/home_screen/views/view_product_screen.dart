@@ -49,7 +49,8 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
           SliverAppBar(
             expandedHeight: 500 - kToolbarHeight,
             pinned: true,
-            backgroundColor: Colors.white,
+            backgroundColor:
+                CustomFunctions.isLight(context) ? Colors.white : Colors.black,
             leading: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
               child: const Icon(
@@ -146,9 +147,11 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                 top: 20,
                 bottom: 10,
               ),
-              decoration: const BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.only(
+              decoration: BoxDecoration(
+                color: CustomFunctions.isLight(context)
+                    ? Colors.white
+                    : Colors.black,
+                borderRadius: const BorderRadius.only(
                   topRight: Radius.circular(20),
                   topLeft: Radius.circular(20),
                 ),
@@ -199,14 +202,18 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                             color: const Color(0xFFD6F5DE),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: const Icon(Icons.check),
+                          child: Icon(
+                            Icons.check,
+                            color: CustomFunctions.isLight(context)
+                                ? Colors.white
+                                : Colors.black,
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text(
                             "${widget.product.leftProduct} dona qoldi",
                             style: const TextStyle(
-                              color: Colors.black,
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
                             ),
@@ -225,14 +232,18 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                             color: const Color(0xFFFFEFD0),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: const Icon(Icons.shopping_cart_outlined),
+                          child: Icon(
+                            Icons.shopping_cart_outlined,
+                            color: CustomFunctions.isLight(context)
+                                ? Colors.white
+                                : Colors.black,
+                          ),
                         ),
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text(
                             "Bu haftada ${widget.product.boughtAmountThisWeek} kishi sotib oldi",
                             style: const TextStyle(
-                              color: Colors.black,
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
                             ),
@@ -269,9 +280,6 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                 childCount: widget.review.length,
               ),
             ),
-          const SliverToBoxAdapter(
-            child: SizedBox(height: kToolbarHeight + 10),
-          ),
         ],
       ),
       bottomNavigationBar: CustomFloatActionButton(product: widget.product),

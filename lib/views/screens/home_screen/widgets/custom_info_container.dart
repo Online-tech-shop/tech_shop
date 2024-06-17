@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tech_shop/models/product_item.dart';
+import 'package:tech_shop/utils/functions.dart';
 
 class CustomInfoContainer extends StatelessWidget {
   final int? reviewCount;
@@ -36,7 +37,10 @@ class CustomInfoContainer extends StatelessWidget {
             children: [
               Text(
                 isSelected ? '$reviewAverageNumber' : '${product.orderAmount}+',
-                style: const TextStyle(
+                style: TextStyle(
+                  color: CustomFunctions.isLight(context)
+                      ? Colors.grey.withOpacity(0.8)
+                      : Colors.black,
                   fontSize: 14,
                   fontWeight: FontWeight.w600,
                 ),
@@ -59,9 +63,10 @@ class CustomInfoContainer extends StatelessWidget {
                 : product.orderAmount == 0
                     ? 'Buyurtma yoʻq '
                     : 'ta buyurtma',
-            style: const TextStyle(
+            style: TextStyle(
               fontWeight: FontWeight.w500,
-              color: Colors.grey,
+              color:
+                  CustomFunctions.isLight(context) ? Colors.grey : Colors.black,
             ),
           ),
         ],

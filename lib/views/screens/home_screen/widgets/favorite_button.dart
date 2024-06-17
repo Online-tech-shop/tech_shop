@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:tech_shop/models/product_item.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/viewmodels/favourite_view_model.dart';
 
 class FavoriteButton extends StatefulWidget {
@@ -68,8 +69,11 @@ class _FavoriteButtonState extends State<FavoriteButton> {
                 CupertinoIcons.heart_fill,
                 color: Color(0xFF6C03FA),
               )
-            : const Icon(
+            : Icon(
                 CupertinoIcons.heart,
+                color: CustomFunctions.isLight(context)
+                    ? Colors.grey
+                    : Colors.black,
               ),
       ),
     );

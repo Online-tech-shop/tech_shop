@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -7,6 +8,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/models/sql_model.dart';
 import 'package:tech_shop/service/sql_service.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
 import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
 
@@ -112,7 +114,7 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: CustomFunctions.isLight(context) ? Colors.white :  Colors.black.withOpacity(0.8),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.3),
