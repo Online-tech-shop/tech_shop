@@ -30,7 +30,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
             slivers: [
               SliverAppBar(
                 toolbarHeight: 80,
-                backgroundColor: const Color.fromARGB(189, 0, 0, 0),
+                // backgroundColor: const Color.fromARGB(189, 0, 0, 0),
+                backgroundColor: const Color(0xff7000FF),
                 clipBehavior: Clip.hardEdge,
                 automaticallyImplyLeading: true,
                 expandedHeight: 130.0,

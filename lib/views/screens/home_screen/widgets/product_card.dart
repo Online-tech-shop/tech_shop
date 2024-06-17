@@ -162,7 +162,7 @@ class ProductCard extends StatelessWidget {
           style: const TextStyle(color: Colors.grey),
         ),
         Text(
-          "(${reviews.length}ta_sharhlar)",
+          " (${reviews.length}-${'ta_sharhlar'.tr()})",
           style: const TextStyle(color: Colors.grey),
         )
       ],

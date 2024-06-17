@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
+import 'package:tech_shop/utils/app_constants.dart';
 import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/carousel_widget.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/category_widget.dart';
@@ -23,10 +24,12 @@ class HomeScreen extends StatelessWidget {
             ElevatedButton(
               onPressed: () {
                 if (context.locale.languageCode == 'uz') {
-                  context.setLocale(Locale('ru'));
+                  context.setLocale(const Locale('ru'));
                 } else {
-                  context.setLocale(Locale('uz'));
+                  context.setLocale(const Locale('uz'));
                 }
+                AppConstants.appLanguageIndex =
+                    context.locale.languageCode == 'uz' ? 0 : 1;
               },
               child: Text(
                 context.locale.languageCode == 'uz'
@@ -41,7 +44,7 @@ class HomeScreen extends StatelessWidget {
           shadowColor: CustomFunctions.isLight(context)
               ? Colors.transparent
               : Colors.black,
-          title: ReadTextfieldWidget(readOnly: true),
+          title: const ReadTextfieldWidget(readOnly: true),
         ),
         body: NestedScrollView(
           headerSliverBuilder: (BuildContext context, bool innerBoxIsScrolled) {
@@ -68,10 +71,11 @@ class HomeScreen extends StatelessWidget {
                 delegate: _SliverAppBarDelegate(
                   TabBar(
                     dividerColor: Colors.transparent,
-                    labelColor: Color(0xFF7B28DA),
-                    indicatorColor: Color(0xFF7B28DA),
+                    labelColor: const Color(0xFF7B28DA),
+                    indicatorColor: const Color(0xFF7B28DA),
                     indicatorSize: TabBarIndicatorSize.tab,
-                    indicatorPadding: EdgeInsets.symmetric(horizontal: 30),
+                    indicatorPadding:
+                        const EdgeInsets.symmetric(horizontal: 30),
                     indicatorWeight: 2.5,
                     tabs: [
                       Tab(text: 'tavsiyalar'.tr()),
