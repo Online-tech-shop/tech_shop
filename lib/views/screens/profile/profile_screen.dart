@@ -12,6 +12,7 @@ import 'package:tech_shop/views/screens/login/sig_up.dart';
 import 'package:tech_shop/views/screens/profile/widgets/profile_item.dart';
 import 'package:tech_shop/views/screens/profile/widgets/settings_screen.dart';
 
+// aaa
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
