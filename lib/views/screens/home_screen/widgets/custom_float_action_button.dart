@@ -1,3 +1,5 @@
+import 'dart:convert';
+
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -24,15 +26,38 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
 
   @override
   void initState() {
-    // TODO: implement initState
     super.initState();
-    getOrderCount();
+    _getOrderCount();
   }
 
-  Future<void> getOrderCount() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    _orderCount = sharedPreferences.getInt('order-count') ?? 0;
-    setState(() {});
+  Future<void> _getOrderCount() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? orderCountJson = prefs.getString('order-count');
+
+    if (orderCountJson == null) return;
+
+    Map<String, dynamic> orderCount = jsonDecode(orderCountJson);
+    if (orderCount.containsKey(widget.product.id)) {
+      setState(() {
+        _orderCount = orderCount[widget.product.id] ?? 1;
+        _isTapped = _orderCount > 0;
+      });
+    }
+  }
+
+  Future<void> _incrementOrderCount() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? orderCountJson = prefs.getString('order-count');
+
+    Map<String, dynamic> orderCount =
+        orderCountJson != null ? jsonDecode(orderCountJson) : {};
+
+    setState(() {
+      _orderCount = (orderCount[widget.product.id] ?? 0) + 1;
+      orderCount[widget.product.id!] = _orderCount;
+    });
+
+    await prefs.setString('order-count', jsonEncode(orderCount));
   }
 
   Future<void> _addToCart(BuildContext context) async {
@@ -56,8 +81,7 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
       final save = Save(
         title: widget.product.name[0],
         image: widget.product.images[0],
-        price: widget.product.price.toDouble() +
-            (widget.product.price * _orderCount),
+        price: widget.product.price.toDouble() * _orderCount,
         amount: widget.product.leftProduct,
         seller: widget.product.seller,
         brieflyAboutProduct: widget.product.brieflyAboutProduct[0],
@@ -67,15 +91,6 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
     }
   }
 
-  void _incrementOrderCount() async {
-    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    int orderC = sharedPreferences.getInt('order-count') ?? 1;
-    orderC++;
-    sharedPreferences.setInt('order-count', orderC);
-    _orderCount = orderC;
-    setState(() => _orderCount++);
-  }
-
   void _onButtonPressed() {
     setState(() {
       _isTapped = true;
@@ -83,8 +98,8 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
     });
   }
 
-  void _navigateToCart(BuildContext context) {
-    _addToCart(context);
+  void _navigateToCart(BuildContext context) async {
+    await _addToCart(context);
     Navigator.pushAndRemoveUntil(
       context,
       CupertinoPageRoute(builder: (context) => const MainScreen(n: 2)),
