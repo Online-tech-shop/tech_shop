@@ -196,7 +196,7 @@ class ProductCard extends StatelessWidget {
               border: Border.all(color: Colors.grey),
             ),
             child: SvgPicture.asset(
-              'assets/icons/product_ico ns/cart.svg',
+              'assets/icons/product_icons/cart.svg',
             ),
           ),
         ),

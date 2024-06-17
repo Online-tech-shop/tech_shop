@@ -7,9 +7,9 @@ import 'package:tech_shop/views/screens/catalog_screen/screens/search_page_scree
 class ReadTextfieldWidget extends StatelessWidget {
   final bool readOnly;
   const ReadTextfieldWidget({
-    Key? key,
+    super.key,
     required this.readOnly,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
