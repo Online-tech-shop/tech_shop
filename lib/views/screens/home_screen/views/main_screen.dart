@@ -1,6 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
 import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
@@ -22,6 +22,7 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  void onChanged() => setState(() {});
   late int _currentIndex;
   final List<Widget> _pages = [
     HomeScreen(),
@@ -55,9 +56,10 @@ class _MainScreenState extends State<MainScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 15),
         decoration: BoxDecoration(
           color: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
-          boxShadow: const [
+          boxShadow: [
             BoxShadow(
-              color: Colors.grey,
+              color:
+                  CustomFunctions.isLight(context) ? Colors.grey : Colors.white.withOpacity(0.3),
               blurRadius: 10,
             ),
           ],
@@ -70,7 +72,7 @@ class _MainScreenState extends State<MainScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomTabBoxButton(
-                    buttonText: 'Bosh sahifa',
+                    buttonText: 'bosh_sahifa'.tr(),
                     imagePath: CustomFunctions.isLight(context)
                         ? 'assets/icons/bottom_navigation_bar_icons/home${_currentIndex == 0 ? '' : '_un'}.png'
                         : null,
@@ -80,7 +82,7 @@ class _MainScreenState extends State<MainScreen> {
                     onTabBoxPressed: onTabBoxPressed,
                   ),
                   CustomTabBoxButton(
-                    buttonText: 'Katalog',
+                    buttonText: 'katalog'.tr(),
                     imagePath: CustomFunctions.isLight(context)
                         ? 'assets/icons/bottom_navigation_bar_icons/search${_currentIndex == 1 ? '' : '_un'}.png'
                         : null,
@@ -90,7 +92,7 @@ class _MainScreenState extends State<MainScreen> {
                     onTabBoxPressed: onTabBoxPressed,
                   ),
                   CustomTabBoxButton(
-                    buttonText: 'Savat',
+                    buttonText: 'savat'.tr(),
                     imagePath: CustomFunctions.isLight(context)
                         ? 'assets/icons/bottom_navigation_bar_icons/cart${_currentIndex == 2 ? '' : '_un'}.png'
                         : null,
@@ -100,7 +102,7 @@ class _MainScreenState extends State<MainScreen> {
                     onTabBoxPressed: onTabBoxPressed,
                   ),
                   CustomTabBoxButton(
-                    buttonText: 'Saralangan',
+                    buttonText: 'saralangan'.tr(),
                     imagePath: CustomFunctions.isLight(context)
                         ? 'assets/icons/bottom_navigation_bar_icons/fav${_currentIndex == 3 ? '' : '_un'}.png'
                         : null,
@@ -112,7 +114,7 @@ class _MainScreenState extends State<MainScreen> {
                     onTabBoxPressed: onTabBoxPressed,
                   ),
                   CustomTabBoxButton(
-                    buttonText: 'Kabinet',
+                    buttonText: 'kabinet'.tr(),
                     imagePath: CustomFunctions.isLight(context)
                         ? 'assets/icons/bottom_navigation_bar_icons/profile${_currentIndex == 4 ? '' : '_un'}.png'
                         : null,
@@ -125,7 +127,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
             cartNum == 0
-                ? const Text("")
+                ? const Text("").tr()
                 : Positioned(
                     top: 0,
                     left: MediaQuery.of(context).size.width / 2 - 10,

@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:tech_shop/models/sql_model.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/views/screens/save_screen/widgets/flush_bar.dart';
 import 'package:tech_shop/views/screens/save_screen/widgets/quantity_changer.dart';
 
@@ -20,7 +21,6 @@ class SaveItem extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-     
       child: Dismissible(
         key: Key(save.id.toString()),
         background: Container(
@@ -93,9 +93,12 @@ class SaveItem extends StatelessWidget {
                   children: [
                     Text(
                       "${save.price} so'm",
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 25,
                         fontWeight: FontWeight.bold,
+                        color: CustomFunctions.isLight(context)
+                            ? Colors.black
+                            : Colors.white,
                       ),
                     ),
                     const SizedBox(height: 5),
@@ -103,21 +106,30 @@ class SaveItem extends StatelessWidget {
                       save.title,
                       maxLines: 3,
                       overflow: TextOverflow.ellipsis,
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 12,
                         fontWeight: FontWeight.w500,
+                        color: CustomFunctions.isLight(context)
+                            ? Colors.black
+                            : Colors.white,
                       ),
                     ),
                     const Gap(20),
                     Text(
                       "Sotuvchi ${save.seller}",
-                      style: TextStyle(color: Colors.grey[700]),
+                      style: TextStyle(
+                        color: CustomFunctions.isLight(context)
+                            ? Colors.grey[700]
+                            : Colors.white,
+                      ),
                     ),
                     const Gap(15),
                     Text(
                       "${save.price} so'm/dona",
                       style: TextStyle(
-                        color: Colors.grey[700],
+                        color: CustomFunctions.isLight(context)
+                            ? Colors.grey[700]
+                            : Colors.white,
                         fontSize: 12,
                       ),
                     ),

@@ -45,6 +45,7 @@ class _SignInState extends State<SignIn> {
                           hintText: 'Enter email',
                           border: OutlineInputBorder()),
                     ),
+
                     const SizedBox(
                       height: 20,
                     ),
@@ -102,6 +103,14 @@ class _SignInState extends State<SignIn> {
                         ),
                       ),
                     )
+
+                    TextButton(
+                        onPressed: () {
+                          Navigator.pushReplacement(context,
+                              MaterialPageRoute(builder: (ctx) => const SigUp()));
+                        },
+                        child: const Text("Ro'yhatdan o'tish"))
+
                   ],
                 )),
           ),

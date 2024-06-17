@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
@@ -42,9 +43,11 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
   }
 
   void _shareProduct() {
-    final String productName = widget.product.name[AppConstants.appLanguageIndex];
-    final String productUrl = widget.product.images.isNotEmpty ? widget.product.images[0] : '';
-    final String productPrice = '${widget.product.price} so\'m';
+    final String productName =
+        widget.product.name[AppConstants.appLanguageIndex];
+    final String productUrl =
+        widget.product.images.isNotEmpty ? widget.product.images[0] : '';
+    final String productPrice = '${widget.product.price} ${"som".tr()}';
 
     Share.share(
       'Check out this product: $productName\nPrice: $productPrice\n$productUrl',
@@ -55,7 +58,9 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFEFEFEF),
+      backgroundColor: CustomFunctions.isLight(context)
+          ? const Color(0xFFEFEFEF)
+          : Colors.black,
       body: CustomScrollView(
         slivers: [
           SliverAppBar(
@@ -84,7 +89,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                     ),
                     const Gap(15),
                     GestureDetector(
-                      onTap: _shareProduct, // Add the onTap handler
+                      onTap: _shareProduct,
                       child: const Icon(
                         CupertinoIcons.share_up,
                       ),
@@ -205,7 +210,8 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
-                      '${widget.product.price} so\'m',
+                      context.tr('som',
+                          namedArgs: {'narx': widget.product.price.toString()}),
                       style: TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.w700,
@@ -226,7 +232,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                             color: const Color(0xFFD6F5DE),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.check,
                             color: Colors.green,
                           ),
@@ -234,8 +240,15 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text(
-                            "${widget.product.leftProduct} dona qoldi",
-                            style: const TextStyle(
+
+                            context.tr('dona_qoldi', namedArgs: {
+                              'qoldi': widget.product.leftProduct.toString()
+                            }),
+                            style: TextStyle(
+                              color: CustomFunctions.isLight(context)
+                                  ? Colors.black
+                                  : Colors.white,
+
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
                             ),
@@ -254,7 +267,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                             color: const Color(0xFFFFEFD0),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.shopping_cart_outlined,
                             color: Colors.orange,
                           ),
@@ -262,8 +275,17 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text(
-                            "Bu haftada ${widget.product.boughtAmountThisWeek} kishi sotib oldi",
-                            style: const TextStyle(
+
+                            context
+                                .tr('bu_haftada_kishi_sotib_oldi', namedArgs: {
+                              'boughtAmountThisWeek':
+                                  widget.product.boughtAmountThisWeek.toString()
+                            }),
+                            style: TextStyle(
+                              color: CustomFunctions.isLight(context)
+                                  ? Colors.black
+                                  : Colors.white,
+
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
                             ),
@@ -276,8 +298,8 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                     padding: const EdgeInsets.only(top: 15.0),
                     child: Text(
                       widget.review.isNotEmpty
-                          ? '${widget.review.length} sharh'
-                          : "Ushbu mahsulotga hali sharh yozilmagan",
+                          ? '${widget.review.length} ${tr('sharh')}'
+                          : tr('ushbu_mahsulotga_hali_sharh_yozilmagan'),
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
                         fontSize: 18,

@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:tech_shop/models/product_item.dart';
@@ -76,7 +78,7 @@ class ProductCard extends StatelessWidget {
     }
 
     FlushBars.undo(
-      message: "Mahsulot Saqlandi",
+      message: "mahsulot_saqlandi".tr(),
       duration: const Duration(seconds: 1),
     ).show(context);
   }
@@ -127,7 +129,7 @@ class ProductCard extends StatelessWidget {
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           _buildProductName(context),
-          _buildProductRating(),
+          _buildProductRating(context),
           const SizedBox(height: 20),
           _buildProductPriceAndCartButton(context),
         ],
@@ -147,7 +149,7 @@ class ProductCard extends StatelessWidget {
     );
   }
 
-  Widget _buildProductRating() {
+  Widget _buildProductRating(BuildContext context) {
     return Row(
       children: [
         const Icon(
@@ -160,7 +162,9 @@ class ProductCard extends StatelessWidget {
           style: const TextStyle(color: Colors.grey),
         ),
         Text(
-          "(${reviews.length}ta sharhlar)",
+
+          context.tr('sharh', namedArgs: {'review':reviews.length.toString()}),
+
           style: const TextStyle(color: Colors.grey),
         )
       ],
@@ -172,7 +176,7 @@ class ProductCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          '${product.price} so\'m',
+          context.tr('som', namedArgs: {'narx':product.price.toString()}),
           style: TextStyle(
             color:
                 CustomFunctions.isLight(context) ? Colors.black : Colors.white,

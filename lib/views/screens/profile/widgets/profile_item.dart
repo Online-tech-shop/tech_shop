@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tech_shop/utils/functions.dart';
 
 class ProfileItem extends StatefulWidget {
   final Icon ikon;
@@ -16,13 +17,20 @@ class ProfileItem extends StatefulWidget {
 class _ProfileItemState extends State<ProfileItem> {
   @override
   Widget build(BuildContext context) {
-    return SizedBox(
+    return Container(
       height: 50,
+
+      color:  CustomFunctions.isLight(context) ? Colors.white : Colors.black,
       child: Row(
         children: [
-          SizedBox(
+          Container(
             width: 70,
             height: 70,
+          decoration: BoxDecoration(
+
+            color:  CustomFunctions.isLight(context) ? Colors.grey : Colors.white,
+            shape: BoxShape.circle
+          ),
             child: Center(
               child: widget.ikon,
             ),
@@ -38,11 +46,13 @@ class _ProfileItemState extends State<ProfileItem> {
               children: [
                 Text(
                   widget.name,
-                  style: const TextStyle(fontWeight: FontWeight.w500),
+                  style:  TextStyle(fontWeight: FontWeight.w500,
+                    color:  CustomFunctions.isLight(context) ? Colors.black : Colors.white,
+                  ),
                 ),
-                const Icon(
+                 Icon(
                   Icons.arrow_forward_ios_rounded,
-                  color: Colors.black26,
+                  color:  CustomFunctions.isLight(context) ? Colors.black : Colors.white,
                 )
               ],
             ),

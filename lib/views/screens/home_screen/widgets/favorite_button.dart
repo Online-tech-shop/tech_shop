@@ -24,32 +24,41 @@ class FavoriteButton extends StatefulWidget {
 
 class _FavoriteButtonState extends State<FavoriteButton> {
   final FavouriteViewModel _favouriteViewModel = FavouriteViewModel();
-  bool isTapped = false;
+   bool isTapped = false;
 
   @override
   void initState() {
     super.initState();
-    _favouriteViewModel
-        .checkIsFav(id: widget.product.id ?? '')
-        .then((value) => setState(() => isTapped = value));
+    FavouriteViewModel().checkIsFav(id: widget.product.id!).then(
+          (value) => setState(() => isTapped = value),
+        );
   }
 
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {
-        isTapped = !isTapped;
+      onTap: () async {
+        setState(() {
+          isTapped = !isTapped;
+        });
 
         if (isTapped) {
           ScaffoldMessenger.of(context).showSnackBar(
-            const SnackBar(
-              content: Text('Mahsulot saralanganga qo\'shildi'),
+            SnackBar(
+              content: Text(
+                CustomFunctions.isUzbek(context)
+                    ? 'Mahsulot saralanganga qo\'shildi'
+                    : 'Товар добавлен в подборку',
+              ),
             ),
           );
-          _favouriteViewModel.saveNewFavouriteProduct(id: widget.product.id!);
+          await _favouriteViewModel.saveNewFavouriteProduct(
+              id: widget.product.id!);
         } else {
-          _favouriteViewModel.deleteNewFavouriteProduct(id: widget.product.id!);
+          await _favouriteViewModel.deleteNewFavouriteProduct(
+              id: widget.product.id!);
         }
+
         if (widget.isDeleteFromFavScreen) {
           widget.deleteFromFavScreen!(widget.product.id!);
         } else {
@@ -60,9 +69,8 @@ class _FavoriteButtonState extends State<FavoriteButton> {
         padding: EdgeInsets.only(
           top: 10,
           right: 10,
-          left: widget.isSelected ? 20 : 10,
-          bottom: widget.isSelected ? 20 : 10,
-          // widget.isSelected ? 0 : 10,
+          left: isTapped ? 20 : 10,
+          bottom: isTapped ? 20 : 10,
         ),
         child: isTapped
             ? const Icon(

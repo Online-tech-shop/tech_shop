@@ -11,7 +11,6 @@ class LoginHttpServices {
         body: jsonEncode(
             {"email": email, "password": password, "returnSecureToken": true}));
     if (response.statusCode != 200) {
-      print("error");
       return {"check": false};
     }
     var data = jsonDecode(response.body);
