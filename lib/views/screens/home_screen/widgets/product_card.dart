@@ -1,4 +1,3 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
@@ -47,13 +46,12 @@ class ProductCard extends StatelessWidget {
     );
 
     if (existingProducts.isNotEmpty) {
-      int sum = product.price;
       final existingProduct = Save.fromMap(existingProducts.first);
       final updatedSave = Save(
         id: existingProduct.id,
         title: existingProduct.title,
         image: existingProduct.image,
-        price: existingProduct.price + sum,
+        price: existingProduct.price + product.price,
         amount: existingProduct.amount,
         seller: existingProduct.seller,
         brieflyAboutProduct: existingProduct.brieflyAboutProduct,
@@ -86,83 +84,6 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Container(
-            clipBehavior: Clip.hardEdge,
-            height: 220,
-            width: double.infinity,
-            decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(10),
-              image: DecorationImage(
-                image: NetworkImage(
-                  product.images[0],
-                ),
-                fit: BoxFit.cover,
-              ),
-            ),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                FavoriteButton(
-                  product: product,
-                  isSelected: false,
-                ),
-              ],
-            ),
-          ),
-          Padding(
-            padding: const EdgeInsets.all(8.0),
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(
-                  product.name[AppConstants.appLanguageIndex],
-                  maxLines: 2,
-                  overflow: TextOverflow.ellipsis,
-                  style: const TextStyle(fontSize: 18),
-                ),
-                Row(
-                  children: [
-                    const Icon(
-                      Icons.star,
-                      color: Color(0XffFFB740),
-                      size: 15,
-                    ),
-                    Text(
-                      ' ${CustomFunctions.countAverageOfReview(reviews).toString().substring(0, 3)} ',
-                      style: const TextStyle(color: Colors.grey),
-                    ),
-                    Text(
-                      "(${reviews.length}ta sharhlar)",
-                      style: const TextStyle(color: Colors.grey),
-                    )
-                  ],
-                ),
-                const SizedBox(height: 20),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  children: [
-                    Text(
-                      '${product.price} so\'m',
-                      style: const TextStyle(
-                        decorationThickness: 2,
-                        color: Colors.black,
-                        fontSize: 14,
-                        fontWeight: FontWeight.w700,
-                      ),
-                    ),
-                    Container(
-                        padding: const EdgeInsets.all(5),
-                        decoration: BoxDecoration(
-                            shape: BoxShape.circle,
-                            border: Border.all(color: Colors.grey)),
-                        child: SvgPicture.asset(
-                            'assets/icons/product_icons/cart.svg'))
-                  ],
-                ),
-              ],
-            ),
-          ),
           _buildProductImage(),
           _buildProductDetails(context),
         ],
@@ -184,9 +105,9 @@ class ProductCard extends StatelessWidget {
       ),
       child: Align(
         alignment: Alignment.topRight,
-        child: IconButton(
-          onPressed: () {},
-          icon: const Icon(CupertinoIcons.heart),
+        child: FavoriteButton(
+          product: product,
+          isSelected: false,
         ),
       ),
     );
@@ -248,7 +169,8 @@ class ProductCard extends StatelessWidget {
             fontWeight: FontWeight.w700,
           ),
         ),
-        GestureDetector(
+        InkWell(
+          radius: 10,
           onTap: () => _addToCart(context),
           child: Container(
             padding: const EdgeInsets.all(5),
