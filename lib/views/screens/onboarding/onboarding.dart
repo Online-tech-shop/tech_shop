@@ -13,9 +13,11 @@ class _SplashPageState extends State<SplashPage> {
   void initState() {
     super.initState();
     Future.delayed(const Duration(seconds: 2)).then(
-      (value) => Navigator.of(context).pushReplacement(MaterialPageRoute(
-        builder: (context) => const MainScreen(),
-      )),
+      (value) => Navigator.of(context).pushReplacement(
+        MaterialPageRoute(
+          builder: (context) =>  const MainScreen(),
+        ),
+      ),
     );
   }
 

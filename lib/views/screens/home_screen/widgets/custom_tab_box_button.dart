@@ -21,19 +21,23 @@ class CustomTabBoxButton extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () => onTabBoxPressed(currentIndex),
-      child: Column(
-        mainAxisSize: MainAxisSize.min,
+      child: Stack(
         children: [
-          Image.asset(
-            imagePath,
-            height: 27,
-            width: 27,
-          ),
-          Text(
-            buttonText,
-            style: isSelected
-                ? CustomTextStyle.customUnselectedTabBoxTextStyle
-                : CustomTextStyle.customSelectedTabBoxTextStyle,
+          Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              Image.asset(
+                imagePath,
+                height: 27,
+                width: 27,
+              ),
+              Text(
+                buttonText,
+                style: isSelected
+                    ? CustomTextStyle.customUnselectedTabBoxTextStyle
+                    : CustomTextStyle.customSelectedTabBoxTextStyle,
+              ),
+            ],
           ),
         ],
       ),
