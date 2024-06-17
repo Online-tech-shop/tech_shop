@@ -24,6 +24,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   bool isDataCame = false;
   final List<Product> _favProductList = [];
   List<Review> _reviewList = [];
+  int a = 0;
 
   @override
   void initState() {
@@ -54,7 +55,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
   }
 
   void deleteProductFromFav(String id) {
-    var a = _favProductList.removeWhere((element) => element.id == id);
+    _favProductList.removeWhere((element) => element.id == id);
     setState(() {});
   }
 
@@ -147,6 +148,7 @@ class _FavouriteScreenState extends State<FavouriteScreen> {
                         ),
                         itemBuilder: (BuildContext context, int index) =>
                             ProductCard(
+                          key: UniqueKey(),
                           product: _favProductList[index],
                           reviews:
                               _favProductList[index].getReviews(_reviewList),
