@@ -47,6 +47,8 @@ dependencies:
   smooth_page_indicator: ^1.1.0
   shared_preferences: ^2.2.3
   easy_localization: ^3.0.7
+  adaptive_theme: ^3.6.0
+  share_plus: ^9.0.0
 
 dev_dependencies:
   flutter_test:

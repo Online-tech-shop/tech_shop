@@ -1,6 +1,7 @@
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/views/screens/catalog_screen/screens/search_page_screen.dart';
 
 class ReadTextfieldWidget extends StatelessWidget {
@@ -33,7 +34,9 @@ class ReadTextfieldWidget extends StatelessWidget {
             color: Color(0xff8B8B95),
           ),
           filled: true,
-          fillColor: const Color(0xffF3F4F8),
+          fillColor: CustomFunctions.isLight(context)
+              ? const Color(0xffF3F4F8)
+              : Colors.black,
           hintStyle: const TextStyle(
             color: Color(0xff8B8B95),
           ),

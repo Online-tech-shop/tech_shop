@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/views/screens/save_screen/widgets/flush_bar.dart';
 
 class QuantityChanger extends StatelessWidget {
@@ -46,7 +47,9 @@ class QuantityChanger extends StatelessWidget {
                 width: 30,
                 height: 30,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: CustomFunctions.isLight(context)
+                      ? Colors.white
+                      : Colors.black,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Center(
@@ -67,7 +70,9 @@ class QuantityChanger extends StatelessWidget {
                 width: 30,
                 height: 30,
                 decoration: BoxDecoration(
-                  color: Colors.white,
+                  color: CustomFunctions.isLight(context)
+                      ? Colors.white
+                      : Colors.black,
                   borderRadius: BorderRadius.circular(10),
                 ),
                 child: const Center(
