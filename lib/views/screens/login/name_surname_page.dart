@@ -12,7 +12,8 @@ class NameSurnamePage extends StatefulWidget {
   final String localId;
   final String email;
 
-  const NameSurnamePage({super.key, required this.localId, required this.email});
+  const NameSurnamePage(
+      {super.key, required this.localId, required this.email});
 
   @override
   State<NameSurnamePage> createState() => _NameSurnamePageState();
@@ -136,7 +137,6 @@ class _NameSurnamePageState extends State<NameSurnamePage> {
                   InkWell(
                     onTap: () async {
                       if (_globalKey.currentState!.validate()) {
-
                         SharedPreferences sharedPreferences =
                             await SharedPreferences.getInstance();
                         sharedPreferences.setString("name", _name.text);
@@ -148,11 +148,8 @@ class _NameSurnamePageState extends State<NameSurnamePage> {
                         print(
                             "${_name.text}\n${_surname.text}]\n${_age.text}\n${_gender.text}\n${widget.email}\n${widget.localId}");
 
-                        Navigator.pushReplacement(
-                            context,
-                            MaterialPageRoute(
-                                builder: (ctx) =>  HomeScreen()));
-
+                        Navigator.pushReplacement(context,
+                            MaterialPageRoute(builder: (ctx) => MainScreen()));
                       }
                     },
                     child: Container(

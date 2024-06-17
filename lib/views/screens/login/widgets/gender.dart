@@ -8,7 +8,7 @@ class Gender extends StatelessWidget {
     return AlertDialog(
       title: const Text("Jinsingizni tanlang"),
       actions: [
-        // aaaa
+
         Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
