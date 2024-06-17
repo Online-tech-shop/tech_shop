@@ -162,9 +162,7 @@ class ProductCard extends StatelessWidget {
           style: const TextStyle(color: Colors.grey),
         ),
         Text(
-
-          context.tr('sharh', namedArgs: {'review':reviews.length.toString()}),
-
+          context.tr('sharh', namedArgs: {'review': reviews.length.toString()}),
           style: const TextStyle(color: Colors.grey),
         )
       ],
@@ -176,11 +174,12 @@ class ProductCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          context.tr('som', namedArgs: {'narx':product.price.toString()}),
+          context.tr(product.price.toString(),
+              namedArgs: {'narx': product.price.toString()}),
           style: TextStyle(
             color:
                 CustomFunctions.isLight(context) ? Colors.black : Colors.white,
-            fontSize: 14,
+            fontSize: 18,
             fontWeight: FontWeight.w700,
           ),
         ),
