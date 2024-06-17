@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:provider/provider.dart';
 import 'package:tech_shop/models/product_item.dart';
@@ -15,11 +17,15 @@ import 'package:tech_shop/models/sql_model.dart';
 class ProductCard extends StatelessWidget {
   final Product product;
   final List<Review> reviews;
+  final bool isDeleteFromFavScreen;
+  final Function(String)? deleteFromFavScreen;
 
   const ProductCard({
     super.key,
     required this.product,
     required this.reviews,
+    required this.isDeleteFromFavScreen,
+    this.deleteFromFavScreen,
   });
 
   void _navigateToProduct(BuildContext context) {
@@ -72,7 +78,7 @@ class ProductCard extends StatelessWidget {
     }
 
     FlushBars.undo(
-      message: "Mahsulot Saqlandi",
+      message: "mahsulot_saqlandi".tr(),
       duration: const Duration(seconds: 1),
     ).show(context);
   }
@@ -108,6 +114,9 @@ class ProductCard extends StatelessWidget {
         child: FavoriteButton(
           product: product,
           isSelected: false,
+          isDeleteFromFavScreen: isDeleteFromFavScreen,
+          deleteFromFavScreen:
+              isDeleteFromFavScreen ? deleteFromFavScreen : null,
         ),
       ),
     );
@@ -119,7 +128,7 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          _buildProductName(),
+          _buildProductName(context),
           _buildProductRating(),
           const SizedBox(height: 20),
           _buildProductPriceAndCartButton(context),
@@ -128,12 +137,15 @@ class ProductCard extends StatelessWidget {
     );
   }
 
-  Widget _buildProductName() {
+  Widget _buildProductName(BuildContext context) {
     return Text(
       product.name[AppConstants.appLanguageIndex],
       maxLines: 2,
       overflow: TextOverflow.ellipsis,
-      style: const TextStyle(fontSize: 18),
+      style: TextStyle(
+          fontSize: 18,
+          color:
+              CustomFunctions.isLight(context) ? Colors.black : Colors.white),
     );
   }
 
@@ -146,11 +158,11 @@ class ProductCard extends StatelessWidget {
           size: 15,
         ),
         Text(
-          ' ${CustomFunctions.countAverageOfReview(reviews).toStringAsFixed(2)} ',
+          ' ${CustomFunctions.countAverageOfReview(reviews).toStringAsFixed(1)} ',
           style: const TextStyle(color: Colors.grey),
         ),
         Text(
-          "(${reviews.length}ta sharhlar)",
+          "(${reviews.length}ta_sharhlar)",
           style: const TextStyle(color: Colors.grey),
         )
       ],
@@ -162,9 +174,10 @@ class ProductCard extends StatelessWidget {
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
         Text(
-          '${product.price} so\'m',
-          style: const TextStyle(
-            color: Colors.black,
+          '${product.price} ${'som'.tr()}',
+          style: TextStyle(
+            color:
+                CustomFunctions.isLight(context) ? Colors.black : Colors.white,
             fontSize: 14,
             fontWeight: FontWeight.w700,
           ),
@@ -176,11 +189,14 @@ class ProductCard extends StatelessWidget {
           child: Container(
             padding: const EdgeInsets.all(5),
             decoration: BoxDecoration(
+              color: CustomFunctions.isLight(context)
+                  ? Colors.white
+                  : Colors.grey.withOpacity(0.7),
               shape: BoxShape.circle,
               border: Border.all(color: Colors.grey),
             ),
             child: SvgPicture.asset(
-              'assets/icons/product_icons/cart.svg',
+              'assets/icons/product_ico ns/cart.svg',
             ),
           ),
         ),

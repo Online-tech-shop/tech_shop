@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
 import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
 import 'package:tech_shop/views/screens/save_screen/widgets/save_item.dart';
@@ -37,17 +38,18 @@ class _SaveScreenState extends State<SaveScreen> {
     final viewModel = Provider.of<SaveViewModel>(context, listen: false);
     if (increment) {
       viewModel.incrementQuantity(id);
-      viewModel.incrementPrice(
-        id,
-      );
+      viewModel.incrementPrice(id);
     } else {
       viewModel.decrementQuantity(id);
       viewModel.decrementPrice(id);
     }
+    _refreshTasks(); // Refresh tasks to update total price when quantity changes
   }
 
   @override
   Widget build(BuildContext context) {
+    final saveViewModel = Provider.of<SaveViewModel>(context, listen: false);
+
     return Scaffold(
       appBar: AppBar(
         forceMaterialTransparency: true,
@@ -62,6 +64,61 @@ class _SaveScreenState extends State<SaveScreen> {
           },
         ),
       ),
+      bottomNavigationBar:
+          Consumer<SaveViewModel>(builder: (context, viewModel, child) {
+        return viewModel.saves.isEmpty
+            ? const SizedBox(
+                width: 1,
+                height: 1,
+              )
+            : Container(
+                width: double.infinity,
+                height: 60,
+                // color: Colors.white,
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 10),
+                  child: Consumer<SaveViewModel>(
+                    builder: (context, viewModel, child) {
+                      final totalPrice = viewModel.saves
+                          .fold(0, (sum, item) => sum + item.price.toInt());
+                      return Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(
+                                "$totalPrice so'm",
+                                style: const TextStyle(
+                                    fontWeight: FontWeight.bold, fontSize: 20),
+                              ),
+                              Text(
+                                  "${saveViewModel.saves.length} ta mahsulot."),
+                            ],
+                          ),
+                          Container(
+                            width: 150,
+                            height: 45,
+                            decoration: BoxDecoration(
+                              color: Colors.deepPurple,
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: const Center(
+                              child: Text(
+                                "Rasmiylashtirish",
+                                style: TextStyle(
+                                    color: Colors.white, fontSize: 16),
+                              ),
+                            ),
+                          )
+                        ],
+                      );
+                    },
+                  ),
+                ),
+              );
+      }),
       body: Consumer<SaveViewModel>(
         builder: (context, viewModel, child) {
           final saves = viewModel.saves;
@@ -135,7 +192,10 @@ class _SaveScreenState extends State<SaveScreen> {
                 final save = saves[index];
                 return SaveItem(
                   save: save,
-                  onDismissed: () {
+                  onDismissed: () async {
+                    SharedPreferences sharedPreferences =
+                        await SharedPreferences.getInstance();
+                    sharedPreferences.remove('order-count');
                     viewModel.deleteSave(save.id as int);
                   },
                   onChangeQuantity: _changeQuantity,

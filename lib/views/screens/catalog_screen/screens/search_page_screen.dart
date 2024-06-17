@@ -1,4 +1,5 @@
 import 'package:flutter/cupertino.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:tech_shop/viewmodels/home_view_model.dart';
 import 'package:tech_shop/views/screens/catalog_screen/screens/filter_screen.dart';
@@ -56,7 +57,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
               hintStyle: const TextStyle(
                 color: Color(0xff8B8B95),
               ),
-              hintText: "Termada qidirish",
+              hintText: "termada_qidirish".tr(),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.only(top: 12),
             ),

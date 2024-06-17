@@ -1,8 +1,14 @@
+import 'dart:convert';
+
+import 'package:easy_localization/easy_localization.dart';
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/models/sql_model.dart';
 import 'package:tech_shop/service/sql_service.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
 import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
 
@@ -20,6 +26,42 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
   int _orderCount = 1;
   bool _isTapped = false;
 
+  @override
+  void initState() {
+    super.initState();
+    _getOrderCount();
+  }
+
+  Future<void> _getOrderCount() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? orderCountJson = prefs.getString('order-count');
+
+    if (orderCountJson == null) return;
+
+    Map<String, dynamic> orderCount = jsonDecode(orderCountJson);
+    if (orderCount.containsKey(widget.product.id)) {
+      setState(() {
+        _orderCount = orderCount[widget.product.id] ?? 1;
+        _isTapped = _orderCount > 0;
+      });
+    }
+  }
+
+  Future<void> _incrementOrderCount() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    String? orderCountJson = prefs.getString('order-count');
+
+    Map<String, dynamic> orderCount =
+        orderCountJson != null ? jsonDecode(orderCountJson) : {};
+
+    setState(() {
+      _orderCount = (orderCount[widget.product.id] ?? 0) + 1;
+      orderCount[widget.product.id!] = _orderCount;
+    });
+
+    await prefs.setString('order-count', jsonEncode(orderCount));
+  }
+
   Future<void> _addToCart(BuildContext context) async {
     final saveViewModel = Provider.of<SaveViewModel>(context, listen: false);
     final dbHelper = DatabaseHelper();
@@ -33,7 +75,7 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
     if (existingProducts.isNotEmpty) {
       final existingProduct = Save.fromMap(existingProducts.first);
       final updatedSave = existingProduct.copyWith(
-        price: existingProduct.price * _orderCount,
+        price: existingProduct.price + (widget.product.price * _orderCount),
         quantity: existingProduct.quantity + _orderCount,
       );
       await dbHelper.updateSave(updatedSave);
@@ -51,10 +93,6 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
     }
   }
 
-  void _incrementOrderCount() {
-    setState(() => _orderCount++);
-  }
-
   void _onButtonPressed() {
     setState(() {
       _isTapped = true;
@@ -62,13 +100,11 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
     });
   }
 
-  void _navigateToCart(BuildContext context) {
-    _addToCart(context);
+  void _navigateToCart(BuildContext context) async {
+    await _addToCart(context);
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(
-        builder: (context) => const MainScreen(n: 2),
-      ),
+      CupertinoPageRoute(builder: (context) => const MainScreen(n: 2)),
       (route) => false,
     );
   }
@@ -78,7 +114,9 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
-        color: Colors.white,
+        color: CustomFunctions.isLight(context)
+            ? Colors.white
+            : Colors.black.withOpacity(0.8),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.3),
@@ -96,14 +134,14 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Narx umumiy',
+                  'umumiy_narx',
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: 10,
                   ),
-                ),
+                ).tr(),
                 Text(
-                  '${widget.product.price * _orderCount} so\'m',
+                  '${widget.product.price * _orderCount} ${"som".tr()}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,

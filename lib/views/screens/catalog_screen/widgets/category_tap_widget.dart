@@ -1,4 +1,6 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/viewmodels/home_view_model.dart';
 import 'package:tech_shop/views/screens/catalog_screen/widgets/show_products_widget.dart';
 
@@ -27,7 +29,7 @@ class _CategoryTapWidgetState extends State<CategoryTapWidget> {
     return Scaffold(
       appBar: AppBar(
         surfaceTintColor: Colors.white,
-        backgroundColor: Colors.white,
+        // backgroundColor:CustomFunctions.isLight(context) ? Colors.white : Colors.black,
         leadingWidth: 30,
         title: ClipRRect(
           borderRadius: BorderRadius.circular(10),
@@ -57,11 +59,11 @@ class _CategoryTapWidgetState extends State<CategoryTapWidget> {
                 color: Color(0xff8B8B95),
               ),
               filled: true,
-              fillColor: const Color(0xffF3F4F8),
+              fillColor: CustomFunctions.isLight(context) ? Color(0xffF3F4F8) : Colors.black,
               hintStyle: const TextStyle(
                 color: Color(0xff8B8B95),
               ),
-              hintText: "Termada qidirishku",
+              hintText: "termada_qidirishku".tr(),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.only(top: 12),
             ),

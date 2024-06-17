@@ -1,10 +1,12 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:tech_shop/views/screens/login/sig_up.dart';
 import 'package:tech_shop/views/screens/profile/widgets/profile_item.dart';
 
 class ProfileScreen extends StatefulWidget {
-  const ProfileScreen({super.key});
+  const ProfileScreen({Key? key}) : super(key: key);
 
   @override
   State<ProfileScreen> createState() => _ProfileScreenState();
@@ -82,17 +84,17 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               _buildProfileSection([
-                const ProfileItem(
+                ProfileItem(
                   ikon: Icon(Icons.shopping_bag_outlined),
-                  name: "Buyurtmalarim",
+                  name: tr("buyurtmalarim"),
                 ),
-                const ProfileItem(
+                ProfileItem(
                   ikon: Icon(CupertinoIcons.smiley),
-                  name: "Sharhlarim",
+                  name: tr("sharhlarim"),
                 ),
-                const ProfileItem(
+                ProfileItem(
                   ikon: Icon(Icons.calendar_month_rounded),
-                  name: "Buyurtmalarim",
+                  name: tr("buyurtmalarim"),
                 ),
               ]),
               SliverToBoxAdapter(
@@ -102,21 +104,21 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               _buildProfileSection([
-                const ProfileItem(
+                ProfileItem(
                   ikon: Icon(CupertinoIcons.chat_bubble_2),
-                  name: "Chatlarim",
+                  name: tr('chatlarim'),
                 ),
-                const ProfileItem(
+                ProfileItem(
                   ikon: Icon(Icons.notifications_none),
-                  name: "Xabarnomalar",
+                  name: tr("xabarnomalar"),
                 ),
-                const ProfileItem(
+                ProfileItem(
                   ikon: Icon(Icons.percent),
-                  name: "Promokodlarim",
+                  name: tr("promokodlarim"),
                 ),
-                const ProfileItem(
+                ProfileItem(
                   ikon: Icon(Icons.settings_rounded),
-                  name: "Sozlamalar",
+                  name: tr("sozlamalar"),
                 ),
               ]),
               SliverToBoxAdapter(
@@ -135,13 +137,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               _buildProfileSection([
-                const ProfileItem(
+                ProfileItem(
                   ikon: Icon(Icons.location_on_outlined),
-                  name: "Shahar",
+                  name: tr("shahar"),
                 ),
-                const ProfileItem(
+                ProfileItem(
                   ikon: Icon(Icons.map_outlined),
-                  name: "Xaritadagi topshirish punktlari",
+                  name: tr("xaritadagi_topshirish_punktlari"),
                 ),
               ]),
               SliverToBoxAdapter(
@@ -151,13 +153,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               _buildProfileSection([
-                const ProfileItem(
+                ProfileItem(
                   ikon: Icon(Icons.help_outline_rounded),
-                  name: "Ma'lumot",
+                  name: tr("malumot"),
                 ),
-                const ProfileItem(
+                ProfileItem(
                   ikon: Icon(CupertinoIcons.mail),
-                  name: "Xaritadagi topshirish punktlari",
+                  name: tr("xaritadagi_topshirish_punktlari"),
                 ),
               ]),
               SliverToBoxAdapter(
@@ -211,10 +213,10 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Container(
       height: 50,
       color: Colors.white,
-      child: const Row(
+      child: Row(
         children: [
           Padding(
-            padding: EdgeInsets.all(10),
+            padding: const EdgeInsets.all(10),
             child: CircleAvatar(
               backgroundImage: AssetImage('assets/images/uzbekistan.png'),
               radius: 20,
@@ -222,15 +224,15 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ),
           Expanded(
             child: Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10),
+              padding: const EdgeInsets.symmetric(horizontal: 10),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   Text(
-                    "Ilova tili",
-                    style: TextStyle(fontWeight: FontWeight.w500),
+                    tr("Ilova tili"),
+                    style: const TextStyle(fontWeight: FontWeight.w500),
                   ),
-                  Icon(
+                  const Icon(
                     Icons.arrow_forward_ios_rounded,
                     color: Colors.black26,
                   )
@@ -249,7 +251,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: InkWell(
           onTap: () {
-            // Handle logout
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (ctx) => SigUp()));
           },
           child: Container(
             height: 50,
@@ -259,7 +262,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             ),
             child: const Center(
               child: Text(
-                "Chiqish",
+                ("Chiqish"),
                 style: TextStyle(
                   color: Colors.white,
                   fontWeight: FontWeight.bold,

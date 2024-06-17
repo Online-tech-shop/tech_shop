@@ -1,6 +1,8 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-
+import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
+import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
 import 'package:tech_shop/views/screens/favourite_screen/screens/favourite_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
@@ -12,7 +14,7 @@ import 'package:tech_shop/views/screens/save_screen/views/save_screen.dart';
 class MainScreen extends StatefulWidget {
   final int n;
 
-  const MainScreen({super.key, this.n = 0});
+  const MainScreen({Key? key, this.n = 0}) : super(key: key);
 
   @override
   State<MainScreen> createState() => _MainScreenState();
@@ -24,7 +26,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     const CatalogScreen(),
     const SaveScreen(),
-     FavouriteScreen(),
+    const FavouriteScreen(),
     const ProfileScreen()
   ];
 
@@ -40,7 +42,6 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
-
   @override
   Widget build(BuildContext context) {
     int cartNum = Provider.of<SaveViewModel>(context).saves.length;
@@ -50,9 +51,9 @@ class _MainScreenState extends State<MainScreen> {
       bottomNavigationBar: Container(
         height: 60,
         padding: const EdgeInsets.symmetric(horizontal: 15),
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          boxShadow: [
+        decoration: BoxDecoration(
+          color: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+          boxShadow: const [
             BoxShadow(
               color: Colors.grey,
               blurRadius: 10,
@@ -67,41 +68,53 @@ class _MainScreenState extends State<MainScreen> {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
                   CustomTabBoxButton(
-                    buttonText: 'Bosh sahifa',
+                    buttonText: 'bosh_sahifa'.tr(),
                     imagePath:
                         'assets/icons/bottom_navigation_bar_icons/home${_currentIndex == 0 ? '' : '_un'}.png',
+                    
+                    icon: CupertinoIcons.home,
                     currentIndex: 0,
                     isSelected: _currentIndex == 0,
                     onTabBoxPressed: onTabBoxPressed,
                   ),
                   CustomTabBoxButton(
-                    buttonText: 'Katalog',
-                    imagePath:
-                        'assets/icons/bottom_navigation_bar_icons/search${_currentIndex == 1 ? '' : '_un'}.png',
+                    buttonText: 'katalog'.tr(),
+                    imagePath: CustomFunctions.isLight(context)
+                        ? 'assets/icons/bottom_navigation_bar_icons/search${_currentIndex == 1 ? '' : '_un'}.png'
+                        : null,
+                    icon: Icons.search,
                     currentIndex: 1,
                     isSelected: _currentIndex == 1,
                     onTabBoxPressed: onTabBoxPressed,
                   ),
                   CustomTabBoxButton(
-                    buttonText: 'Savat',
-                    imagePath:
-                        'assets/icons/bottom_navigation_bar_icons/cart${_currentIndex == 2 ? '' : '_un'}.png',
+                    buttonText: 'savat'.tr(),
+                    imagePath: CustomFunctions.isLight(context)
+                        ? 'assets/icons/bottom_navigation_bar_icons/cart${_currentIndex == 2 ? '' : '_un'}.png'
+                        : null,
+                    icon: Icons.shopping_cart,
                     currentIndex: 2,
                     isSelected: _currentIndex == 2,
                     onTabBoxPressed: onTabBoxPressed,
                   ),
                   CustomTabBoxButton(
-                    buttonText: 'Saralangan',
-                    imagePath:
-                        'assets/icons/bottom_navigation_bar_icons/fav${_currentIndex == 3 ? '' : '_un'}.png',
+                    buttonText: 'saralangan'.tr(),
+                    imagePath: CustomFunctions.isLight(context)
+                        ? 'assets/icons/bottom_navigation_bar_icons/fav${_currentIndex == 3 ? '' : '_un'}.png'
+                        : null,
+                    icon: _currentIndex == 3
+                        ? CupertinoIcons.heart_fill
+                        : CupertinoIcons.heart,
                     currentIndex: 3,
                     isSelected: _currentIndex == 3,
                     onTabBoxPressed: onTabBoxPressed,
                   ),
                   CustomTabBoxButton(
-                    buttonText: 'Kabinet',
-                    imagePath:
-                        'assets/icons/bottom_navigation_bar_icons/profile${_currentIndex == 4 ? '' : '_un'}.png',
+                    buttonText: 'kabinet'.tr(),
+                    imagePath: CustomFunctions.isLight(context)
+                        ? 'assets/icons/bottom_navigation_bar_icons/profile${_currentIndex == 4 ? '' : '_un'}.png'
+                        : null,
+                    icon: Icons.person,
                     currentIndex: 4,
                     isSelected: _currentIndex == 4,
                     onTabBoxPressed: onTabBoxPressed,
@@ -110,7 +123,7 @@ class _MainScreenState extends State<MainScreen> {
               ),
             ),
             cartNum == 0
-                ? const Text("")
+                ? const Text("").tr()
                 : Positioned(
                     top: 0,
                     left: MediaQuery.of(context).size.width / 2 - 10,

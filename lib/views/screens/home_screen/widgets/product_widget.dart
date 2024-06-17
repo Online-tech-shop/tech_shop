@@ -1,3 +1,4 @@
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:shimmer/shimmer.dart';
@@ -41,8 +42,8 @@ class _ProductGridState extends State<ProductGrid> {
         if (snapshot.connectionState == ConnectionState.waiting) {
           return const ShimmerProductGrid();
         } else if (!snapshot.hasData || snapshot.hasError) {
-          return const Center(
-            child: Text('Internet bilan muammo bor.'),
+          return Center(
+            child: Text('internet_bilan_muammo_bor'.tr()),
           );
         } else {
           List<Product> products = widget.isSelected
@@ -67,6 +68,7 @@ class _ProductGridState extends State<ProductGrid> {
               return ProductCard(
                 product: products[index],
                 reviews: products[index].getReviews(reviewList),
+                isDeleteFromFavScreen: false,
               );
             },
           );
