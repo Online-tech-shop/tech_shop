@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:tech_shop/service/login_http_services.dart';
 import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
+
 import 'package:tech_shop/views/screens/login/widgets/gender.dart';
 
 class NameSurnamePage extends StatefulWidget {
@@ -130,7 +131,7 @@ class _NameSurnamePageState extends State<NameSurnamePage> {
                     height: 40,
                   ),
                   InkWell(
-                    onTap: () {
+                    onTap: () async {
                       if (_globalKey.currentState!.validate()) {
                         LoginHttpServices().addUser(
                           _name.text,
@@ -146,6 +147,7 @@ class _NameSurnamePageState extends State<NameSurnamePage> {
                             builder: (ctx) => const MainScreen(),
                           ),
                         );
+
                       }
                     },
                     child: Container(

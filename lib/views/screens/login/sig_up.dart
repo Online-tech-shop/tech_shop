@@ -129,10 +129,20 @@ class _SigUpState extends State<SigUp> {
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
+
                 children: [
-                  const Text(
-                    "Sizda akkaunt bormi?",
-                    style: TextStyle(fontWeight: FontWeight.bold),
+                  TextFormField(
+                    controller: _email,
+                    validator: (value) {
+                      if (value!.isEmpty) {
+                        return "Iltimos emailni kiriting!";
+                      }
+                      return null;
+                    },
+                    decoration: const InputDecoration(
+                      hintText: 'Email kiriting',
+                      border: OutlineInputBorder(),
+                    ),
                   ),
                   TextButton(
                     onPressed: () {
@@ -148,18 +158,44 @@ class _SigUpState extends State<SigUp> {
                       style: TextStyle(fontWeight: FontWeight.bold),
                     ),
                   )
+
                 ],
               ),
-              const SizedBox(
-                height: 100,
+            ),
+          ),
+          const SizedBox(
+            height: 40,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              const Text(
+                "Sizda akkaunt bormi?",
+                style: TextStyle(fontWeight: FontWeight.bold),
               ),
-              const SizedBox(
-                width: 300,
-                child: Text(
-                    textAlign: TextAlign.center,
-                    "Tizimda ro'yhatdan o'tish orqali foydalanuvchi shartnomasini qabulgan qilgan bo'lasiz"),
-              )
+              TextButton(
+                onPressed: () {
+                  Navigator.pushReplacement(
+                    context,
+                    MaterialPageRoute(builder: (ctx) => SignIn()),
+                  );
+                },
+                child: const Text(
+                  "Kirish",
+                  style: TextStyle(fontWeight: FontWeight.bold),
+                ),
+              ),
             ],
+          ),
+          const SizedBox(
+            height: 100,
+          ),
+          const SizedBox(
+            width: 300,
+            child: Text(
+              textAlign: TextAlign.center,
+              "Tizimda ro'yhatdan o'tish orqali foydalanuvchi shartnomasini qabulgan qilgan bo'lasiz",
+            ),
           ),
         ],
       ),

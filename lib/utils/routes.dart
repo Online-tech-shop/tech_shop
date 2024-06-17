@@ -1,10 +1,10 @@
 import 'package:flutter/cupertino.dart';
 import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/models/review_model.dart';
-import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/views/view_product_screen.dart';
 import 'package:fluttertoast/fluttertoast.dart';
 import 'package:tech_shop/views/screens/login/sign_in.dart';
+
 
 class RouteName {
   static const String viewProduct = '/viewProduct';
@@ -45,7 +45,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
               return true;
             }
           },
-          child: const MainScreen(),
+          child: const SplashPage(),
         ),
       );
   }

@@ -4,6 +4,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tech_shop/models/user_model.dart';
+
 import 'package:tech_shop/service/login_http_services.dart';
 import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
 import 'package:tech_shop/views/screens/login/sig_up.dart';
@@ -20,6 +21,7 @@ class _SignInState extends State<SignIn> {
   final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
   String email = '';
   String password = '';
+
 
   @override
   Widget build(BuildContext context) {
@@ -66,6 +68,7 @@ class _SignInState extends State<SignIn> {
                     decoration: const InputDecoration(
                       hintText: 'Enter password',
                       border: OutlineInputBorder(),
+
                     ),
                     validator: (value) {
                       if (value == null || value.trim().isEmpty) {
@@ -134,6 +137,7 @@ class _SignInState extends State<SignIn> {
             },
             child: const Text('Tizimga kirish'),
           ),
+
         ],
       ),
     );

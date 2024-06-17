@@ -5,11 +5,15 @@ import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tech_shop/models/user_model.dart';
+
 import 'package:tech_shop/utils/app_constants.dart';
 import 'package:tech_shop/utils/functions.dart';
+
 import 'package:tech_shop/views/screens/login/sig_up.dart';
 import 'package:tech_shop/views/screens/profile/widgets/profile_item.dart';
+import 'package:tech_shop/views/screens/profile/widgets/settings_screen.dart';
 
+// aaa
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -20,6 +24,7 @@ class ProfileScreen extends StatefulWidget {
 class _ProfileScreenState extends State<ProfileScreen> {
   Future<User> getUser() async {
     return await AppConstants.getUser();
+
   }
 
   @override
@@ -251,26 +256,169 @@ class _ProfileScreenState extends State<ProfileScreen> {
             }
           },
         ));
+
   }
 
-  Widget _buildProfileSection(List<Widget> children) {
-    return SliverPadding(
-      padding: const EdgeInsets.symmetric(vertical: 0),
-      sliver: SliverList(
-        delegate: SliverChildListDelegate(
-          children
-              .map((child) => Container(
-                    color: Colors.white,
-                    child: child,
-                  ))
-              .toList(),
+  SliverAppBar _buildSliverAppBar(BuildContext context) {
+    return SliverAppBar(
+      toolbarHeight: 80,
+      backgroundColor:
+          CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+      clipBehavior: Clip.hardEdge,
+      automaticallyImplyLeading: true,
+      expandedHeight: 130.0,
+      pinned: true,
+      actions: [
+        Padding(
+          padding: const EdgeInsets.only(right: 15.0),
+          child: GestureDetector(
+            onTap: () => _toggleTheme(context),
+            child: Icon(
+              CustomFunctions.isLight(context) ? Icons.dark_mode : Icons.sunny,
+              color: Colors.white,
+              size: 30,
+            ),
+          ),
+        )
+      ],
+      flexibleSpace: FlexibleSpaceBar(
+        centerTitle: true,
+        collapseMode: CollapseMode.parallax,
+        title: _buildProfileTitle(),
+        background: Image.asset(
+          "assets/images/profile.jpg",
+          fit: BoxFit.cover,
+          width: double.infinity,
         ),
       ),
     );
   }
 
+  Row _buildProfileTitle() {
+    return Row(
+      children: [
+        const Gap(15),
+        const CircleAvatar(
+          child: Center(
+            child: Icon(Icons.person),
+          ),
+        ),
+        const Gap(15),
+        Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            Text(
+              "$name ${surname?[0]}.",
+              style: const TextStyle(
+                fontSize: 18,
+                color: Colors.white,
+              ),
+            ),
+            Text(
+              email!,
+              style: const TextStyle(
+                letterSpacing: 1,
+                fontSize: 11,
+                color: Colors.white,
+              ),
+            ),
+          ],
+        ),
+      ],
+    );
+  }
+
+  Widget _buildProfileSections(BuildContext context) {
+    final isLight = CustomFunctions.isLight(context);
+    final backgroundColor = isLight ? Colors.white : Colors.black;
+
+    return SliverList(
+      delegate: SliverChildListDelegate([
+        _buildProfileSection([
+          ProfileItem(
+            ikon: const Icon(Icons.shopping_bag_outlined),
+            name: tr("buyurtmalarim"),
+          ),
+          ProfileItem(
+            ikon: const Icon(CupertinoIcons.smiley),
+            name: tr("sharhlarim"),
+          ),
+          ProfileItem(
+            ikon: const Icon(Icons.calendar_month_rounded),
+            name: tr("buyurtmalarim"),
+          ),
+        ], backgroundColor),
+        _buildDivider(isLight),
+        _buildProfileSection([
+          ProfileItem(
+            ikon: const Icon(CupertinoIcons.chat_bubble_2),
+            name: tr('chatlarim'),
+          ),
+          ProfileItem(
+            ikon: const Icon(Icons.notifications_none),
+            name: tr("xabarnomalar"),
+          ),
+          ProfileItem(
+            ikon: const Icon(Icons.percent),
+            name: tr("promokodlarim"),
+          ),
+          ProfileItem(
+            ikon: const Icon(Icons.settings_rounded),
+            name: tr("sozlamalar"),
+          ),
+        ], backgroundColor),
+        _buildDivider(isLight),
+        _buildProfileSection([
+          _buildLanguageSetting(),
+        ], backgroundColor),
+        _buildDivider(isLight),
+        _buildProfileSection([
+          ProfileItem(
+            ikon: const Icon(Icons.location_on_outlined),
+            name: tr("shahar"),
+          ),
+          ProfileItem(
+            ikon: const Icon(Icons.map_outlined),
+            name: tr("xaritadagi_topshirish_punktlari"),
+          ),
+        ], backgroundColor),
+        _buildDivider(isLight),
+        _buildProfileSection([
+          ProfileItem(
+            ikon: const Icon(Icons.help_outline_rounded),
+            name: tr("malumot"),
+          ),
+          ProfileItem(
+            ikon: const Icon(CupertinoIcons.mail),
+            name: tr("xaritadagi_topshirish_punktlari"),
+          ),
+        ], backgroundColor),
+        _buildDivider(isLight),
+      ]),
+    );
+  }
+
+  Widget _buildProfileSection(List<Widget> children, Color backgroundColor) {
+    return Column(
+      children: children
+          .map((child) => Container(
+                color: backgroundColor,
+                child: child,
+              ))
+          .toList(),
+    );
+  }
+
+  Widget _buildDivider(bool isLight) {
+    return Container(
+      height: 13,
+      color: isLight ? Colors.grey[200] : Colors.white,
+    );
+  }
+
   Widget _buildLanguageSetting() {
-    return GestureDetector(
+    return InkWell(
       onTap: () async {
         SharedPreferences sharedPreferences =
             await SharedPreferences.getInstance();
@@ -286,25 +434,30 @@ class _ProfileScreenState extends State<ProfileScreen> {
         }
       },
       child: Container(
-          height: 50,
-          color: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
-          child: Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Text(
-                  tr("ilova_tili"),
-                  style: TextStyle(
-                    fontWeight: FontWeight.w500,
-                    color: CustomFunctions.isLight(context)
-                        ? Colors.black
-                        : Colors.white,
-                  ),
+        height: 50,
+        color: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+        child: Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            children: [
+              Text(
+                tr("ilova_tili"),
+                style: TextStyle(
+                  fontWeight: FontWeight.w500,
+                  color: CustomFunctions.isLight(context)
+                      ? Colors.black
+                      : Colors.white,
                 ),
-              ],
-            ),
-          )),
+              ),
+              const Icon(
+                Icons.arrow_forward_ios_rounded,
+                color: Colors.black26,
+              )
+            ],
+          ),
+        ),
+      ),
     );
   }
 
@@ -320,6 +473,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               Navigator.pushReplacement(
                 context, MaterialPageRoute(builder: (ctx) => const SigUp()));
             }
+
           },
           child: Container(
             height: 50,
@@ -331,6 +485,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
               child: Text(
                 CustomFunctions.isUzbek(context) ? "Chiqish" : 'Vixod',
                 style: const TextStyle(
+
                   color: Colors.white,
                   fontWeight: FontWeight.bold,
                   fontSize: 16,

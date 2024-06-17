@@ -5,6 +5,7 @@ import 'package:tech_shop/models/user_model.dart';
 
 class LoginHttpServices {
   Future<Map<String, dynamic>> signIn(String email, String password) async {
+
     Uri url = Uri.parse(
         "https://identitytoolkit.googleapis.com/v1/accounts:signUp?key=AIzaSyDbklOtGFEhnWwSkCGDCZ3IgwyB1wMw4mk");
     var response = await http.post(
@@ -26,6 +27,7 @@ class LoginHttpServices {
     } catch (e) {
       rethrow;
     }
+
     return {"check": true, "localId": data["localId"]};
   }
 

@@ -8,6 +8,7 @@ import 'package:tech_shop/views/screens/favourite_screen/screens/favourite_scree
 import 'package:tech_shop/views/screens/home_screen/views/home_screen.dart';
 import 'package:tech_shop/views/screens/catalog_screen/screens/catalog_screen.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_tab_box_button.dart';
+import 'package:tech_shop/views/screens/profile/no_login_profile.dart';
 import 'package:tech_shop/views/screens/profile/profile_screen.dart';
 import 'package:tech_shop/views/screens/save_screen/views/save_screen.dart';
 
@@ -29,7 +30,8 @@ class _MainScreenState extends State<MainScreen> {
     const CatalogScreen(),
     const SaveScreen(),
     const FavouriteScreen(),
-    const ProfileScreen()
+    // const ProfileScreen(),
+    const NoLoginProfile()
   ];
 
   @override
@@ -57,8 +59,9 @@ class _MainScreenState extends State<MainScreen> {
           color: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
           boxShadow: [
             BoxShadow(
-              color:
-                  CustomFunctions.isLight(context) ? Colors.grey : Colors.white.withOpacity(0.3),
+              color: CustomFunctions.isLight(context)
+                  ? Colors.grey
+                  : Colors.white.withOpacity(0.3),
               blurRadius: 10,
             ),
           ],
