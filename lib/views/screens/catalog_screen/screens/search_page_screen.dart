@@ -85,7 +85,7 @@ class _SearchPageWidgetState extends State<SearchPageWidget> {
               Navigator.of(context).push(
                 CupertinoPageRoute(
                   builder: (context) {
-                    return const FilterScreen();
+                    return FilterScreen(homeViewModel: widget.homeViewModel,);
                   },
                 ),
               );

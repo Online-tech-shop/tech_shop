@@ -1,15 +1,65 @@
 import 'package:flutter/material.dart';
 import 'package:tech_shop/models/filtr_model.dart';
+import 'package:tech_shop/models/product_item.dart';
+import 'package:tech_shop/models/review_model.dart';
+import 'package:tech_shop/viewmodels/home_view_model.dart';
+import 'package:tech_shop/viewmodels/review_view_model.dart';
 import 'package:tech_shop/utils/functions.dart';
 
 class FilterScreen extends StatefulWidget {
-  const FilterScreen({super.key});
+  HomeViewModel homeViewModel;
+  FilterScreen({
+    required this.homeViewModel,
+    super.key,
+  });
 
   @override
   State<FilterScreen> createState() => _FilterScreenState();
 }
 
 class _FilterScreenState extends State<FilterScreen> {
+  final _reviewViewModel = ReviewViewModel();
+  List<Product> products = [];
+  List<Review> reviewList = [];
+
+  @override
+  void initState() {
+    loadProductsAndReviews();
+    super.initState();
+  }
+
+  void loadProductsAndReviews() async {
+    try {
+      List<Product> fetchedProducts =
+          await widget.homeViewModel.onCarouselItemTap();
+      List<Review> fetchedReviews = await _reviewViewModel.getReviews();
+      setState(() {
+        products = fetchedProducts;
+        reviewList = fetchedReviews;
+      });
+    } catch (e) {
+      // setState(() {});
+    }
+  }
+
+  List<Product> arzonroq() {
+    products.sort(
+      (a, b) {
+        return a.price.compareTo(b.price);
+      },
+    );
+    setState(() {});
+    return products;
+  }
+
+  List<Product> qimmatroq() {
+    products.sort(
+      (a, b) => b.price.compareTo(a.price),
+    );
+    setState(() {});
+    return products;
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -59,6 +109,12 @@ class _FilterScreenState extends State<FilterScreen> {
                       for (var item in filtrList) {
                         item.isSelected = false;
                       }
+
+                      widget.homeViewModel.products =
+                          index == 0 ? arzonroq() : qimmatroq();
+                      for (var i in widget.homeViewModel.products) {
+                        print(i.price);
+                      }
                       data.isSelected = true;
                     });
                   },
@@ -72,50 +128,7 @@ class _FilterScreenState extends State<FilterScreen> {
               },
             ),
           ),
-          Expanded(
-            flex: 2,
-            child: Row(
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        prefixIcon: Text(
-                          CustomFunctions.isUzbek(context) ? "dan" : 'от',
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        border: const OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                ),
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(8.0),
-                    child: TextField(
-                      keyboardType: TextInputType.number,
-                      decoration: InputDecoration(
-                        prefixIcon: Text(
-                          CustomFunctions.isUzbek(context) ? "oldin" : 'до',
-                          style: const TextStyle(
-                            fontSize: 18,
-                            color: Colors.grey,
-                          ),
-                        ),
-                        border: const OutlineInputBorder(),
-                      ),
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ),
+
         ],
       ),
     );

@@ -11,6 +11,7 @@ class FiltrModel {
 }
 
 List<FiltrModel> filtrList = [
+
   FiltrModel(isSelected: false, title: "arzonroq".tr()),
   FiltrModel(isSelected: false, title: "qimmatroq".tr()),
   FiltrModel(isSelected: false, title: "yuqori_reyting".tr()),
