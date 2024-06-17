@@ -87,7 +87,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                     ),
                     const Gap(15),
                     GestureDetector(
-                      onTap: _shareProduct, 
+                      onTap: _shareProduct,
                       child: const Icon(
                         CupertinoIcons.share_up,
                       ),
@@ -229,7 +229,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                             color: const Color(0xFFD6F5DE),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.check,
                             color: Colors.green,
                           ),
@@ -237,8 +237,8 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text(
-                            tr('dona_qoldi',
-                                args: [widget.product.leftProduct.toString()]),
+                            '${widget.product.leftProduct} ' +
+                                'dona_qoldi'.tr(),
                             style: const TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
@@ -258,7 +258,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                             color: const Color(0xFFFFEFD0),
                             borderRadius: BorderRadius.circular(10),
                           ),
-                          child: Icon(
+                          child: const Icon(
                             Icons.shopping_cart_outlined,
                             color: Colors.orange,
                           ),
@@ -266,9 +266,8 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text(
-                            tr('bu_haftada_kishi_sotib_oldi', args: [
-                              widget.product.boughtAmountThisWeek.toString()
-                            ]),
+                            'bu_haftada_kishi_sotib_oldi'.tr() +
+                                ' - ${widget.product.boughtAmountThisWeek}',
                             style: const TextStyle(
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
@@ -282,7 +281,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                     padding: const EdgeInsets.only(top: 15.0),
                     child: Text(
                       widget.review.isNotEmpty
-                          ? '${widget.review.length} ${tr('sharh').plural(widget.review.length)}'
+                          ? '${widget.review.length} ${tr('sharh')}'
                           : tr('ushbu_mahsulotga_hali_sharh_yozilmagan'),
                       style: const TextStyle(
                         fontWeight: FontWeight.w700,
