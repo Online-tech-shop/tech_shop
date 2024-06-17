@@ -10,6 +10,7 @@ import 'package:tech_shop/views/screens/home_screen/widgets/custom_float_action_
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_info_container.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/custom_user_review_box.dart';
 import 'package:tech_shop/views/screens/home_screen/widgets/favorite_button.dart';
+import 'package:share_plus/share_plus.dart'; // Import the share_plus package
 
 class ViewProductScreen extends StatefulWidget {
   final Product product;
@@ -40,6 +41,17 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
     super.dispose();
   }
 
+  void _shareProduct() {
+    final String productName = widget.product.name[AppConstants.appLanguageIndex];
+    final String productUrl = widget.product.images.isNotEmpty ? widget.product.images[0] : '';
+    final String productPrice = '${widget.product.price} so\'m';
+
+    Share.share(
+      'Check out this product: $productName\nPrice: $productPrice\n$productUrl',
+      subject: 'Product Details',
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -53,9 +65,11 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                 CustomFunctions.isLight(context) ? Colors.white : Colors.black,
             leading: GestureDetector(
               onTap: () => Navigator.of(context).pop(),
-              child: const Icon(
+              child: Icon(
                 Icons.arrow_back_ios_new,
-                color: Colors.black,
+                color: CustomFunctions.isLight(context)
+                    ? Colors.black
+                    : Colors.white,
               ),
             ),
             actions: [
@@ -70,6 +84,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                     ),
                     const Gap(15),
                     GestureDetector(
+                      onTap: _shareProduct, // Add the onTap handler
                       child: const Icon(
                         CupertinoIcons.share_up,
                       ),
@@ -92,9 +107,12 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                         widget.product.name[AppConstants.appLanguageIndex],
                         maxLines: 1,
                         overflow: TextOverflow.ellipsis,
-                        style: const TextStyle(
+                        style: TextStyle(
                           fontSize: 18,
                           fontWeight: FontWeight.w600,
+                          color: CustomFunctions.isLight(context)
+                              ? Colors.black
+                              : Colors.white,
                         ),
                       ),
                     ),
@@ -161,9 +179,12 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                 children: [
                   Text(
                     widget.product.name[AppConstants.appLanguageIndex],
-                    style: const TextStyle(
+                    style: TextStyle(
                       fontSize: 18,
                       fontWeight: FontWeight.w600,
+                      color: CustomFunctions.isLight(context)
+                          ? Colors.black
+                          : Colors.white,
                     ),
                   ),
                   Row(
@@ -185,9 +206,12 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
                       '${widget.product.price} so\'m',
-                      style: const TextStyle(
+                      style: TextStyle(
                         fontSize: 26,
                         fontWeight: FontWeight.w700,
+                        color: CustomFunctions.isLight(context)
+                            ? Colors.black
+                            : Colors.white,
                       ),
                     ),
                   ),
@@ -204,9 +228,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                           ),
                           child: Icon(
                             Icons.check,
-                            color: CustomFunctions.isLight(context)
-                                ? Colors.white
-                                : Colors.black,
+                            color: Colors.green,
                           ),
                         ),
                         Padding(
@@ -218,7 +240,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                               fontSize: 14,
                             ),
                           ),
-                        )
+                        ),
                       ],
                     ),
                   ),
@@ -234,9 +256,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                           ),
                           child: Icon(
                             Icons.shopping_cart_outlined,
-                            color: CustomFunctions.isLight(context)
-                                ? Colors.white
-                                : Colors.black,
+                            color: Colors.orange,
                           ),
                         ),
                         Padding(

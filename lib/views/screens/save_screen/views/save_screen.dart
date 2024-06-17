@@ -74,7 +74,7 @@ class _SaveScreenState extends State<SaveScreen> {
             : Container(
                 width: double.infinity,
                 height: 60,
-                color: Colors.white,
+                // color: Colors.white,
                 child: Padding(
                   padding: const EdgeInsets.symmetric(horizontal: 10),
                   child: Consumer<SaveViewModel>(
