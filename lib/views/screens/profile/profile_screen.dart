@@ -1,6 +1,7 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:tech_shop/views/screens/login/sig_up.dart';
 import 'package:tech_shop/views/screens/profile/widgets/profile_item.dart';
 
 class ProfileScreen extends StatefulWidget {
@@ -249,7 +250,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: InkWell(
           onTap: () {
-            // Handle logout
+            Navigator.pushReplacement(
+                context, MaterialPageRoute(builder: (ctx) => SigUp()));
           },
           child: Container(
             height: 50,
