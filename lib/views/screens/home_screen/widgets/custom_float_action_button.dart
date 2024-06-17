@@ -1,5 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/models/sql_model.dart';
 import 'package:tech_shop/service/sql_service.dart';
@@ -19,6 +21,19 @@ class CustomFloatActionButton extends StatefulWidget {
 class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
   int _orderCount = 1;
   bool _isTapped = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    getOrderCount();
+  }
+
+  Future<void> getOrderCount() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    _orderCount = sharedPreferences.getInt('order-count') ?? 0;
+    setState(() {});
+  }
 
   Future<void> _addToCart(BuildContext context) async {
     final saveViewModel = Provider.of<SaveViewModel>(context, listen: false);
@@ -41,7 +56,8 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
       final save = Save(
         title: widget.product.name[0],
         image: widget.product.images[0],
-        price: widget.product.price.toDouble() + (widget.product.price * _orderCount),
+        price: widget.product.price.toDouble() +
+            (widget.product.price * _orderCount),
         amount: widget.product.leftProduct,
         seller: widget.product.seller,
         brieflyAboutProduct: widget.product.brieflyAboutProduct[0],
@@ -51,7 +67,12 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
     }
   }
 
-  void _incrementOrderCount() {
+  void _incrementOrderCount() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    int orderC = sharedPreferences.getInt('order-count') ?? 1;
+    orderC++;
+    sharedPreferences.setInt('order-count', orderC);
+    _orderCount = orderC;
     setState(() => _orderCount++);
   }
 
@@ -66,7 +87,7 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
     _addToCart(context);
     Navigator.pushAndRemoveUntil(
       context,
-      MaterialPageRoute(builder: (context) => const MainScreen(n: 2)),
+      CupertinoPageRoute(builder: (context) => const MainScreen(n: 2)),
       (route) => false,
     );
   }

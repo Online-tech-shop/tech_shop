@@ -62,7 +62,11 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                 padding: const EdgeInsets.only(right: 15.0),
                 child: Row(
                   children: [
-                    FavoriteButton(product: widget.product, isSelected: false),
+                    FavoriteButton(
+                      product: widget.product,
+                      isSelected: false,
+                      isDeleteFromFavScreen: false,
+                    ),
                     const Gap(15),
                     GestureDetector(
                       child: const Icon(

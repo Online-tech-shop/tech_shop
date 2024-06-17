@@ -67,6 +67,7 @@ class _ProductGridState extends State<ProductGrid> {
               return ProductCard(
                 product: products[index],
                 reviews: products[index].getReviews(reviewList),
+                isDeleteFromFavScreen: false,
               );
             },
           );
