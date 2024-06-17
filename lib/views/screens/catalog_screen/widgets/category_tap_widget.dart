@@ -22,8 +22,6 @@ class _CategoryTapWidgetState extends State<CategoryTapWidget> {
   final _textController = TextEditingController();
   String searchText = '';
 
-
-  
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -58,11 +56,13 @@ class _CategoryTapWidgetState extends State<CategoryTapWidget> {
                 color: Color(0xff8B8B95),
               ),
               filled: true,
-              fillColor: CustomFunctions.isLight(context) ? const Color(0xffF3F4F8) : Colors.black,
+              fillColor: CustomFunctions.isLight(context)
+                  ? const Color(0xffF3F4F8)
+                  : Colors.black,
               hintStyle: const TextStyle(
                 color: Color(0xff8B8B95),
               ),
-              hintText: "termada_qidirishku".tr(),
+              hintText: "termada_qidirish".tr(),
               border: InputBorder.none,
               contentPadding: const EdgeInsets.only(top: 12),
             ),
