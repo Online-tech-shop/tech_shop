@@ -72,8 +72,8 @@ class _ShowProductsWidgetState extends State<ShowProductsWidget> {
     }).toList();
 
     return filteredProducts.isEmpty
-        ? const Center(
-            child: Text("Mahsulot topilmadi"),
+        ? Center(
+            child: Text("mahsulot_topilmadi").tr(),
           )
         : SingleChildScrollView(
             child: Column(

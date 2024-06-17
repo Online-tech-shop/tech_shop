@@ -3,7 +3,7 @@
     "termada_qidirishku": "искать по термину",
     "mahsulot_va_toifalarni_qidirish": "поиск товаров и категорий",
     "mahsulot_topilmadi": "товар не найден",
-    "ta_tovar_topildi": "товаров найдено",
+    "ta_tovar_topildi": "товаров найдено: {count}",
     "istaklarim": "мои желания",
     "sizga_yoqqanini_qoʻshing": "добавьте то, что вам нравится",
     "bosh_sahifaga_oʻting_va_mahsulotdagi_♡_belgisini_bosing": "перейдите на главную страницу и нажмите значок ♡ на товаре",
@@ -25,5 +25,17 @@
     "mahsulot_saralanganga_qo'shildi": "Товар добавлен в избранное",
     "internet_bilan_muammo_bor": "проблема с интернетом",
     "buyurtmalarim": "Мои заказы",
-    "sharhlarim": "мои комментарии"
-    }
+    "sharhlarim": "мои комментарии",
+    "ta_buyurtma": "{orderAmount} заказ",
+    "mahsulot_saqlandi": "Товар сохранен",
+    "ta_sharhlar": "{count} Комментарии",
+    "chatlarim": "Мои чаты",
+    "xabarnomalar": "Уведомления",
+    "promokodlarim": "Мои промокоды",
+    "sozlamalar": "Настройки",
+    "shahar": "город",
+    "xaritadagi_topshirish_punktlari": "Пункты доставки на карте",
+    "malumot": "Информация",
+    "umumiy_narx": "Итоговая цена"
+
+}

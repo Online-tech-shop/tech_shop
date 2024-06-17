@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:adaptive_theme/adaptive_theme.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -114,7 +114,9 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
     return Container(
       padding: const EdgeInsets.symmetric(horizontal: 15),
       decoration: BoxDecoration(
-        color: CustomFunctions.isLight(context) ? Colors.white :  Colors.black.withOpacity(0.8),
+        color: CustomFunctions.isLight(context)
+            ? Colors.white
+            : Colors.black.withOpacity(0.8),
         boxShadow: [
           BoxShadow(
             color: Colors.grey.withOpacity(0.3),
@@ -132,14 +134,14 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 const Text(
-                  'Narx umumiy',
+                  'umumiy_narx',
                   style: TextStyle(
                     color: Colors.grey,
                     fontSize: 10,
                   ),
-                ),
+                ).tr(),
                 Text(
-                  '${widget.product.price * _orderCount} so\'m',
+                  '${widget.product.price * _orderCount} ${"som".tr()}',
                   style: const TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,

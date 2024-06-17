@@ -44,7 +44,7 @@ class _FavoriteButtonState extends State<FavoriteButton> {
         if (isTapped) {
           ScaffoldMessenger.of(context).showSnackBar(
             SnackBar(
-              content: Text(tr('mahsulot_saralanganga_qo\'shildi')),
+              content: Text(tr("mahsulot_saralanganga_qo'shildi")),
             ),
           );
           await _favouriteViewModel.saveNewFavouriteProduct(
