@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:tech_shop/models/category_name.dart';
 import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/models/review_model.dart';
 import 'package:tech_shop/viewmodels/home_view_model.dart';
@@ -12,7 +11,7 @@ class ShowProductsWidget extends StatefulWidget {
   final int? categoryIndex;
   final String? categoryTitle;
 
-  ShowProductsWidget({
+  const ShowProductsWidget({
     super.key,
     required this.viewModel,
     required this.searchText,

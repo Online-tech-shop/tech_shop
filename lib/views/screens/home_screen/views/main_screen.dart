@@ -23,7 +23,7 @@ class _MainScreenState extends State<MainScreen> {
     HomeScreen(),
     const CatalogScreen(),
     const SaveScreen(),
-    Placeholder(),
+    const Placeholder(),
     const ProfileScreen()
   ];
 
@@ -39,11 +39,6 @@ class _MainScreenState extends State<MainScreen> {
     });
   }
 
-  @override
-  void initState() {
-    // TODO: implement initState
-    super.initState();
-  }
 
   @override
   Widget build(BuildContext context) {

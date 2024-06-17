@@ -1,7 +1,5 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/rendering.dart';
-import 'package:flutter/widgets.dart';
 import 'package:gap/gap.dart';
 import 'package:tech_shop/views/screens/profile/widgets/profile_item.dart';
 
@@ -30,7 +28,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
             slivers: [
               SliverAppBar(
                 toolbarHeight: 80,
-                backgroundColor: Color.fromARGB(189, 0, 0, 0),
+                backgroundColor: const Color.fromARGB(189, 0, 0, 0),
                 clipBehavior: Clip.hardEdge,
                 automaticallyImplyLeading: true,
                 expandedHeight: 130.0,
@@ -84,16 +82,16 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               _buildProfileSection([
-                ProfileItem(
-                  ikon: const Icon(Icons.shopping_bag_outlined),
+                const ProfileItem(
+                  ikon: Icon(Icons.shopping_bag_outlined),
                   name: "Buyurtmalarim",
                 ),
-                ProfileItem(
-                  ikon: const Icon(CupertinoIcons.smiley),
+                const ProfileItem(
+                  ikon: Icon(CupertinoIcons.smiley),
                   name: "Sharhlarim",
                 ),
-                ProfileItem(
-                  ikon: const Icon(Icons.calendar_month_rounded),
+                const ProfileItem(
+                  ikon: Icon(Icons.calendar_month_rounded),
                   name: "Buyurtmalarim",
                 ),
               ]),
@@ -104,20 +102,20 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               _buildProfileSection([
-                ProfileItem(
-                  ikon: const Icon(CupertinoIcons.chat_bubble_2),
+                const ProfileItem(
+                  ikon: Icon(CupertinoIcons.chat_bubble_2),
                   name: "Chatlarim",
                 ),
-                ProfileItem(
-                  ikon: const Icon(Icons.notifications_none),
+                const ProfileItem(
+                  ikon: Icon(Icons.notifications_none),
                   name: "Xabarnomalar",
                 ),
-                ProfileItem(
-                  ikon: const Icon(Icons.percent),
+                const ProfileItem(
+                  ikon: Icon(Icons.percent),
                   name: "Promokodlarim",
                 ),
-                ProfileItem(
-                  ikon: const Icon(Icons.settings_rounded),
+                const ProfileItem(
+                  ikon: Icon(Icons.settings_rounded),
                   name: "Sozlamalar",
                 ),
               ]),
@@ -137,12 +135,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               _buildProfileSection([
-                ProfileItem(
-                  ikon: const Icon(Icons.location_on_outlined),
+                const ProfileItem(
+                  ikon: Icon(Icons.location_on_outlined),
                   name: "Shahar",
                 ),
-                ProfileItem(
-                  ikon: const Icon(Icons.map_outlined),
+                const ProfileItem(
+                  ikon: Icon(Icons.map_outlined),
                   name: "Xaritadagi topshirish punktlari",
                 ),
               ]),
@@ -153,12 +151,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
                 ),
               ),
               _buildProfileSection([
-                ProfileItem(
-                  ikon: const Icon(Icons.help_outline_rounded),
+                const ProfileItem(
+                  ikon: Icon(Icons.help_outline_rounded),
                   name: "Ma'lumot",
                 ),
-                ProfileItem(
-                  ikon: const Icon(CupertinoIcons.mail),
+                const ProfileItem(
+                  ikon: Icon(CupertinoIcons.mail),
                   name: "Xaritadagi topshirish punktlari",
                 ),
               ]),
@@ -216,13 +214,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: const Row(
         children: [
           Padding(
-            padding: const EdgeInsets.all(10),
+            padding: EdgeInsets.all(10),
             child: CircleAvatar(
               backgroundImage: AssetImage('assets/images/uzbekistan.png'),
               radius: 20,
             ),
           ),
-          const Expanded(
+          Expanded(
             child: Padding(
               padding: EdgeInsets.symmetric(horizontal: 10),
               child: Row(

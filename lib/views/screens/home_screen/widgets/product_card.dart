@@ -8,13 +8,10 @@ import 'package:tech_shop/service/sql_service.dart';
 import 'package:tech_shop/utils/app_constants.dart';
 import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/utils/routes.dart';
-<<<<<<< HEAD
 import 'package:tech_shop/views/screens/home_screen/widgets/favorite_button.dart';
-=======
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
 import 'package:tech_shop/views/screens/save_screen/widgets/flush_bar.dart';
 import 'package:tech_shop/models/sql_model.dart';
->>>>>>> origin/main
 
 class ProductCard extends StatelessWidget {
   final Product product;
@@ -41,11 +38,13 @@ class ProductCard extends StatelessWidget {
     final saveViewModel = Provider.of<SaveViewModel>(context, listen: false);
     final dbHelper = DatabaseHelper();
 
-    final existingProducts = await dbHelper.database.then((db) => db.query(
-          'saves_product4',
-          where: 'title = ?',
-          whereArgs: [product.name[0]],
-        ));
+    final existingProducts = await dbHelper.database.then(
+      (db) => db.query(
+        'saves_product4',
+        where: 'title = ?',
+        whereArgs: [product.name[0]],
+      ),
+    );
 
     if (existingProducts.isNotEmpty) {
       int sum = product.price;
@@ -87,7 +86,6 @@ class ProductCard extends StatelessWidget {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-<<<<<<< HEAD
           Container(
             clipBehavior: Clip.hardEdge,
             height: 220,
@@ -96,7 +94,7 @@ class ProductCard extends StatelessWidget {
               borderRadius: BorderRadius.circular(10),
               image: DecorationImage(
                 image: NetworkImage(
-                  widget.product.images[0],
+                  product.images[0],
                 ),
                 fit: BoxFit.cover,
               ),
@@ -105,7 +103,8 @@ class ProductCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.end,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                FavoriteButton(product: widget.product,
+                FavoriteButton(
+                  product: product,
                   isSelected: false,
                 ),
               ],
@@ -117,7 +116,7 @@ class ProductCard extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  widget.product.name[AppConstants.appLanguageIndex],
+                  product.name[AppConstants.appLanguageIndex],
                   maxLines: 2,
                   overflow: TextOverflow.ellipsis,
                   style: const TextStyle(fontSize: 18),
@@ -130,11 +129,11 @@ class ProductCard extends StatelessWidget {
                       size: 15,
                     ),
                     Text(
-                      ' ${CustomFunctions.countAverageOfReview(widget.reviews).toString().substring(0, 3)} ',
+                      ' ${CustomFunctions.countAverageOfReview(reviews).toString().substring(0, 3)} ',
                       style: const TextStyle(color: Colors.grey),
                     ),
                     Text(
-                      "(${widget.reviews.length}ta sharhlar)",
+                      "(${reviews.length}ta sharhlar)",
                       style: const TextStyle(color: Colors.grey),
                     )
                   ],
@@ -144,7 +143,7 @@ class ProductCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      '${widget.product.price} so\'m',
+                      '${product.price} so\'m',
                       style: const TextStyle(
                         decorationThickness: 2,
                         color: Colors.black,
@@ -164,10 +163,8 @@ class ProductCard extends StatelessWidget {
               ],
             ),
           ),
-=======
           _buildProductImage(),
           _buildProductDetails(context),
->>>>>>> origin/main
         ],
       ),
     );

@@ -5,8 +5,8 @@ class FavouriteScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.only(top: kToolbarHeight),
+    return const Padding(
+      padding: EdgeInsets.only(top: kToolbarHeight),
       child: Column(
         children: [
           Row(
