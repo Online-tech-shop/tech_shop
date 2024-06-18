@@ -22,11 +22,19 @@ class LoginHttpServices {
       return {"check": false};
     }
     var data = jsonDecode(response.body);
+
+    bool? aaa = false;
+
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    aaa = await sharedPreferences.setBool("check", true);
+    print("$aaa aaa");
+
     try {
       getUser(data['localId']);
     } catch (e) {
       rethrow;
     }
+
 
     return {"check": true, "localId": data["localId"]};
   }
@@ -97,6 +105,14 @@ class LoginHttpServices {
       throw Exception('Failed to fetch user data');
     }
 
+    var data = jsonDecode(response.body);
+    bool? aaa = false;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    aaa = await sharedPreferences.setBool("check", true);
+    print("$aaa aaa");
+    return {"check": true, "localId": data["localId"]};
+
+
     final Map<String, dynamic> userDataMap = jsonDecode(response.body);
 
     var userData;
@@ -112,6 +128,7 @@ class LoginHttpServices {
     }
 
     return User.fromJson(userData);
+
   }
 }
 //{
