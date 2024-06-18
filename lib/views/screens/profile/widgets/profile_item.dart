@@ -27,12 +27,11 @@ class _ProfileItemState extends State<ProfileItem> {
       onTap: () async {
         if (widget.num == 1) {
           var data = await showDialog(
-              context: context, builder: (ctx) => EditProfileItem());
+              context: context, builder: (ctx) => const EditProfileItem());
           SharedPreferences sharedPreferences =
               await SharedPreferences.getInstance();
           sharedPreferences.setString("name", data["name"]);
           sharedPreferences.setString("surname", data["surname"]);
-          print(data["surname"]);
         }
       },
       child: Container(
@@ -43,10 +42,12 @@ class _ProfileItemState extends State<ProfileItem> {
             Container(
               width: 70,
               height: 70,
-              decoration: const BoxDecoration(
-
-                  // color:  CustomFunctions.isLight(context) ? Colors.grey : Colors.white,
-                  shape: BoxShape.circle),
+              decoration: BoxDecoration(
+                color: CustomFunctions.isLight(context)
+                    ? Colors.grey
+                    : Colors.grey,
+                shape: BoxShape.circle,
+              ),
               child: Center(
                 child: widget.icon,
               ),

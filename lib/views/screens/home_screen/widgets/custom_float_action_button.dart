@@ -1,10 +1,9 @@
 import 'dart:convert';
 
-import 'package:easy_localization/easy_localization.dart';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:easy_localization/easy_localization.dart';
 import 'package:tech_shop/models/product_item.dart';
 import 'package:tech_shop/models/sql_model.dart';
 import 'package:tech_shop/service/sql_service.dart';
@@ -15,10 +14,11 @@ import 'package:tech_shop/views/screens/home_screen/views/main_screen.dart';
 class CustomFloatActionButton extends StatefulWidget {
   final Product product;
 
-  const CustomFloatActionButton({super.key, required this.product});
+  const CustomFloatActionButton({Key? key, required this.product})
+      : super(key: key);
 
   @override
-  State<CustomFloatActionButton> createState() =>
+  _CustomFloatActionButtonState createState() =>
       _CustomFloatActionButtonState();
 }
 
@@ -104,7 +104,7 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
     await _addToCart(context);
     Navigator.pushAndRemoveUntil(
       context,
-      CupertinoPageRoute(builder: (context) => const MainScreen(n: 2)),
+      MaterialPageRoute(builder: (context) => const MainScreen(n: 2)),
       (route) => false,
     );
   }
@@ -141,12 +141,14 @@ class _CustomFloatActionButtonState extends State<CustomFloatActionButton> {
                   ),
                 ).tr(),
                 Text(
-                  context.tr('som',
+                  context.tr(widget.product.price.toString(),
                       namedArgs: {'narx': widget.product.price.toString()}),
-                  style:  TextStyle(
+                  style: TextStyle(
                     fontSize: 20,
                     fontWeight: FontWeight.w600,
-                    color: CustomFunctions.isLight(context) ? Colors.black : Colors.white
+                    color: CustomFunctions.isLight(context)
+                        ? Colors.black
+                        : Colors.white,
                   ),
                 ),
               ],

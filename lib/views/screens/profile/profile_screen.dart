@@ -99,8 +99,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
 
   Future<void> checkLogin() async {
     SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
-    check = await sharedPreferences.getBool("check");
-    // print(object)
+    // await sharedPreferences.setBool("check", false);
+    check = sharedPreferences.getBool("check");
   }
 
   @override
@@ -138,14 +138,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
               ],
             ),
           )
-        : NoLoginProfile();
+        : const NoLoginProfile();
   }
 
   SliverAppBar _buildSliverAppBar(BuildContext context) {
     return SliverAppBar(
       toolbarHeight: 80,
-      backgroundColor:
-          CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+      backgroundColor: Colors.black54,
       clipBehavior: Clip.hardEdge,
       automaticallyImplyLeading: true,
       expandedHeight: 130.0,
@@ -300,7 +299,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _buildDivider(bool isLight) {
     return Container(
       height: 13,
-      color: isLight ? Colors.grey[200] : Colors.white,
+      color: isLight ? Colors.grey[200] : Colors.grey[700],
     );
   }
 
@@ -324,7 +323,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
         height: 50,
         color: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
         child: Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 10),
+          padding: const EdgeInsets.symmetric(horizontal: 20),
           child: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [

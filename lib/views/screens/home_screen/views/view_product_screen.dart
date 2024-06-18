@@ -210,7 +210,7 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                   Padding(
                     padding: const EdgeInsets.only(top: 20.0),
                     child: Text(
-                      context.tr('som',
+                      context.tr(widget.product.price.toString(),
                           namedArgs: {'narx': widget.product.price.toString()}),
                       style: TextStyle(
                         fontSize: 26,
@@ -240,15 +240,15 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text(
-
-                            context.tr('dona_qoldi', namedArgs: {
-                              'qoldi': widget.product.leftProduct.toString()
-                            }),
+                            context.tr(
+                                '${widget.product.leftProduct.toString()} dona qoldi',
+                                namedArgs: {
+                                  'qoldi': widget.product.leftProduct.toString()
+                                }),
                             style: TextStyle(
                               color: CustomFunctions.isLight(context)
                                   ? Colors.black
                                   : Colors.white,
-
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
                             ),
@@ -275,7 +275,6 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                         Padding(
                           padding: const EdgeInsets.only(left: 10.0),
                           child: Text(
-
                             context
                                 .tr('bu_haftada_kishi_sotib_oldi', namedArgs: {
                               'boughtAmountThisWeek':
@@ -285,7 +284,6 @@ class _ViewProductScreenState extends State<ViewProductScreen> {
                               color: CustomFunctions.isLight(context)
                                   ? Colors.black
                                   : Colors.white,
-
                               fontWeight: FontWeight.w600,
                               fontSize: 14,
                             ),
