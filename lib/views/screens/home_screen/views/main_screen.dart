@@ -29,8 +29,8 @@ class _MainScreenState extends State<MainScreen> {
     const CatalogScreen(),
     const SaveScreen(),
     const FavouriteScreen(),
-    // const ProfileScreen(),
-    const NoLoginProfile()
+    const ProfileScreen(),
+    // const NoLoginProfile()
   ];
 
   @override

@@ -1,8 +1,10 @@
+import 'dart:io';
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gap/gap.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import 'package:tech_shop/utils/app_constants.dart';
@@ -12,7 +14,6 @@ import 'package:tech_shop/views/screens/login/sig_up.dart';
 import 'package:tech_shop/views/screens/profile/widgets/profile_item.dart';
 import 'package:tech_shop/views/screens/profile/widgets/settings_screen.dart';
 
-// aaa
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -24,6 +25,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   String? name = "";
   String? surname = ".";
   String? email = "";
+  String? profileImagePath;
 
   @override
   void initState() {
@@ -37,7 +39,50 @@ class _ProfileScreenState extends State<ProfileScreen> {
       name = sharedPreferences.getString("name") ?? "";
       surname = sharedPreferences.getString("surname") ?? ".";
       email = sharedPreferences.getString("email") ?? "";
+      profileImagePath = sharedPreferences.getString("profileImagePath");
     });
+  }
+
+  Future<void> _updateProfilePicture(ImageSource source) async {
+    final picker = ImagePicker();
+    final pickedFile = await picker.pickImage(source: source);
+
+    if (pickedFile != null) {
+      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      await sharedPreferences.setString('profileImagePath', pickedFile.path);
+
+      setState(() {
+        profileImagePath = pickedFile.path;
+      });
+    }
+  }
+
+  void _showImagePickerOptions() {
+    showModalBottomSheet(
+      context: context,
+      builder: (context) => SafeArea(
+        child: Wrap(
+          children: [
+            ListTile(
+              leading: const Icon(Icons.photo_library),
+              title: const Text('Gallery'),
+              onTap: () {
+                Navigator.of(context).pop();
+                _updateProfilePicture(ImageSource.gallery);
+              },
+            ),
+            ListTile(
+              leading: const Icon(Icons.photo_camera),
+              title: const Text('Camera'),
+              onTap: () {
+                Navigator.of(context).pop();
+                _updateProfilePicture(ImageSource.camera);
+              },
+            ),
+          ],
+        ),
+      ),
+    );
   }
 
   void _toggleTheme(BuildContext context) {
@@ -51,8 +96,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor:
-          CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+      backgroundColor: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
       body: Stack(
         children: [
           Image.asset(
@@ -86,8 +130,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   SliverAppBar _buildSliverAppBar(BuildContext context) {
     return SliverAppBar(
       toolbarHeight: 80,
-      backgroundColor:
-          CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+      backgroundColor: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
       clipBehavior: Clip.hardEdge,
       automaticallyImplyLeading: true,
       expandedHeight: 130.0,
@@ -122,9 +165,11 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Row(
       children: [
         const Gap(15),
-        const CircleAvatar(
-          child: Center(
-            child: Icon(Icons.person),
+        GestureDetector(
+          onTap: _showImagePickerOptions,
+          child: CircleAvatar(
+            backgroundImage: profileImagePath != null ? FileImage(File(profileImagePath!)) : null,
+            child: profileImagePath == null ? const Icon(Icons.person) : null,
           ),
         ),
         const Gap(15),
@@ -227,9 +272,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(
       children: children
           .map((child) => Container(
-                color: backgroundColor,
-                child: child,
-              ))
+        color: backgroundColor,
+        child: child,
+      ))
           .toList(),
     );
   }
@@ -244,8 +289,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _buildLanguageSetting() {
     return InkWell(
       onTap: () async {
-        SharedPreferences sharedPreferences =
-            await SharedPreferences.getInstance();
+        SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
         if (mounted) {
           if (context.locale.languageCode == 'uz') {
             context.setLocale(const Locale('ru'));
