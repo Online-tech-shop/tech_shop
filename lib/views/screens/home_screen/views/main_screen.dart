@@ -30,7 +30,6 @@ class _MainScreenState extends State<MainScreen> {
     const SaveScreen(),
     const FavouriteScreen(),
     const ProfileScreen(),
-    // const NoLoginProfile()
   ];
 
   @override

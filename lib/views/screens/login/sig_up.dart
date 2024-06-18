@@ -137,7 +137,11 @@ class _SigUpState extends State<SigUp> {
                 onPressed: () {
                   Navigator.pushReplacement(
                     context,
-                    MaterialPageRoute(builder: (ctx) => SignIn()),
+                    MaterialPageRoute(
+                        builder: (ctx) => NameSurnamePage(
+                              localId: "",
+                              email: _email.text,
+                            )),
                   );
                 },
                 child: const Text(

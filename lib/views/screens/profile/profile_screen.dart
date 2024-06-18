@@ -11,6 +11,8 @@ import 'package:tech_shop/utils/app_constants.dart';
 import 'package:tech_shop/utils/functions.dart';
 
 import 'package:tech_shop/views/screens/login/sig_up.dart';
+import 'package:tech_shop/views/screens/login/sign_in.dart';
+import 'package:tech_shop/views/screens/profile/no_login_profile.dart';
 import 'package:tech_shop/views/screens/profile/widgets/profile_item.dart';
 import 'package:tech_shop/views/screens/profile/widgets/settings_screen.dart';
 
@@ -22,6 +24,7 @@ class ProfileScreen extends StatefulWidget {
 }
 
 class _ProfileScreenState extends State<ProfileScreen> {
+  bool? check = false;
   String? name = "";
   String? surname = ".";
   String? email = "";
@@ -48,7 +51,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
     final pickedFile = await picker.pickImage(source: source);
 
     if (pickedFile != null) {
-      SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+      SharedPreferences sharedPreferences =
+          await SharedPreferences.getInstance();
       await sharedPreferences.setString('profileImagePath', pickedFile.path);
 
       setState(() {
@@ -93,44 +97,55 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
+  Future<void> checkLogin() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    check = await sharedPreferences.getBool("check");
+    // print(object)
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
-      body: Stack(
-        children: [
-          Image.asset(
-            "assets/images/profile.jpg",
-            fit: BoxFit.cover,
-            width: double.infinity,
-          ),
-          CustomScrollView(
-            slivers: [
-              _buildSliverAppBar(context),
-              _buildProfileSections(context),
-              _buildLogoutButton(),
-              const SliverToBoxAdapter(
-                child: Center(
-                  child: Text(
-                    "Ilova versiyasi: 1.36.3 (12884)",
-                    textAlign: TextAlign.center,
-                  ),
+    checkLogin();
+    return check!
+        ? Scaffold(
+            backgroundColor:
+                CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+            body: Stack(
+              children: [
+                Image.asset(
+                  "assets/images/profile.jpg",
+                  fit: BoxFit.cover,
+                  width: double.infinity,
                 ),
-              ),
-              const SliverToBoxAdapter(
-                child: SizedBox(height: 50),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+                CustomScrollView(
+                  slivers: [
+                    _buildSliverAppBar(context),
+                    _buildProfileSections(context),
+                    _buildLogoutButton(),
+                    const SliverToBoxAdapter(
+                      child: Center(
+                        child: Text(
+                          "Ilova versiyasi: 1.36.3 (12884)",
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                    const SliverToBoxAdapter(
+                      child: SizedBox(height: 50),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
+        : NoLoginProfile();
   }
 
   SliverAppBar _buildSliverAppBar(BuildContext context) {
     return SliverAppBar(
       toolbarHeight: 80,
-      backgroundColor: CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+      backgroundColor:
+          CustomFunctions.isLight(context) ? Colors.white : Colors.black,
       clipBehavior: Clip.hardEdge,
       automaticallyImplyLeading: true,
       expandedHeight: 130.0,
@@ -168,7 +183,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
         GestureDetector(
           onTap: _showImagePickerOptions,
           child: CircleAvatar(
-            backgroundImage: profileImagePath != null ? FileImage(File(profileImagePath!)) : null,
+            backgroundImage: profileImagePath != null
+                ? FileImage(File(profileImagePath!))
+                : null,
             child: profileImagePath == null ? const Icon(Icons.person) : null,
           ),
         ),
@@ -235,6 +252,7 @@ class _ProfileScreenState extends State<ProfileScreen> {
           ProfileItem(
             icon: const Icon(Icons.settings_rounded),
             name: tr("sozlamalar"),
+            num: 1,
           ),
         ], backgroundColor),
         _buildDivider(isLight),
@@ -272,9 +290,9 @@ class _ProfileScreenState extends State<ProfileScreen> {
     return Column(
       children: children
           .map((child) => Container(
-        color: backgroundColor,
-        child: child,
-      ))
+                color: backgroundColor,
+                child: child,
+              ))
           .toList(),
     );
   }
@@ -289,7 +307,8 @@ class _ProfileScreenState extends State<ProfileScreen> {
   Widget _buildLanguageSetting() {
     return InkWell(
       onTap: () async {
-        SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+        SharedPreferences sharedPreferences =
+            await SharedPreferences.getInstance();
         if (mounted) {
           if (context.locale.languageCode == 'uz') {
             context.setLocale(const Locale('ru'));
@@ -334,9 +353,13 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: InkWell(
-          onTap: () {
+          onTap: () async {
             // Navigator.pushReplacement(
-            //     context, MaterialPageRoute(builder: (ctx) => const SigUp()));
+            //     context, MaterialPageRoute(builder: (ctx) => const SignIn()));
+            SharedPreferences sharedPreferences =
+                await SharedPreferences.getInstance();
+            sharedPreferences.setBool("check", false);
+            setState(() {});
           },
           child: Container(
             height: 50,
