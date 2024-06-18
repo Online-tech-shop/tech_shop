@@ -8,7 +8,6 @@ import 'package:tech_shop/utils/routes.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
 
 void main(List<String> args) async {
-  print('object');
   WidgetsFlutterBinding.ensureInitialized();
   final AdaptiveThemeMode? savedThemeMode = await AdaptiveTheme.getThemeMode();
   await EasyLocalization.ensureInitialized();
@@ -26,13 +25,28 @@ void main(List<String> args) async {
   );
 }
 
-class MyApp extends StatelessWidget {
+class MyApp extends StatefulWidget {
   final AdaptiveThemeMode? savedThemeMode;
 
   const MyApp({
     super.key,
     required this.savedThemeMode,
   });
+
+  @override
+  State<MyApp> createState() => _MyAppState();
+}
+
+class _MyAppState extends State<MyApp> {
+  bool isLogged = false;
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+    CustomFunctions.isLogged()
+        .then((value) => setState(() => isLogged = value));
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -50,7 +64,7 @@ class MyApp extends StatelessWidget {
           brightness: Brightness.dark,
           colorSchemeSeed: Colors.blue,
         ),
-        initial: savedThemeMode ?? AdaptiveThemeMode.light,
+        initial: widget.savedThemeMode ?? AdaptiveThemeMode.light,
         builder: (ThemeData light, ThemeData dark) => MaterialApp(
           darkTheme: dark,
           theme: ThemeData(
@@ -62,13 +76,13 @@ class MyApp extends StatelessWidget {
               ),
             ),
           ),
+          initialRoute: isLogged ? '' : '/',
           debugShowCheckedModeBanner: false,
           onGenerateRoute: generateRoute,
           localizationsDelegates: context.localizationDelegates,
           supportedLocales: context.supportedLocales,
           locale: context.locale,
         ),
-        debugShowFloatingThemeButton: true,
       ),
     );
   }

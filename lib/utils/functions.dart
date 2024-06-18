@@ -1,6 +1,7 @@
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tech_shop/models/review_model.dart';
 
 class CustomFunctions {
@@ -31,5 +32,10 @@ class CustomFunctions {
       return true;
     }
     return false;
+  }
+
+  static Future<bool> isLogged() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    return sharedPreferences.getBool('isLogged') ?? false;
   }
 }
