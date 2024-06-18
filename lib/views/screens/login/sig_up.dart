@@ -19,13 +19,14 @@ class _SigUpState extends State<SigUp> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Ro'yhatdan o'tish",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+      ),
       body: ListView(
         children: [
-          const Text(
-            "Ro'yhatdan o'tish",
-            style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            textAlign: TextAlign.center,
-          ),
           const SizedBox(
             height: 60,
           ),
@@ -44,7 +45,7 @@ class _SigUpState extends State<SigUp> {
                       return null;
                     },
                     decoration: const InputDecoration(
-                      hintText: 'Email kiriting',
+                      labelText: 'Email kiriting',
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -62,7 +63,7 @@ class _SigUpState extends State<SigUp> {
                       return null;
                     },
                     decoration: const InputDecoration(
-                      hintText: 'Parol kiriting',
+                      labelText: 'Parol kiriting',
                       border: OutlineInputBorder(),
                     ),
                   ),
@@ -77,7 +78,7 @@ class _SigUpState extends State<SigUp> {
                       return null;
                     },
                     decoration: const InputDecoration(
-                      hintText: 'Parolni qaytadan kiriting',
+                      labelText: 'Parolni qaytadan kiriting',
                       border: OutlineInputBorder(),
                     ),
                   ),

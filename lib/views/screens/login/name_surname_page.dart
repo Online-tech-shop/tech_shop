@@ -48,14 +48,17 @@ class _NameSurnamePageState extends State<NameSurnamePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text(
+          "Foydalanuvchi ma'lumoti",
+          style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
+        ),
+        centerTitle: true,
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            const Text(
-              "Foydalanuvchi ma'lumoti",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
-            ),
             const SizedBox(height: 100),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20),
