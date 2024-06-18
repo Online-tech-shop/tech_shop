@@ -14,6 +14,11 @@ class LoginHttpServices {
       return {"check": false};
     }
     var data = jsonDecode(response.body);
+    bool? aaa = false;
+
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    aaa = await sharedPreferences.setBool("check", true);
+    print("$aaa aaa");
 
     return {"check": true, "localId": data["localId"]};
   }
@@ -29,7 +34,10 @@ class LoginHttpServices {
       return {"check": false};
     }
     var data = jsonDecode(response.body);
-
+    bool? aaa = false;
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    aaa = await sharedPreferences.setBool("check", true);
+    print("$aaa aaa");
     return {"check": true, "localId": data["localId"]};
   }
 }

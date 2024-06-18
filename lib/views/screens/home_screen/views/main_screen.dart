@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:provider/provider.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:tech_shop/utils/functions.dart';
 import 'package:tech_shop/viewmodels/sql_view_model.dart';
 import 'package:tech_shop/views/screens/favourite_screen/screens/favourite_screen.dart';
@@ -22,6 +23,10 @@ class MainScreen extends StatefulWidget {
 }
 
 class _MainScreenState extends State<MainScreen> {
+  Future<void> login() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+  }
+
   void onChanged() => setState(() {});
   late int _currentIndex;
   final List<Widget> _pages = [
@@ -29,8 +34,7 @@ class _MainScreenState extends State<MainScreen> {
     const CatalogScreen(),
     const SaveScreen(),
     const FavouriteScreen(),
-    // const ProfileScreen(),
-    const NoLoginProfile()
+    const ProfileScreen(),
   ];
 
   @override
@@ -48,6 +52,7 @@ class _MainScreenState extends State<MainScreen> {
   @override
   Widget build(BuildContext context) {
     int cartNum = Provider.of<SaveViewModel>(context).saves.length;
+    login();
 
     return Scaffold(
       body: _pages[_currentIndex],

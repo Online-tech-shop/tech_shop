@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:adaptive_theme/adaptive_theme.dart';
 import 'package:easy_localization/easy_localization.dart';
 import 'package:flutter/cupertino.dart';
@@ -9,10 +11,11 @@ import 'package:tech_shop/utils/app_constants.dart';
 import 'package:tech_shop/utils/functions.dart';
 
 import 'package:tech_shop/views/screens/login/sig_up.dart';
+import 'package:tech_shop/views/screens/profile/no_login_profile.dart';
 import 'package:tech_shop/views/screens/profile/widgets/profile_item.dart';
 import 'package:tech_shop/views/screens/profile/widgets/settings_screen.dart';
 
-// aaa
+// aaaaaaa
 class ProfileScreen extends StatefulWidget {
   const ProfileScreen({super.key});
 
@@ -48,39 +51,49 @@ class _ProfileScreenState extends State<ProfileScreen> {
     }
   }
 
+  bool? check = false;
+  Future<void> checkLogin() async {
+    SharedPreferences sharedPreferences = await SharedPreferences.getInstance();
+    check = await sharedPreferences.getBool("check");
+    print("$check p");
+  }
+
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor:
-          CustomFunctions.isLight(context) ? Colors.white : Colors.black,
-      body: Stack(
-        children: [
-          Image.asset(
-            "assets/images/profile.jpg",
-            fit: BoxFit.cover,
-            width: double.infinity,
-          ),
-          CustomScrollView(
-            slivers: [
-              _buildSliverAppBar(context),
-              _buildProfileSections(context),
-              _buildLogoutButton(),
-              const SliverToBoxAdapter(
-                child: Center(
-                  child: Text(
-                    "Ilova versiyasi: 1.36.3 (12884)",
-                    textAlign: TextAlign.center,
-                  ),
+    checkLogin();
+    return check!
+        ? Scaffold(
+            backgroundColor:
+                CustomFunctions.isLight(context) ? Colors.white : Colors.black,
+            body: Stack(
+              children: [
+                Image.asset(
+                  "assets/images/profile.jpg",
+                  fit: BoxFit.cover,
+                  width: double.infinity,
                 ),
-              ),
-              const SliverToBoxAdapter(
-                child: SizedBox(height: 50),
-              ),
-            ],
-          ),
-        ],
-      ),
-    );
+                CustomScrollView(
+                  slivers: [
+                    _buildSliverAppBar(context),
+                    _buildProfileSections(context),
+                    _buildLogoutButton(),
+                    const SliverToBoxAdapter(
+                      child: Center(
+                        child: Text(
+                          "Ilova versiyasi: 1.36.3 (12884)",
+                          textAlign: TextAlign.center,
+                        ),
+                      ),
+                    ),
+                    const SliverToBoxAdapter(
+                      child: SizedBox(height: 50),
+                    ),
+                  ],
+                ),
+              ],
+            ),
+          )
+        : NoLoginProfile();
   }
 
   SliverAppBar _buildSliverAppBar(BuildContext context) {
@@ -290,9 +303,12 @@ class _ProfileScreenState extends State<ProfileScreen> {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: InkWell(
-          onTap: () {
-            // Navigator.pushReplacement(
-            //     context, MaterialPageRoute(builder: (ctx) => const SigUp()));
+          onTap: () async {
+            SharedPreferences sharedPreferences =
+                await SharedPreferences.getInstance();
+            await sharedPreferences.setBool("check", false);
+
+            setState(() {});
           },
           child: Container(
             height: 50,
