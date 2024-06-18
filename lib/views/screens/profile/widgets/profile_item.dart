@@ -2,11 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:tech_shop/utils/functions.dart';
 
 class ProfileItem extends StatefulWidget {
-  final Icon ikon;
+  final Icon icon;
   final String name;
   const ProfileItem({
     super.key,
-    required this.ikon,
+    required this.icon,
     required this.name,
   });
 
@@ -32,7 +32,7 @@ class _ProfileItemState extends State<ProfileItem> {
             shape: BoxShape.circle
           ),
             child: Center(
-              child: widget.ikon,
+              child: widget.icon,
             ),
           ),
           Expanded(

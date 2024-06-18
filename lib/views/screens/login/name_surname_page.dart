@@ -148,8 +148,7 @@ class _NameSurnamePageState extends State<NameSurnamePage> {
                         print(
                             "${_name.text}\n${_surname.text}]\n${_age.text}\n${_gender.text}\n${widget.email}\n${widget.localId}");
 
-                        Navigator.pushReplacement(context,
-                            MaterialPageRoute(builder: (ctx) => MainScreen()));
+                     
                       }
                     },
                     child: Container(

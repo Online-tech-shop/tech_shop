@@ -206,34 +206,34 @@ class _ProfileScreenState extends State<ProfileScreen> {
       delegate: SliverChildListDelegate([
         _buildProfileSection([
           ProfileItem(
-            ikon: const Icon(Icons.shopping_bag_outlined),
+            icon: const Icon(Icons.shopping_bag_outlined),
             name: tr("buyurtmalarim"),
           ),
           ProfileItem(
-            ikon: const Icon(CupertinoIcons.smiley),
+            icon: const Icon(CupertinoIcons.smiley),
             name: tr("sharhlarim"),
           ),
           ProfileItem(
-            ikon: const Icon(Icons.calendar_month_rounded),
+            icon: const Icon(Icons.calendar_month_rounded),
             name: tr("buyurtmalarim"),
           ),
         ], backgroundColor),
         _buildDivider(isLight),
         _buildProfileSection([
           ProfileItem(
-            ikon: const Icon(CupertinoIcons.chat_bubble_2),
+            icon: const Icon(CupertinoIcons.chat_bubble_2),
             name: tr('chatlarim'),
           ),
           ProfileItem(
-            ikon: const Icon(Icons.notifications_none),
+            icon: const Icon(Icons.notifications_none),
             name: tr("xabarnomalar"),
           ),
           ProfileItem(
-            ikon: const Icon(Icons.percent),
+            icon: const Icon(Icons.percent),
             name: tr("promokodlarim"),
           ),
           ProfileItem(
-            ikon: const Icon(Icons.settings_rounded),
+            icon: const Icon(Icons.settings_rounded),
             name: tr("sozlamalar"),
           ),
         ], backgroundColor),
@@ -244,22 +244,22 @@ class _ProfileScreenState extends State<ProfileScreen> {
         _buildDivider(isLight),
         _buildProfileSection([
           ProfileItem(
-            ikon: const Icon(Icons.location_on_outlined),
+            icon: const Icon(Icons.location_on_outlined),
             name: tr("shahar"),
           ),
           ProfileItem(
-            ikon: const Icon(Icons.map_outlined),
+            icon: const Icon(Icons.map_outlined),
             name: tr("xaritadagi_topshirish_punktlari"),
           ),
         ], backgroundColor),
         _buildDivider(isLight),
         _buildProfileSection([
           ProfileItem(
-            ikon: const Icon(Icons.help_outline_rounded),
+            icon: const Icon(Icons.help_outline_rounded),
             name: tr("malumot"),
           ),
           ProfileItem(
-            ikon: const Icon(CupertinoIcons.mail),
+            icon: const Icon(CupertinoIcons.mail),
             name: tr("xaritadagi_topshirish_punktlari"),
           ),
         ], backgroundColor),
